@@ -2,7 +2,6 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/blogFront.ts";
 import * as $$$1 from "./loaders/top5week.ts";
 import * as $$$$0 from "./routes/styles.css.ts";
 import * as $$$$1 from "./routes/_app.tsx";
@@ -196,7 +195,6 @@ const manifest = {
     "deco-sites/std/loaders/vtex/user.ts": i2$$$27,
     "deco-sites/std/loaders/vtex/wishlist.ts": i2$$$28,
     "deco-sites/std/loaders/x/redirectsFromCsv.ts": i2$$$29,
-    "deco-sites/ultimato/loaders/blogFront.ts": $$$0,
     "deco-sites/ultimato/loaders/top5week.ts": $$$1,
   },
   "routes": {
