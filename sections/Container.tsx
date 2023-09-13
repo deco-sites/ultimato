@@ -1,37 +1,47 @@
 import type { JSX } from "preact";
 
 import { Section } from "deco/blocks/section.ts";
-import { useLivePageContext } from "deco/pages/LivePage.tsx";
 
 export interface Props {
-  /** @description Seção interna */
-  innerSection: Section;
-  style?: JSX.CSSProperties;
-  bgScheme?: "dark" | "light";
-  showBg: boolean;
-  bgType?: "bacon" | "pattern";
+  sections: {
+    /** @description Seção interna */
+    innerSection: Section;
+
+    /** @description Style */
+    style?: JSX.CSSProperties;
+
+    /** @description Background color */
+    bgScheme?: "dark" | "light";
+
+    /** @description Background type */
+    bgType?: "bacon" | "pattern";
+  }[];
 }
 
 const Container = (
-  { innerSection, style, showBg, bgScheme, bgType }: Props,
+  { sections }: Props,
 ) => {
-  if (!innerSection) return <div></div>;
-
-  const { renderSection } = useLivePageContext();
-
   return (
-    <div
-      style={style}
-      className={`${
-        showBg && bgType === "pattern" ? "bg-primary relative" : ""
-      } ${bgScheme === "light" ? "bg-white" : ""} ${
-        bgScheme === "dark" ? "bg-dark" : ""
-      }`}
-    >
-      <div className="container px-4">
-        {renderSection(innerSection, 0)}
-      </div>
-    </div>
+    <>
+      {sections?.map((
+        { innerSection: { Component, props }, style, bgScheme, bgType },
+      ) => (
+        <div
+          style={style}
+          className={`${
+            bgType && bgType === "pattern"
+              ? "bg-primary relative"
+              : `${bgScheme === "light" ? "bg-white" : "bg-dark"}`
+          }`}
+        >
+          <div className="container px-4">
+            <div className="relative z-10">
+              <Component {...props} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
   );
 };
 

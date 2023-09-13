@@ -35,7 +35,9 @@ const PostHorizontal = ({
 }: PostVerticalProps) => {
   return (
     <div
-      className={`last-of-type:mb-0  ${layout === "full" ? "mb-12" : ""}`}
+      className={`last-of-type:mb-0 flex gap-4 flex-row-reverse mb-6 ${
+        layout === "full" ? "mb-12" : ""
+      }`}
     >
       {image && image.sourceUrl && (
         <div
@@ -56,7 +58,7 @@ const PostHorizontal = ({
 
       <div className="flex-1">
         {categories && categories.length > 0 && (
-          <div className="text-xs text-red-200 mb-2">
+          <div className="text-xs text-secondary mb-2">
             {categories
               .filter(({ slug, ancestors }) =>
                 filterCategories(

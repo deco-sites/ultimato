@@ -19,7 +19,7 @@ function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
           />
         )}
       </div>
-      <div className="grid mb-8 flex-1 lg:block lg:pl-8 lg:mb-0 xl:pl-10 2xl:pl-12">
+      <div className="grid mb-8 lg:flex-1 lg:block lg:pl-8 lg:mb-0 xl:pl-10 2xl:pl-12">
         <HQSelectorList selectors={selectors} />
       </div>
     </div>
