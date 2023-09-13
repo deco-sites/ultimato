@@ -1,5 +1,5 @@
 import { AppProps } from "$fresh/server.ts";
-import { context } from "$live/live.ts";
+import { context } from "deco/live.ts";
 import GoogleTagManager from "partytown/integrations/GTM.tsx";
 import GlobalTags from "../components/GlobalTags.tsx";
 import Theme from "../sections/Theme.tsx";

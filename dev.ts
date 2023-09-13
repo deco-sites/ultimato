@@ -1,16 +1,11 @@
-#!/usr/bin/env -S deno run -A --watch
-import dev from "$live/dev.ts";
-import tailwind from "deco-sites/std/tailwindv3.ts";
-import daisyui from "npm:daisyui@2.51.6";
-import tailwindConfig from "./tailwind.config.ts";
-import site from "./site.json" assert { type: "json" };
+#!/usr/bin/env -S deno run -A --watch=static/
+import dev from "deco/dev.ts";
+import liveManifest from "deco/live.gen.ts";
+import liveStdManifest from "deco-sites/std/live.gen.ts";
 
-// Start tailwind background process generation
-tailwind({
-  ...tailwindConfig,
-  plugins: [daisyui],
-  daisyui: { themes: [], logs: false },
+await dev(import.meta.url, "./main.ts", {
+  imports: {
+    "$live": liveManifest,
+    "deco-sites/std": liveStdManifest,
+  },
 });
-
-// Generate manifest and boot server
-await dev(import.meta.url, "./main.ts", site);

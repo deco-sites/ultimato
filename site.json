@@ -2,7 +2,7 @@
   "siteId": 2359,
   "namespace": "deco-sites/ultimato",
   "imports": [
-    "$live/live.gen.ts",
+    "deco/live.gen.ts",
     "deco-sites/std/live.gen.ts"
   ]
 }
