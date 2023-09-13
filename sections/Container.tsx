@@ -2,6 +2,8 @@ import type { JSX } from "preact";
 
 import { Section } from "deco/blocks/section.ts";
 
+import FlyingBacons from "deco-sites/ultimato/islands/FlyingBacons.tsx";
+
 export interface Props {
   sections: {
     /** @description Seção interna */
@@ -28,13 +30,25 @@ const Container = (
       ) => (
         <div
           style={style}
-          className={`${
+          className={`container-wrapper ${
             bgType && bgType === "pattern"
               ? "bg-primary relative"
               : `${bgScheme === "light" ? "bg-white" : "bg-dark"}`
           }`}
         >
-          <div className="container px-4">
+          {bgType && bgType === "bacon" &&
+            (
+              <FlyingBacons
+                bg={bgScheme ?? "light"}
+              />
+            )}
+
+          <div
+            className={`container px-4 ${
+              bgType &&
+              (bgType === "bacon" ? "bacon-background" : "pattern-background")
+            }`}
+          >
             <div className="relative z-10">
               <Component {...props} />
             </div>

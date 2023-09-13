@@ -4,9 +4,8 @@
 
 @layer base {
 
-  /* Allow changing font family via CMS */
-  html {
-    font-family: var(--font-family);
+  html, body {
+    @apply font-base overflow-x-hidden scroll-smooth;
   }
 
   /** Remove default styles from input[type=number] */
