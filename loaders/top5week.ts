@@ -1,3 +1,7 @@
+import type {
+  RootQueryToPostConnection,
+} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+
 import {
   createClient,
   endpoint,
@@ -9,10 +13,13 @@ import {
   PostArchiveFields,
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
-import type { RootQueryToPostConnection } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import type {
+  Props,
+  Selectors,
+} from "deco-sites/ultimato/components/HQSelectorList.tsx";
 
 export type LoaderProps = {
-  selectors: SelectorProps["selectors"];
+  selectors: Selectors[];
   posts: FeaturedPostsSectionProps | undefined;
 };
 
@@ -20,10 +27,8 @@ export type FeaturedPostsSectionProps = {
   featured: RootQueryToPostConnection;
 };
 
-import type { Props as SelectorProps } from "../sections/Top5AndCat.tsx";
-
-const loader = async (
-  { selectors }: SelectorProps,
+export const loader = async (
+  { selectors }: Props,
   _req: Request,
 ): Promise<LoaderProps> => {
   const client = createClient({ endpoint });

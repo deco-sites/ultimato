@@ -9,11 +9,12 @@ export interface Props {
 function HQSelector({ image, title, link }: Props) {
   return (
     <a href={link} className="mr-4 lg:mr-0">
-      <div className="overflow-y-hidden overflow-x-hidden rounded-full border-4 border-red-300 w-20 h-20 mx-auto mb-4">
+      <div className="overflow-y-hidden overflow-x-hidden rounded-full border-4 border-primary w-20 h-20 mx-auto mb-4">
         {image && (
           <Image
             className="border-2 border-white rounded-full w-full h-full object-contain overflow-hidden"
             width={80}
+            height={80}
             src={image}
             alt={title}
             loading="lazy"

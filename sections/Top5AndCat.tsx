@@ -1,28 +1,13 @@
 import HQSelectorList from "deco-sites/ultimato/components/HQSelectorList.tsx";
 import FeaturedPosts from "deco-sites/ultimato/components/BlogArchive/FeaturedPosts.tsx";
 
+import type { SectionProps } from "deco/mod.ts";
+
+import type {
+  RootQueryToPostConnectionEdge,
+} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+
 import loader from "deco-sites/ultimato/loaders/top5week.ts";
-
-import type { Image as DecoImage } from "deco-sites/std/components/types.ts";
-import type { SectionProps } from "$live/mod.ts";
-import type { RootQueryToPostConnectionEdge } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
-
-/** @title {{{name}}} */
-export interface Selectors {
-  /** @description nome da categoria */
-  name: string;
-
-  /** @description slug da categoria */
-  slug: string;
-
-  /** @description imagem da categoria */
-  image?: DecoImage;
-}
-
-export interface Props {
-  /** @description Categorias */
-  selectors: Array<Selectors>;
-}
 
 function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
   return (

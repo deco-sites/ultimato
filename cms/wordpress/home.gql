@@ -1,0 +1,240 @@
+query getPostsForHome($limit: Int!, $skip: Int!, $pageID: ID!) {
+  pageSEO: page(id: $pageID, idType: DATABASE_ID) {
+    seo {
+      title
+      metaDesc
+      metaKeywords
+      canonical
+      opengraphModifiedTime
+      opengraphPublishedTime
+      opengraphPublisher
+      opengraphSiteName
+      opengraphTitle
+      opengraphType
+      opengraphUrl
+      opengraphAuthor
+      opengraphDescription
+      opengraphImage {
+        altText
+        sourceUrl
+      }
+      twitterTitle
+      twitterDescription
+      twitterImage {
+        sourceUrl
+      }
+      schema {
+        articleType
+        pageType
+      }
+    }
+  }
+
+  posts: posts(
+    where: {
+      offsetPagination: { offset: $skip, size: $limit }
+      orderby: { field: DATE, order: DESC }
+    }
+  ) {
+    edges {
+      node {
+        id
+        databaseId
+        title
+        excerpt
+        slug
+        date
+        readingTime
+        content
+        author {
+          node {
+            name
+            firstName
+            lastName
+          }
+        }
+        categories {
+          nodes {
+            name
+            slug
+            databaseId
+            uri
+            ancestors {
+              nodes {
+                slug
+              }
+            }
+          }
+        }
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+
+  featured: posts(
+    where: {
+      offsetPagination: { size: 50 }
+      orderby: { field: DATE, order: DESC }
+    }
+  ) {
+    edges {
+      node {
+        id
+        title
+        excerpt
+        slug
+        date
+        readingTime
+        categories {
+          nodes {
+            slug
+            name
+            uri
+            ancestors {
+              nodes {
+                slug
+              }
+            }
+          }
+        }
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+        acfPostParams {
+          postviews
+        }
+      }
+    }
+  }
+
+  guias: posts(
+    where: {
+      offsetPagination: { size: 8 }
+      orderby: { field: DATE, order: DESC }
+      categoryName: "guias"
+    }
+  ) {
+    edges {
+      node {
+        id
+        title
+        excerpt
+        slug
+        date
+        readingTime
+        categories {
+          nodes {
+            slug
+            name
+            uri
+            ancestors {
+              nodes {
+                slug
+              }
+            }
+          }
+        }
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+  porquinhos: posts(where: { categoryName: "porquinhos" }) {
+    edges {
+      node {
+        id
+        title
+        slug
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+  cinemaAndStreaming: posts(
+    where: {
+      offsetPagination: { size: 3 }
+      orderby: { field: DATE, order: DESC }
+      categoryIn: [2446, 2451, 4646]
+    }
+  ) {
+    edges {
+      node {
+        id
+        title
+        excerpt
+        slug
+        date
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+
+  HQsAndBooks: posts(
+    where: {
+      offsetPagination: { size: 3 }
+      orderby: { field: DATE, order: DESC }
+      categoryIn: [2448, 6001]
+    }
+  ) {
+    edges {
+      node {
+        id
+        title
+        excerpt
+        slug
+        date
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+
+  podcast: posts(
+    where: {
+      offsetPagination: { size: 3 }
+      orderby: { field: DATE, order: DESC }
+      categoryIn: [15]
+    }
+  ) {
+    edges {
+      node {
+        id
+        title
+        excerpt
+        slug
+        date
+        featuredImage {
+          node {
+            altText
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+}

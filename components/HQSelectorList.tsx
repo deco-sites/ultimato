@@ -14,6 +14,7 @@ export interface Selectors {
 }
 
 export interface Props {
+  /** @description Categorias dos seletores */
   selectors: Array<Selectors>;
 }
 
