@@ -9,6 +9,8 @@ import {
   stripTags,
 } from "deco-sites/ultimato/utils/content.tsx";
 
+import DecoImage from "deco-sites/std/components/Image.tsx";
+
 import { Fragment } from "preact";
 
 import { PostProps } from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
@@ -46,11 +48,12 @@ const PostHorizontal = ({
           } ${layout === "reduced" ? "w-24 h-24 xl:w-28 xl:h-28" : ""}`}
         >
           <a href={`/${slug}`}>
-            <img
+            <DecoImage
               src={image?.sourceUrl}
-              type={layout === "reduced" ? "thumb" : "mid"}
+              width={layout === "reduced" ? 150 : 600}
               alt={image?.altText || ""}
               className="w-full h-full object-center object-cover"
+              loading="lazy"
             />
           </a>
         </div>
@@ -79,9 +82,9 @@ const PostHorizontal = ({
         <a href={`/${slug}`}>
           <div>
             <h3
-              className={`${layout === "full" ? "text-sm md:text-2xl" : ""} 
-              ${layout === "medium" ? "text-sm lg:text-lg" : ""} 
-              ${layout === "reduced" ? "text-sm lg:text-base" : ""} 
+              className={`${layout === "full" ? "text-sm md:text-2xl" : ""}
+              ${layout === "medium" ? "text-sm lg:text-lg" : ""}
+              ${layout === "reduced" ? "text-sm lg:text-base" : ""}
               ${
                 colorScheme && colorScheme === "dark"
                   ? "text-white font-bold mb-2"

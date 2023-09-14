@@ -9,6 +9,8 @@ import {
   stripTags,
 } from "deco-sites/ultimato/utils/content.tsx";
 
+import DecoImage from "deco-sites/std/components/Image.tsx";
+
 import { Fragment } from "preact";
 
 import { PostProps } from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
@@ -44,11 +46,12 @@ const PostVertical = (
       {image && image.sourceUrl && (
         <div className="rounded-lg overflow-hidden flex cursor-pointer relative mb-4">
           <a href={`/${slug}`}>
-            <img
+            <DecoImage
               src={image?.sourceUrl}
-              type={layout === "reduced" ? "mid" : "large"}
+              width={layout === "reduced" ? 600 : 1200}
               alt={image?.altText || ""}
               className="w-full h-full object-center object-cover"
+              loading="lazy"
             />
           </a>
         </div>
