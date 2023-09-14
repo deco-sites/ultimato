@@ -5,7 +5,8 @@
 import * as $$$0 from "./loaders/top5week.ts";
 import * as $$$$0 from "./routes/styles.css.ts";
 import * as $$$$1 from "./routes/_app.tsx";
-import * as $$$$$0 from "./islands/FlyingBacons.tsx";
+import * as $$$$$0 from "./islands/CookiePrompt.tsx";
+import * as $$$$$1 from "./islands/FlyingBacons.tsx";
 import * as $$$$$$$$0 from "./sections/Container.tsx";
 import * as $$$$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$$$2 from "./sections/Hero.tsx";
@@ -14,6 +15,7 @@ import * as $$$$$$$$4 from "./sections/ParagraphList.tsx";
 import * as $$$$$$$$5 from "./sections/SimpleTextList.tsx";
 import * as $$$$$$$$6 from "./sections/Theme.tsx";
 import * as $$$$$$$$7 from "./sections/Top5AndCat.tsx";
+import * as $$$$$$$$8 from "./sections/WhatsappCTA.tsx";
 import * as $live_workflows from "deco/routes/live/workflows/run.ts";
 import * as $live_middleware from "deco/routes/_middleware.ts";
 import * as $live_workbench from "deco/routes/live/workbench.ts";
@@ -222,7 +224,8 @@ const manifest = {
     "./routes/styles.css.ts": $$$$0,
   },
   "islands": {
-    "./islands/FlyingBacons.tsx": $$$$$0,
+    "./islands/CookiePrompt.tsx": $$$$$0,
+    "./islands/FlyingBacons.tsx": $$$$$1,
   },
   "sections": {
     "$live/sections/Conditional_Beta.tsx": i1$$$$0,
@@ -250,6 +253,7 @@ const manifest = {
     "deco-sites/ultimato/sections/SimpleTextList.tsx": $$$$$$$$5,
     "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$6,
     "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$7,
+    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$8,
   },
   "name": "deco-sites/ultimato",
   "handlers": {

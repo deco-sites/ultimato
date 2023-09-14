@@ -23,6 +23,7 @@ export default {
         accent: "#852C2A",
         neutral: "#FFF4F2",
         dark: "#18181B",
+        whatsapp: "#25D366",
       },
       typography: ({ theme }: { theme: (str: string) => string }) => ({
         gray: {

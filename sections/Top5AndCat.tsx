@@ -11,7 +11,7 @@ import loader from "deco-sites/ultimato/loaders/top5week.ts";
 
 function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
   return (
-    <div className="flex flex-wrap-reverse justify-between">
+    <div className="flex flex-wrap-reverse justify-between mb-32">
       <div className="w-full lg:pr-8 xl:w-3/4 xl:pr-10 xl:border-r xl:border-gray-200 2xl:w-2/3 2xl:pr-12">
         {posts && posts.featured && posts.featured.edges && (
           <FeaturedPosts
