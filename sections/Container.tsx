@@ -1,5 +1,3 @@
-import type { JSX } from "preact";
-
 import { Section } from "deco/blocks/section.ts";
 
 import FlyingBacons from "deco-sites/ultimato/islands/FlyingBacons.tsx";
@@ -10,9 +8,12 @@ export interface Props {
     innerSection: Section;
 
     /** @description Style */
-    style?: JSX.CSSProperties;
+    style?: string;
 
-    /** @description Background color */
+    /**
+     * @title Esquema de cores
+     * @description Background color
+     */
     bgScheme?: "dark" | "light";
 
     /** @description Background type */
@@ -27,8 +28,10 @@ const Container = (
     <>
       {sections?.map((
         { innerSection: { Component, props }, style, bgScheme, bgType },
+        index,
       ) => (
         <div
+          key={index}
           style={style}
           className={`container-wrapper ${
             bgType && bgType === "pattern"
@@ -45,8 +48,11 @@ const Container = (
 
           <div
             className={`container px-4 ${
-              bgType &&
-              (bgType === "bacon" ? "bacon-background" : "pattern-background")
+              bgType
+                ? (bgType === "bacon"
+                  ? "bacon-background"
+                  : "pattern-background")
+                : ""
             }`}
           >
             <div className="relative z-10">

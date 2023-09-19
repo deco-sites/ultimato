@@ -45,7 +45,9 @@ export const createClient = ({
       console.error(Deno.inspect(errors, { depth: 100, colors: true }));
 
       throw new Error(
-        `Error while running query:\n${query}\n\n${JSON.stringify(variables)}`,
+        `Error while running query:\n${query}\n\nVariables:\n${
+          JSON.stringify(variables)
+        }`,
       );
     }
 

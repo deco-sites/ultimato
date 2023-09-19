@@ -3,8 +3,13 @@ import Button from "deco-sites/ultimato/components/ui/Button.tsx";
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 
 export interface Props {
+  /** @description Link do grupo do whatsapp */
   link?: string;
+
+  /** @description Esquema de cores do componente */
   colorScheme?: "dark" | "light";
+
+  /** @description Tipo */
   small?: boolean;
 }
 
@@ -22,30 +27,24 @@ function WhatsappCTA({
       <img
         src={`${asset("/images/bg-bacon.png")}`}
         alt=""
-        style={{
-          position: "absolute",
-        }}
-        className="w-full h-full left-0 top-0 object-center object-cover z-0"
+        className="w-full h-full left-0 top-0 object-center object-cover z-0 absolute select-none pointer-events-none"
+        loading="lazy"
       />
       <img
         aria-hidden="true"
         src={`${asset("/images/bacon-dark.png")}`}
         alt=""
-        style={{
-          position: "absolute",
-        }}
         placeholder="none"
-        className="absolute top-0 left-0 transform-gpu -rotate-45 w-6 lg:w-8"
+        className="absolute top-0 left-0 transform-gpu -rotate-45 w-6 lg:w-8 select-none pointer-events-none"
+        loading="lazy"
       />
       <img
         aria-hidden="true"
         src={`${asset("/images/bacon-dark.png")}`}
         alt=""
-        style={{
-          position: "absolute",
-        }}
         placeholder="none"
-        className="absolute bottom-0 right-0 transform-gpu rotate-45 w-6 lg:w-8"
+        className="absolute bottom-0 right-0 transform-gpu rotate-45 w-6 lg:w-8 select-none pointer-events-none"
+        loading="lazy"
       />
       <div className="flex flex-wrap justify-between items-center w-full h-full relative">
         <div className="flex justify-between flex-wrap 2xl:justify-start w-full lg:w-3/5 items-center">

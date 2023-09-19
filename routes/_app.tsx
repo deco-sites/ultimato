@@ -1,8 +1,8 @@
 import { AppProps } from "$fresh/server.ts";
 import { context } from "deco/live.ts";
 import GoogleTagManager from "partytown/integrations/GTM.tsx";
-import GlobalTags from "../components/GlobalTags.tsx";
-import Theme from "../sections/Theme.tsx";
+import GlobalTags from "deco-sites/ultimato/components/GlobalTags.tsx";
+import Theme from "deco-sites/ultimato/sections/Theme.tsx";
 
 const trackingId = "";
 

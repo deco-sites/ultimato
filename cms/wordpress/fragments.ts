@@ -7,6 +7,8 @@ export const MenuFields = gql`
     title
     path
     label
+    target
+    cssClasses
   }
 `;
 export const MenuChildren = gql`
@@ -14,6 +16,16 @@ export const MenuChildren = gql`
     childItems {
       nodes {
         ...MenuFields
+        childItems {
+          nodes {
+            ...MenuFields
+            childItems {
+              nodes {
+                ...MenuFields
+              }
+            }
+          }
+        }
       }
     }
   }

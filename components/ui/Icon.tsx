@@ -10,6 +10,7 @@ export type AvailableIcons =
   | "User"
   | "ShoppingCart"
   | "Bars3"
+  | "Times"
   | "Heart"
   | "MagnifyingGlass"
   | "XMark"
