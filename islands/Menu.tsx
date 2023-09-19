@@ -1,1 +1,1 @@
-export { default } from "../components/header/Menu.tsx";
+export { default } from "deco-sites/ultimato/components/header/Menu.tsx";
