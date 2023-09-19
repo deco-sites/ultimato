@@ -52,16 +52,18 @@ import * as i1$$$$2 from "deco/sections/PageInclude.tsx";
 import * as i1$$$$3 from "deco/sections/Slot.tsx";
 import * as i1$$$$4 from "deco/sections/UseSlot.tsx";
 import * as i1$$$$$0 from "deco/matchers/MatchAlways.ts";
-import * as i1$$$$$1 from "deco/matchers/MatchCron.ts";
-import * as i1$$$$$2 from "deco/matchers/MatchDate.ts";
-import * as i1$$$$$3 from "deco/matchers/MatchDevice.ts";
-import * as i1$$$$$4 from "deco/matchers/MatchEnvironment.ts";
-import * as i1$$$$$5 from "deco/matchers/MatchHost.ts";
-import * as i1$$$$$6 from "deco/matchers/MatchLocation.ts";
-import * as i1$$$$$7 from "deco/matchers/MatchMulti.ts";
-import * as i1$$$$$8 from "deco/matchers/MatchRandom.ts";
-import * as i1$$$$$9 from "deco/matchers/MatchSite.ts";
-import * as i1$$$$$10 from "deco/matchers/MatchUserAgent.ts";
+import * as i1$$$$$1 from "deco/matchers/MatchCookies.ts";
+import * as i1$$$$$2 from "deco/matchers/MatchCron.ts";
+import * as i1$$$$$3 from "deco/matchers/MatchDate.ts";
+import * as i1$$$$$4 from "deco/matchers/MatchDevice.ts";
+import * as i1$$$$$5 from "deco/matchers/MatchEnvironment.ts";
+import * as i1$$$$$6 from "deco/matchers/MatchHost.ts";
+import * as i1$$$$$7 from "deco/matchers/MatchLocation.ts";
+import * as i1$$$$$8 from "deco/matchers/MatchMulti.ts";
+import * as i1$$$$$9 from "deco/matchers/MatchNegate.ts";
+import * as i1$$$$$10 from "deco/matchers/MatchRandom.ts";
+import * as i1$$$$$11 from "deco/matchers/MatchSite.ts";
+import * as i1$$$$$12 from "deco/matchers/MatchUserAgent.ts";
 import * as i1$$$$$$0 from "deco/flags/audience.ts";
 import * as i1$$$$$$1 from "deco/flags/everyone.ts";
 import * as i1$$$$$$2 from "deco/flags/flag.ts";
@@ -284,16 +286,18 @@ const manifest = {
   },
   "matchers": {
     "$live/matchers/MatchAlways.ts": i1$$$$$0,
-    "$live/matchers/MatchCron.ts": i1$$$$$1,
-    "$live/matchers/MatchDate.ts": i1$$$$$2,
-    "$live/matchers/MatchDevice.ts": i1$$$$$3,
-    "$live/matchers/MatchEnvironment.ts": i1$$$$$4,
-    "$live/matchers/MatchHost.ts": i1$$$$$5,
-    "$live/matchers/MatchLocation.ts": i1$$$$$6,
-    "$live/matchers/MatchMulti.ts": i1$$$$$7,
-    "$live/matchers/MatchRandom.ts": i1$$$$$8,
-    "$live/matchers/MatchSite.ts": i1$$$$$9,
-    "$live/matchers/MatchUserAgent.ts": i1$$$$$10,
+    "$live/matchers/MatchCookies.ts": i1$$$$$1,
+    "$live/matchers/MatchCron.ts": i1$$$$$2,
+    "$live/matchers/MatchDate.ts": i1$$$$$3,
+    "$live/matchers/MatchDevice.ts": i1$$$$$4,
+    "$live/matchers/MatchEnvironment.ts": i1$$$$$5,
+    "$live/matchers/MatchHost.ts": i1$$$$$6,
+    "$live/matchers/MatchLocation.ts": i1$$$$$7,
+    "$live/matchers/MatchMulti.ts": i1$$$$$8,
+    "$live/matchers/MatchNegate.ts": i1$$$$$9,
+    "$live/matchers/MatchRandom.ts": i1$$$$$10,
+    "$live/matchers/MatchSite.ts": i1$$$$$11,
+    "$live/matchers/MatchUserAgent.ts": i1$$$$$12,
   },
   "flags": {
     "$live/flags/audience.ts": i1$$$$$$0,
