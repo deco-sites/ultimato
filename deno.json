@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=sections/,functions/ dev.ts",
+    "start": "deno run -A --watch=tailwind.css,sections/,functions/,loaders/ dev.ts",
     "component": "deno eval 'import \"deco/scripts/component.ts\"'",
     "check": "deno fmt && deno lint && deno check dev.ts main.ts"
   },
@@ -12,6 +12,7 @@
     "static/",
     "README.md"
   ],
+  "nodeModulesDir": true,
   "importMap": "./import_map.json",
   "compilerOptions": {
     "jsx": "react-jsx",
