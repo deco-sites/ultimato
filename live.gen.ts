@@ -2,26 +2,26 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/header.ts";
-import * as $$$1 from "./loaders/news-carousel.ts";
-import * as $$$2 from "./loaders/top5week.ts";
+import * as $$$0 from "./loaders/news-carousel.ts";
+import * as $$$1 from "./loaders/top5week.ts";
+import * as $$$2 from "./loaders/header.ts";
 import * as $$$$0 from "./routes/styles.css.ts";
 import * as $$$$1 from "./routes/_app.tsx";
-import * as $$$$$0 from "./islands/CookiePrompt.tsx";
-import * as $$$$$1 from "./islands/FlyingBacons.tsx";
-import * as $$$$$2 from "./islands/Menu.tsx";
-import * as $$$$$3 from "./islands/Slider.tsx";
-import * as $$$$$$$$0 from "./sections/Container.tsx";
-import * as $$$$$$$$1 from "./sections/Footer.tsx";
-import * as $$$$$$$$2 from "./sections/Header.tsx";
-import * as $$$$$$$$3 from "./sections/Hero.tsx";
-import * as $$$$$$$$4 from "./sections/HQSelectorList.tsx";
-import * as $$$$$$$$5 from "./sections/ParagraphList.tsx";
-import * as $$$$$$$$6 from "./sections/PostsSlider.tsx";
+import * as $$$$$0 from "./islands/FlyingBacons.tsx";
+import * as $$$$$1 from "./islands/Slider.tsx";
+import * as $$$$$2 from "./islands/CookiePrompt.tsx";
+import * as $$$$$3 from "./islands/Menu.tsx";
+import * as $$$$$$$$0 from "./sections/Hero.tsx";
+import * as $$$$$$$$1 from "./sections/Container.tsx";
+import * as $$$$$$$$2 from "./sections/WhatsappCTA.tsx";
+import * as $$$$$$$$3 from "./sections/Top5AndCat.tsx";
+import * as $$$$$$$$4 from "./sections/Theme.tsx";
+import * as $$$$$$$$5 from "./sections/Footer.tsx";
+import * as $$$$$$$$6 from "./sections/Header.tsx";
 import * as $$$$$$$$7 from "./sections/SimpleTextList.tsx";
-import * as $$$$$$$$8 from "./sections/Theme.tsx";
-import * as $$$$$$$$9 from "./sections/Top5AndCat.tsx";
-import * as $$$$$$$$10 from "./sections/WhatsappCTA.tsx";
+import * as $$$$$$$$8 from "./sections/HQSelectorList.tsx";
+import * as $$$$$$$$9 from "./sections/PostsSlider.tsx";
+import * as $$$$$$$$10 from "./sections/ParagraphList.tsx";
 import * as $live_workflows from "deco/routes/live/workflows/run.ts";
 import * as $live_middleware from "deco/routes/_middleware.ts";
 import * as $live_workbench from "deco/routes/live/workbench.ts";
@@ -52,16 +52,18 @@ import * as i1$$$$2 from "deco/sections/PageInclude.tsx";
 import * as i1$$$$3 from "deco/sections/Slot.tsx";
 import * as i1$$$$4 from "deco/sections/UseSlot.tsx";
 import * as i1$$$$$0 from "deco/matchers/MatchAlways.ts";
-import * as i1$$$$$1 from "deco/matchers/MatchCron.ts";
-import * as i1$$$$$2 from "deco/matchers/MatchDate.ts";
-import * as i1$$$$$3 from "deco/matchers/MatchDevice.ts";
-import * as i1$$$$$4 from "deco/matchers/MatchEnvironment.ts";
-import * as i1$$$$$5 from "deco/matchers/MatchHost.ts";
-import * as i1$$$$$6 from "deco/matchers/MatchLocation.ts";
-import * as i1$$$$$7 from "deco/matchers/MatchMulti.ts";
-import * as i1$$$$$8 from "deco/matchers/MatchRandom.ts";
-import * as i1$$$$$9 from "deco/matchers/MatchSite.ts";
-import * as i1$$$$$10 from "deco/matchers/MatchUserAgent.ts";
+import * as i1$$$$$1 from "deco/matchers/MatchCookies.ts";
+import * as i1$$$$$2 from "deco/matchers/MatchCron.ts";
+import * as i1$$$$$3 from "deco/matchers/MatchDate.ts";
+import * as i1$$$$$4 from "deco/matchers/MatchDevice.ts";
+import * as i1$$$$$5 from "deco/matchers/MatchEnvironment.ts";
+import * as i1$$$$$6 from "deco/matchers/MatchHost.ts";
+import * as i1$$$$$7 from "deco/matchers/MatchLocation.ts";
+import * as i1$$$$$8 from "deco/matchers/MatchMulti.ts";
+import * as i1$$$$$9 from "deco/matchers/MatchNegate.ts";
+import * as i1$$$$$10 from "deco/matchers/MatchRandom.ts";
+import * as i1$$$$$11 from "deco/matchers/MatchSite.ts";
+import * as i1$$$$$12 from "deco/matchers/MatchUserAgent.ts";
 import * as i1$$$$$$0 from "deco/flags/audience.ts";
 import * as i1$$$$$$1 from "deco/flags/everyone.ts";
 import * as i1$$$$$$2 from "deco/flags/flag.ts";
@@ -210,9 +212,9 @@ const manifest = {
     "deco-sites/std/loaders/x/image.ts": i2$$$28,
     "deco-sites/std/loaders/x/redirects.ts": i2$$$29,
     "deco-sites/std/loaders/x/redirectsFromCsv.ts": i2$$$30,
-    "deco-sites/ultimato/loaders/header.ts": $$$0,
-    "deco-sites/ultimato/loaders/news-carousel.ts": $$$1,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$2,
+    "deco-sites/ultimato/loaders/header.ts": $$$2,
+    "deco-sites/ultimato/loaders/news-carousel.ts": $$$0,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$1,
   },
   "routes": {
     "./routes/_app.tsx": $$$$1,
@@ -232,10 +234,10 @@ const manifest = {
     "./routes/styles.css.ts": $$$$0,
   },
   "islands": {
-    "./islands/CookiePrompt.tsx": $$$$$0,
-    "./islands/FlyingBacons.tsx": $$$$$1,
-    "./islands/Menu.tsx": $$$$$2,
-    "./islands/Slider.tsx": $$$$$3,
+    "./islands/CookiePrompt.tsx": $$$$$2,
+    "./islands/FlyingBacons.tsx": $$$$$0,
+    "./islands/Menu.tsx": $$$$$3,
+    "./islands/Slider.tsx": $$$$$1,
   },
   "sections": {
     "$live/sections/Conditional_Beta.tsx": i1$$$$0,
@@ -255,17 +257,17 @@ const manifest = {
     "deco-sites/std/sections/SEOPDP.tsx": i2$$$$$9,
     "deco-sites/std/sections/SEOPLP.tsx": i2$$$$$10,
     "deco-sites/std/sections/VTEXPortalDataLayerCompatibility.tsx": i2$$$$$11,
-    "deco-sites/ultimato/sections/Container.tsx": $$$$$$$$0,
-    "deco-sites/ultimato/sections/Footer.tsx": $$$$$$$$1,
-    "deco-sites/ultimato/sections/Header.tsx": $$$$$$$$2,
-    "deco-sites/ultimato/sections/Hero.tsx": $$$$$$$$3,
-    "deco-sites/ultimato/sections/HQSelectorList.tsx": $$$$$$$$4,
-    "deco-sites/ultimato/sections/ParagraphList.tsx": $$$$$$$$5,
-    "deco-sites/ultimato/sections/PostsSlider.tsx": $$$$$$$$6,
+    "deco-sites/ultimato/sections/Container.tsx": $$$$$$$$1,
+    "deco-sites/ultimato/sections/Footer.tsx": $$$$$$$$5,
+    "deco-sites/ultimato/sections/Header.tsx": $$$$$$$$6,
+    "deco-sites/ultimato/sections/Hero.tsx": $$$$$$$$0,
+    "deco-sites/ultimato/sections/HQSelectorList.tsx": $$$$$$$$8,
+    "deco-sites/ultimato/sections/ParagraphList.tsx": $$$$$$$$10,
+    "deco-sites/ultimato/sections/PostsSlider.tsx": $$$$$$$$9,
     "deco-sites/ultimato/sections/SimpleTextList.tsx": $$$$$$$$7,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$8,
-    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$9,
-    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$10,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$4,
+    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$3,
+    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$2,
   },
   "name": "deco-sites/ultimato",
   "handlers": {
@@ -284,16 +286,18 @@ const manifest = {
   },
   "matchers": {
     "$live/matchers/MatchAlways.ts": i1$$$$$0,
-    "$live/matchers/MatchCron.ts": i1$$$$$1,
-    "$live/matchers/MatchDate.ts": i1$$$$$2,
-    "$live/matchers/MatchDevice.ts": i1$$$$$3,
-    "$live/matchers/MatchEnvironment.ts": i1$$$$$4,
-    "$live/matchers/MatchHost.ts": i1$$$$$5,
-    "$live/matchers/MatchLocation.ts": i1$$$$$6,
-    "$live/matchers/MatchMulti.ts": i1$$$$$7,
-    "$live/matchers/MatchRandom.ts": i1$$$$$8,
-    "$live/matchers/MatchSite.ts": i1$$$$$9,
-    "$live/matchers/MatchUserAgent.ts": i1$$$$$10,
+    "$live/matchers/MatchCookies.ts": i1$$$$$1,
+    "$live/matchers/MatchCron.ts": i1$$$$$2,
+    "$live/matchers/MatchDate.ts": i1$$$$$3,
+    "$live/matchers/MatchDevice.ts": i1$$$$$4,
+    "$live/matchers/MatchEnvironment.ts": i1$$$$$5,
+    "$live/matchers/MatchHost.ts": i1$$$$$6,
+    "$live/matchers/MatchLocation.ts": i1$$$$$7,
+    "$live/matchers/MatchMulti.ts": i1$$$$$8,
+    "$live/matchers/MatchNegate.ts": i1$$$$$9,
+    "$live/matchers/MatchRandom.ts": i1$$$$$10,
+    "$live/matchers/MatchSite.ts": i1$$$$$11,
+    "$live/matchers/MatchUserAgent.ts": i1$$$$$12,
   },
   "flags": {
     "$live/flags/audience.ts": i1$$$$$$0,

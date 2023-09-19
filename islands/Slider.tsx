@@ -7,7 +7,7 @@ import {
   register,
   SwiperContainer,
   SwiperSlide,
-} from "npm:swiper@10.2.0/element/bundle";
+} from "https://esm.sh/swiper@10.2.0/element/bundle?target=es2022";
 
 // deno-lint-ignore no-explicit-any
 type CustomElement<T> = Partial<T & { children: any; key?: any; ref?: any }>;

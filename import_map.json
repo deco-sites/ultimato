@@ -1,9 +1,9 @@
 {
   "imports": {
     "deco-sites/ultimato/": "./",
-    "deco-sites/std/": "https://denopkg.com/deco-sites/std@1.22.6/",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.35.12/",
-    "$fresh/": "https://denopkg.com/deco-cx/fresh@1.3.3/",
+    "deco-sites/std/": "https://denopkg.com/deco-sites/std@1.22.10/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.36.18/",
+    "$fresh/": "https://denopkg.com/deco-cx/fresh@1.3.6/",
     "preact": "https://esm.sh/preact@10.15.1",
     "preact/": "https://esm.sh/preact@10.15.1/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.0",
