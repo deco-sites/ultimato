@@ -1,7 +1,7 @@
 import { JSX } from "preact";
 import { useEffect, useRef } from "preact/hooks";
-import MenuItem from "deco-sites/ultimato/islands/MenuItem.tsx";
-import Hamburger from "deco-sites/ultimato/islands/Hamburger.tsx";
+import MenuItem from "deco-sites/ultimato/components/header/MenuItem.tsx";
+import Hamburger from "deco-sites/ultimato/components/header/Hamburger.tsx";
 
 import { signal } from "@preact/signals";
 

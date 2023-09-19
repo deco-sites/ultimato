@@ -9,10 +9,8 @@ import * as $$$$0 from "./routes/styles.css.ts";
 import * as $$$$1 from "./routes/_app.tsx";
 import * as $$$$$0 from "./islands/CookiePrompt.tsx";
 import * as $$$$$1 from "./islands/FlyingBacons.tsx";
-import * as $$$$$2 from "./islands/Hamburger.tsx";
-import * as $$$$$3 from "./islands/Menu.tsx";
-import * as $$$$$4 from "./islands/MenuItem.tsx";
-import * as $$$$$5 from "./islands/Slider.tsx";
+import * as $$$$$2 from "./islands/Menu.tsx";
+import * as $$$$$3 from "./islands/Slider.tsx";
 import * as $$$$$$$$0 from "./sections/Container.tsx";
 import * as $$$$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$$$2 from "./sections/Header.tsx";
@@ -236,10 +234,8 @@ const manifest = {
   "islands": {
     "./islands/CookiePrompt.tsx": $$$$$0,
     "./islands/FlyingBacons.tsx": $$$$$1,
-    "./islands/Hamburger.tsx": $$$$$2,
-    "./islands/Menu.tsx": $$$$$3,
-    "./islands/MenuItem.tsx": $$$$$4,
-    "./islands/Slider.tsx": $$$$$5,
+    "./islands/Menu.tsx": $$$$$2,
+    "./islands/Slider.tsx": $$$$$3,
   },
   "sections": {
     "$live/sections/Conditional_Beta.tsx": i1$$$$0,
