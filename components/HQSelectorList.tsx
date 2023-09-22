@@ -1,4 +1,5 @@
 import HQSelector from "deco-sites/ultimato/components/HQSelector.tsx";
+import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
 import type { Image as DecoImage } from "deco-sites/std/components/types.ts";
 
 /** @title {{{name}}} */
@@ -20,21 +21,26 @@ export interface Props {
 
 function HQSelectorList({ selectors }: Props) {
   return (
-    <div className="overflow-x-auto w-full max-w-full">
-      <div className="flex lg:justify-center lg:mb-12 xl:grid grid-cols-9 xl:grid-cols-3 lg:gap-4 2xl:gap-8">
-        {selectors &&
-          selectors.map(({ slug, name, image }, index) => {
-            return (
-              <HQSelector
-                key={index}
-                image={image}
-                title={name}
-                link={`/hqs-${slug}`}
-              />
-            );
-          })}
+    <>
+      <SectionTitle tag="div">
+        SELETOR HQS
+      </SectionTitle>
+      <div className="overflow-x-auto w-full max-w-full">
+        <div className="flex lg:justify-center lg:mb-12 xl:grid grid-cols-9 xl:grid-cols-3 lg:gap-4 2xl:gap-8">
+          {selectors &&
+            selectors.map(({ slug, name, image }, index) => {
+              return (
+                <HQSelector
+                  key={index}
+                  image={image}
+                  title={name}
+                  link={`/hqs-${slug}`}
+                />
+              );
+            })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

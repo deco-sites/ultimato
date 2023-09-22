@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import DecoImage from "deco-sites/std/components/Image.tsx";
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 
@@ -41,6 +41,8 @@ type SlideType = {
 
 function Slider({ content }: Props) {
   const swiperElRef = useRef<SwiperContainer>(null);
+
+  const [registered, setRegistered] = useState(false);
 
   function updatePrevAndNextTitles(
     ref: { current?: SwiperContainer | null },
@@ -86,6 +88,7 @@ function Slider({ content }: Props) {
 
   useEffect(() => {
     register();
+    setRegistered(true);
 
     if (swiperElRef.current) {
       updatePrevAndNextTitles(swiperElRef);
@@ -117,16 +120,24 @@ function Slider({ content }: Props) {
             direction="prev"
           />
         </div>
-        {content.map((post) => (
+        {content.map((post, index) => (
           <swiper-slide key={post.id}>
             <a href={`/${post.link}`}>
-              <div className="w-full h-96 lg:h-[700px] bg-black flex justify-center items-center relative">
+              <div
+                className={`w-full h-96 lg:h-[700px] bg-black justify-center items-center relative ${
+                  (!registered && index > 0) ? "hidden" : "flex"
+                }`}
+              >
                 <DecoImage
                   src={post.image}
-                  width={1400}
+                  width={980}
+                  height={700}
+                  sizes={"100vw"}
                   className="absolute left-0 top-0 w-full h-full object-center object-cover z-0 opacity-30"
                   loading="eager"
                   alt={post.title}
+                  preload={index === 0 ? true : false}
+                  fetchPriority="high"
                 />
                 <div className="text-white text-xl text-center font-bold lg:text-6xl lg:max-w-4xl z-10 relative max-w-[220px]">
                   {post.title}

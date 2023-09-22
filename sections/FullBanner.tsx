@@ -59,8 +59,6 @@ export const loader = async (props: Props, _req: Request): Promise<Props> => {
         : true;
   }
 
-  console.log(response);
-
   return response;
 };
 
@@ -104,10 +102,13 @@ function FullBanner({ image, alt, link, hideComponent, position }: Props) {
           target={link?.target ? link.target : "_self"}
           aria-label={alt}
         >
-          <img
+          <DecoImage
             className="w-full h-full object-left object-cover mx-auto"
             src={image}
+            width={1200}
+            height={144}
             alt={alt ? alt : "Destaque"}
+            loading="eager"
           />
           <div className="sr-only">
             {alt ? alt : "Destaque"}
