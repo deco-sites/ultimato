@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "preact/hooks";
-import { IS_BROWSER } from "$fresh/runtime.ts";
+import { useEffect, useRef } from "preact/hooks";
 import DecoImage from "deco-sites/std/components/Image.tsx";
-import Icon from "../components/ui/Icon.tsx";
+import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 
 import {
   register,
@@ -41,58 +40,60 @@ type SlideType = {
 };
 
 function Slider({ content }: Props) {
-  if (IS_BROWSER) {
-    register();
-  }
-
   const swiperElRef = useRef<SwiperContainer>(null);
 
-  const [previewTexts, setPreviewTexts] = useState<{
-    prev?: string;
-    next?: string;
-  }>({
-    prev: "",
-    next: "",
-  });
-
-  function updatePrevAndNextTitles(ref: { current?: SwiperContainer | null }) {
+  function updatePrevAndNextTitles(
+    ref: { current?: SwiperContainer | null },
+  ) {
     if (ref.current) {
-      const prev = ref.current.querySelector(
-        `.swiper-slide-prev`,
+      const slides = ref.current.querySelectorAll("swiper-slide");
+
+      const getSlide = (index: number) =>
+        ref.current?.querySelector(`[data-swiper-slide-index="${index}"]`);
+
+      const activeSlide = ref.current.querySelector(".swiper-slide-active") as
+        | HTMLElement
+        | null;
+
+      const prevButton = ref.current.querySelector(
+        ".prev-button-label",
+      ) as HTMLElement;
+      const nextButton = ref.current.querySelector(
+        ".next-button-label",
       ) as HTMLElement;
 
-      const next = ref.current.querySelector(
-        `.swiper-slide-next`,
-      ) as HTMLElement;
+      const activeSlideIndex = parseInt(
+        activeSlide?.dataset.swiperSlideIndex as string,
+        10,
+      );
+      const totaSlides = slides.length - 1;
 
-      if ((!prev && !next) || (!prev && next)) {
-        const slides = [
-          ...ref.current.querySelectorAll("swiper-slide"),
-        ] as Array<HTMLElement>;
-
-        setPreviewTexts({
-          prev: prev ? slides[slides.length - 1].innerText : "",
-          next: next ? slides[1].innerText : "",
-        });
-
-        return;
+      if (activeSlideIndex === 0) {
+        prevButton.innerText = (getSlide(totaSlides) as HTMLElement).innerText;
+      } else {
+        prevButton.innerText =
+          (getSlide(activeSlideIndex - 1) as HTMLElement).innerText;
       }
 
-      setPreviewTexts({
-        prev: prev ? prev.innerText : "",
-        next: next ? next.innerText : "",
-      });
+      if (activeSlideIndex === totaSlides) {
+        nextButton.innerText = (getSlide(0) as HTMLElement).innerText;
+      } else {
+        nextButton.innerText =
+          (getSlide(activeSlideIndex + 1) as HTMLElement).innerText;
+      }
     }
   }
 
   useEffect(() => {
+    register();
+
     if (swiperElRef.current) {
       updatePrevAndNextTitles(swiperElRef);
 
       swiperElRef.current.addEventListener("slidechange", (e) => {
         setTimeout(() => {
           updatePrevAndNextTitles(swiperElRef);
-        }, 500);
+        }, 100);
       });
     }
   }, []);
@@ -104,8 +105,18 @@ function Slider({ content }: Props) {
         slides-per-view="1"
         space-between="0"
         loop="true"
-        autoplay={`{\"delay\":4000}`}
+        autoplay={`{"delay":4000}`}
       >
+        <div slot="container-end">
+          <NavigationButton
+            element={swiperElRef}
+            direction="next"
+          />
+          <NavigationButton
+            element={swiperElRef}
+            direction="prev"
+          />
+        </div>
         {content.map((post) => (
           <swiper-slide key={post.id}>
             <a href={`/${post.link}`}>
@@ -125,24 +136,13 @@ function Slider({ content }: Props) {
           </swiper-slide>
         ))}
       </swiper-container>
-      <NavigationButton
-        element={swiperElRef}
-        direction="next"
-        text={previewTexts.next}
-      />
-      <NavigationButton
-        element={swiperElRef}
-        direction="prev"
-        text={previewTexts.prev}
-      />
     </div>
   );
 }
 
-function NavigationButton({ element, direction, text }: {
+function NavigationButton({ element, direction }: {
   element?: { current?: SwiperContainer | null };
   direction: "next" | "prev";
-  text?: string;
 }) {
   return (
     <button
@@ -175,7 +175,7 @@ function NavigationButton({ element, direction, text }: {
             : "right-0 rounded-r-2xl -translate-x-full group-hover:translate-x-full"
         }`}
       >
-        {text && text}
+        <span className={`${direction}-button-label`}></span>
       </div>
     </button>
   );
