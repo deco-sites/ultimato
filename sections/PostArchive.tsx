@@ -1,5 +1,6 @@
 import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
 import LatestPosts from "deco-sites/ultimato/components/BlogArchive/LatestPosts.tsx";
+import Pagination from "deco-sites/ultimato/components/BlogArchive/Pagination.tsx";
 
 import loader from "deco-sites/ultimato/loaders/post-archive.ts";
 import type { SectionProps } from "deco/mod.ts";
@@ -29,7 +30,7 @@ function PostArchive(
           posts={posts}
         />
 
-        {/* <Pagination pageContext={pageContext} pathPrefix="/" /> */}
+        <Pagination context={pageInfo} pathPrefix="/" />
       </div>
       {sidebar &&
         (

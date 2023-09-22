@@ -1,20 +1,48 @@
-import { Adsense } from "npm:@ctrl/react-adsense";
-
-type Props = {
+import type { JSX } from "preact";
+interface Props {
   className?: string;
   style?: React.CSSProperties;
+  client?: string;
+  slot: string;
   layout?: string;
   layoutKey?: string;
   format?: string;
   responsive?: string;
-  // eslint-disable-next-line react/boolean-prop-naming
   pageLevelAds?: boolean;
-};
+  adTest?: string;
+  children?: JSX.Element;
+}
 
-export function Ad(props: Props) {
+function Ad({
+  className = "",
+  style = { display: "block" },
+  client = "ca-pub-2313803884697164",
+  slot = "7806394673",
+  layout = "",
+  layoutKey = "",
+  format = "auto",
+  responsive = "false",
+  pageLevelAds = false,
+  adTest,
+  children,
+  ...rest
+}: Props) {
   return (
     <div className="w-full mx-auto my-8">
-      <Adsense client="ca-pub-2313803884697164" slot="7806394673" {...props} />
+      <ins
+        className={`adsbygoogle ${className}`}
+        style={style}
+        data-ad-client={client}
+        data-ad-slot={slot}
+        data-ad-layout={layout}
+        data-ad-layout-key={layoutKey}
+        data-ad-format={format}
+        data-full-width-responsive={responsive}
+        data-adtest={adTest}
+        {...rest}
+      >
+        {children}
+      </ins>
     </div>
   );
 }

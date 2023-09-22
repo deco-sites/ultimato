@@ -48,7 +48,7 @@ const PostVertical = (
           <a href={`/${slug}`}>
             <DecoImage
               src={image?.sourceUrl}
-              width={layout === "reduced" ? 600 : 1200}
+              width={layout === "reduced" ? 300 : 600}
               alt={image?.altText || ""}
               className="w-full h-full object-center object-cover"
               loading="lazy"

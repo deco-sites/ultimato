@@ -50,7 +50,7 @@ const PostHorizontal = ({
           <a href={`/${slug}`}>
             <DecoImage
               src={image?.sourceUrl}
-              width={layout === "reduced" ? 150 : 600}
+              width={layout === "reduced" ? 80 : 300}
               alt={image?.altText || ""}
               className="w-full h-full object-center object-cover"
               loading="lazy"

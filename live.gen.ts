@@ -2,10 +2,11 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/header.ts";
-import * as $$$1 from "./loaders/news-carousel.ts";
-import * as $$$2 from "./loaders/post-archive.ts";
-import * as $$$3 from "./loaders/top5week.ts";
+import * as $$$0 from "./loaders/guias.ts";
+import * as $$$1 from "./loaders/header.ts";
+import * as $$$2 from "./loaders/news-carousel.ts";
+import * as $$$3 from "./loaders/post-archive.ts";
+import * as $$$4 from "./loaders/top5week.ts";
 import * as $$$$0 from "./routes/styles.css.ts";
 import * as $$$$1 from "./routes/_app.tsx";
 import * as $$$$$0 from "./islands/CookiePrompt.tsx";
@@ -15,16 +16,15 @@ import * as $$$$$3 from "./islands/Slider.tsx";
 import * as $$$$$$$$0 from "./sections/Container.tsx";
 import * as $$$$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$$$2 from "./sections/FullBanner.tsx";
-import * as $$$$$$$$3 from "./sections/Header.tsx";
-import * as $$$$$$$$4 from "./sections/Hero.tsx";
-import * as $$$$$$$$5 from "./sections/HQSelectorList.tsx";
-import * as $$$$$$$$6 from "./sections/ParagraphList.tsx";
+import * as $$$$$$$$3 from "./sections/Guias.tsx";
+import * as $$$$$$$$4 from "./sections/Header.tsx";
+import * as $$$$$$$$5 from "./sections/Hero.tsx";
+import * as $$$$$$$$6 from "./sections/HQSelectorList.tsx";
 import * as $$$$$$$$7 from "./sections/PostArchive.tsx";
 import * as $$$$$$$$8 from "./sections/PostsSlider.tsx";
-import * as $$$$$$$$9 from "./sections/SimpleTextList.tsx";
-import * as $$$$$$$$10 from "./sections/Theme.tsx";
-import * as $$$$$$$$11 from "./sections/Top5AndCat.tsx";
-import * as $$$$$$$$12 from "./sections/WhatsappCTA.tsx";
+import * as $$$$$$$$9 from "./sections/Theme.tsx";
+import * as $$$$$$$$10 from "./sections/Top5AndCat.tsx";
+import * as $$$$$$$$11 from "./sections/WhatsappCTA.tsx";
 import * as $live_workflows from "$live/routes/live/workflows/run.ts";
 import * as $live_middleware from "$live/routes/_middleware.ts";
 import * as $live_workbench from "$live/routes/live/workbench.ts";
@@ -215,10 +215,11 @@ const manifest = {
     "deco-sites/std/loaders/x/image.ts": i2$$$28,
     "deco-sites/std/loaders/x/redirects.ts": i2$$$29,
     "deco-sites/std/loaders/x/redirectsFromCsv.ts": i2$$$30,
-    "deco-sites/ultimato/loaders/header.ts": $$$0,
-    "deco-sites/ultimato/loaders/news-carousel.ts": $$$1,
-    "deco-sites/ultimato/loaders/post-archive.ts": $$$2,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$3,
+    "deco-sites/ultimato/loaders/guias.ts": $$$0,
+    "deco-sites/ultimato/loaders/header.ts": $$$1,
+    "deco-sites/ultimato/loaders/news-carousel.ts": $$$2,
+    "deco-sites/ultimato/loaders/post-archive.ts": $$$3,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$4,
   },
   "routes": {
     "./routes/_app.tsx": $$$$1,
@@ -264,16 +265,15 @@ const manifest = {
     "deco-sites/ultimato/sections/Container.tsx": $$$$$$$$0,
     "deco-sites/ultimato/sections/Footer.tsx": $$$$$$$$1,
     "deco-sites/ultimato/sections/FullBanner.tsx": $$$$$$$$2,
-    "deco-sites/ultimato/sections/Header.tsx": $$$$$$$$3,
-    "deco-sites/ultimato/sections/Hero.tsx": $$$$$$$$4,
-    "deco-sites/ultimato/sections/HQSelectorList.tsx": $$$$$$$$5,
-    "deco-sites/ultimato/sections/ParagraphList.tsx": $$$$$$$$6,
+    "deco-sites/ultimato/sections/Guias.tsx": $$$$$$$$3,
+    "deco-sites/ultimato/sections/Header.tsx": $$$$$$$$4,
+    "deco-sites/ultimato/sections/Hero.tsx": $$$$$$$$5,
+    "deco-sites/ultimato/sections/HQSelectorList.tsx": $$$$$$$$6,
     "deco-sites/ultimato/sections/PostArchive.tsx": $$$$$$$$7,
     "deco-sites/ultimato/sections/PostsSlider.tsx": $$$$$$$$8,
-    "deco-sites/ultimato/sections/SimpleTextList.tsx": $$$$$$$$9,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$10,
-    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$11,
-    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$12,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$9,
+    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$10,
+    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$11,
   },
   "name": "deco-sites/ultimato",
   "handlers": {

@@ -17,7 +17,7 @@ import {
 
 import { Section } from "deco/blocks/section.ts";
 
-type PageInfo = OffsetPaginationPageInfo & {
+export type PageInfo = OffsetPaginationPageInfo & {
   limit: number;
   skip: number;
   totalPages: number;

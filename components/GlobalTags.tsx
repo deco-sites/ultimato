@@ -39,6 +39,14 @@ function GlobalTags() {
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;800&display=swap"
         rel="stylesheet"
       />
+
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2313803884697164"
+        crossOrigin="anonymous"
+        defer
+      >
+      </script>
     </Head>
   );
 }
