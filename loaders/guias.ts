@@ -26,11 +26,9 @@ export interface LoaderReturn {
 
 export const loader = async (
   { adPosition }: Props,
-  req: Request,
+  _req: Request,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
-
-  console.log(req);
 
   const postList = await client.query<{ guias: RootQueryToPostConnection }>(
     PostsQuery,

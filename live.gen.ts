@@ -12,7 +12,8 @@ import * as $$$$1 from "./routes/_app.tsx";
 import * as $$$$$0 from "./islands/CookiePrompt.tsx";
 import * as $$$$$1 from "./islands/FlyingBacons.tsx";
 import * as $$$$$2 from "./islands/Menu.tsx";
-import * as $$$$$3 from "./islands/Slider.tsx";
+import * as $$$$$3 from "./islands/PigsSlider.tsx";
+import * as $$$$$4 from "./islands/Slider.tsx";
 import * as $$$$$$$$0 from "./sections/Container.tsx";
 import * as $$$$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$$$2 from "./sections/FullBanner.tsx";
@@ -20,11 +21,12 @@ import * as $$$$$$$$3 from "./sections/Guias.tsx";
 import * as $$$$$$$$4 from "./sections/Header.tsx";
 import * as $$$$$$$$5 from "./sections/Hero.tsx";
 import * as $$$$$$$$6 from "./sections/HQSelectorList.tsx";
-import * as $$$$$$$$7 from "./sections/PostArchive.tsx";
-import * as $$$$$$$$8 from "./sections/PostsSlider.tsx";
-import * as $$$$$$$$9 from "./sections/Theme.tsx";
-import * as $$$$$$$$10 from "./sections/Top5AndCat.tsx";
-import * as $$$$$$$$11 from "./sections/WhatsappCTA.tsx";
+import * as $$$$$$$$7 from "./sections/Pigs.tsx";
+import * as $$$$$$$$8 from "./sections/PostArchive.tsx";
+import * as $$$$$$$$9 from "./sections/PostsSlider.tsx";
+import * as $$$$$$$$10 from "./sections/Theme.tsx";
+import * as $$$$$$$$11 from "./sections/Top5AndCat.tsx";
+import * as $$$$$$$$12 from "./sections/WhatsappCTA.tsx";
 import * as $live_workflows from "$live/routes/live/workflows/run.ts";
 import * as $live_middleware from "$live/routes/_middleware.ts";
 import * as $live_workbench from "$live/routes/live/workbench.ts";
@@ -242,7 +244,8 @@ const manifest = {
     "./islands/CookiePrompt.tsx": $$$$$0,
     "./islands/FlyingBacons.tsx": $$$$$1,
     "./islands/Menu.tsx": $$$$$2,
-    "./islands/Slider.tsx": $$$$$3,
+    "./islands/PigsSlider.tsx": $$$$$3,
+    "./islands/Slider.tsx": $$$$$4,
   },
   "sections": {
     "$live/sections/Conditional_Beta.tsx": i1$$$$0,
@@ -269,11 +272,12 @@ const manifest = {
     "deco-sites/ultimato/sections/Header.tsx": $$$$$$$$4,
     "deco-sites/ultimato/sections/Hero.tsx": $$$$$$$$5,
     "deco-sites/ultimato/sections/HQSelectorList.tsx": $$$$$$$$6,
-    "deco-sites/ultimato/sections/PostArchive.tsx": $$$$$$$$7,
-    "deco-sites/ultimato/sections/PostsSlider.tsx": $$$$$$$$8,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$9,
-    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$10,
-    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$11,
+    "deco-sites/ultimato/sections/Pigs.tsx": $$$$$$$$7,
+    "deco-sites/ultimato/sections/PostArchive.tsx": $$$$$$$$8,
+    "deco-sites/ultimato/sections/PostsSlider.tsx": $$$$$$$$9,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$10,
+    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$11,
+    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$12,
   },
   "name": "deco-sites/ultimato",
   "handlers": {

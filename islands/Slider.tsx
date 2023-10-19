@@ -6,10 +6,12 @@ import {
   register,
   SwiperContainer,
   SwiperSlide,
-} from "https://esm.sh/swiper@10.2.0/element/bundle?target=es2022";
+} from "https://esm.sh/swiper@10.3.1/element/bundle?target=es2022";
 
 // deno-lint-ignore no-explicit-any
-type CustomElement<T> = Partial<T & { children: any; key?: any; ref?: any }>;
+type CustomElement<T> = Partial<
+  T & { children: any; key?: any; ref?: any; class?: string }
+>;
 
 type Kebab<T extends string, A extends string = ""> = T extends
   `${infer F}${infer R}`

@@ -3,26 +3,24 @@
 @tailwind utilities;
 
 @layer base {
-
-  html, body {
+  body {
     @apply font-base overflow-x-hidden scroll-smooth;
   }
 
   /** Remove default styles from input[type=number] */
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  input[type=number] {
+  input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
   }
 }
 
 @layer components {
-
   /** Prevent scroll when modal is open */
   .no-scroll {
     overflow: hidden;
@@ -31,7 +29,6 @@
 }
 
 @layer utilities {
-
   /** Remove scrollbar from overflow-auto */
   .scrollbar-none {
     scrollbar-width: none;
@@ -40,5 +37,18 @@
 
   .scrollbar-none::-webkit-scrollbar {
     display: none;
+  }
+
+  .thumb-decorator::before {
+    @apply content-[''] opacity-0 block absolute m-auto right-0 left-0 w-[66px] h-[23px] top-[-23px] bg-contain bg-no-repeat transition-opacity duration-200;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 35.3'%3e%3cpath d='M-7.8 36C.1 36 7.7 33.7 14 29.4l16.7-11.2c11.4-7.6 27.1-7.6 38.6 0l16.5 11.2c6.3 4.2 13.9 6.5 21.8 6.5H-7.8v.1z' fill='%23852c2a'/%3e%3cpath d='M0 33.5c6.8 0 13.4-2.2 18.9-6.4L33.3 16c9.8-7.6 23.5-7.6 33.4 0l14.4 11.1c5.4 4.2 12.1 6.4 18.9 6.4h0' fill='%23852c2a' stroke='%23ed6c6e' stroke-width='3.636'/%3e%3c/svg%3e");
+  }
+
+  .swiper-slide-thumb-active .thumb-decorator {
+    @apply bg-accent border-secondary transform-gpu -translate-y-3;
+  }
+
+  .swiper-slide-thumb-active .thumb-decorator::before {
+    @apply opacity-100;
   }
 }

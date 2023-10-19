@@ -1,7 +1,7 @@
 import type { JSX } from "preact";
 interface Props {
   className?: string;
-  style?: React.CSSProperties;
+  style?: JSX.CSSProperties;
   client?: string;
   slot: string;
   layout?: string;

@@ -16,10 +16,8 @@ function PostArchive(
     );
   }
 
-  console.log(pageInfo);
-
   return (
-    <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between">
+    <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
       <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
         <SectionTitle tag="div">
           Notícias, Matérias e Reviews
@@ -34,7 +32,7 @@ function PostArchive(
       </div>
       {sidebar &&
         (
-          <aside className="flex-1 max-w-md bg-red-100 rounded-lg px-6 py-6 hidden lg:block">
+          <aside className="flex-1 max-w-md bg-neutral rounded-lg px-6 py-6 hidden lg:block">
             <sidebar.Component {...sidebar.props} />
           </aside>
         )}

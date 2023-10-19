@@ -1,4 +1,5 @@
 import { Section } from "deco/blocks/section.ts";
+import { asset } from "$fresh/runtime.ts";
 
 import FlyingBacons from "deco-sites/ultimato/islands/FlyingBacons.tsx";
 
@@ -45,7 +46,14 @@ const Container = (
                 bg={bgScheme ?? "light"}
               />
             )}
-
+          {bgType && bgType === "pattern" &&
+            (
+              <img
+                src={`${asset("/images/ub-pattern.png")}`}
+                alt="pattern hq"
+                class="absolute top-0 left-0 w-full h-full object-cover mix-blend-multiply pointer-events-none select-none"
+              />
+            )}
           <div
             className={`container px-4 ${
               bgType

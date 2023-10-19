@@ -40,11 +40,9 @@ export interface LoaderReturn {
 
 export const loader = async (
   { postNumber, sidebar }: Props,
-  req: Request,
+  _req: Request,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
-
-  console.log(req);
 
   const variables = {
     limit: postNumber || 10,

@@ -40,13 +40,15 @@ function GlobalTags() {
         rel="stylesheet"
       />
 
-      <script
+      {
+        /* <script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2313803884697164"
         crossOrigin="anonymous"
         defer
       >
-      </script>
+      </script> */
+      }
     </Head>
   );
 }
