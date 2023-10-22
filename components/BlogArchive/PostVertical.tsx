@@ -58,7 +58,7 @@ const PostVertical = (
       )}
 
       <div className="flex-1">
-        {categories && (
+        {categories && layout !== "reduced" && (
           <div className="text-xs text-secondary mb-2">
             {categories
               .filter(({ slug, ancestors }) =>

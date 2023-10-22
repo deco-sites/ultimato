@@ -37,7 +37,11 @@ const Container = (
           className={`container-wrapper ${
             bgType && bgType === "pattern"
               ? "bg-primary relative"
-              : `${bgScheme === "light" ? "bg-white" : "bg-dark"}`
+              : `${
+                bgScheme === "light"
+                  ? "bg-white group/container-light"
+                  : "bg-dark group/container-dark"
+              }`
           }`}
         >
           {bgType && bgType === "bacon" &&

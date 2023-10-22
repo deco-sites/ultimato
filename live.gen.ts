@@ -2,11 +2,12 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/guias.ts";
-import * as $$$1 from "./loaders/header.ts";
-import * as $$$2 from "./loaders/news-carousel.ts";
-import * as $$$3 from "./loaders/post-archive.ts";
-import * as $$$4 from "./loaders/top5week.ts";
+import * as $$$0 from "./loaders/categories.ts";
+import * as $$$1 from "./loaders/guias.ts";
+import * as $$$2 from "./loaders/header.ts";
+import * as $$$3 from "./loaders/news-carousel.ts";
+import * as $$$4 from "./loaders/post-archive.ts";
+import * as $$$5 from "./loaders/top5week.ts";
 import * as $$$$0 from "./routes/styles.css.ts";
 import * as $$$$1 from "./routes/_app.tsx";
 import * as $$$$$0 from "./islands/CookiePrompt.tsx";
@@ -15,18 +16,19 @@ import * as $$$$$2 from "./islands/Menu.tsx";
 import * as $$$$$3 from "./islands/PigsSlider.tsx";
 import * as $$$$$4 from "./islands/Slider.tsx";
 import * as $$$$$$$$0 from "./sections/Container.tsx";
-import * as $$$$$$$$1 from "./sections/Footer.tsx";
-import * as $$$$$$$$2 from "./sections/FullBanner.tsx";
-import * as $$$$$$$$3 from "./sections/Guias.tsx";
-import * as $$$$$$$$4 from "./sections/Header.tsx";
-import * as $$$$$$$$5 from "./sections/Hero.tsx";
-import * as $$$$$$$$6 from "./sections/HQSelectorList.tsx";
-import * as $$$$$$$$7 from "./sections/Pigs.tsx";
-import * as $$$$$$$$8 from "./sections/PostArchive.tsx";
-import * as $$$$$$$$9 from "./sections/PostsSlider.tsx";
-import * as $$$$$$$$10 from "./sections/Theme.tsx";
-import * as $$$$$$$$11 from "./sections/Top5AndCat.tsx";
-import * as $$$$$$$$12 from "./sections/WhatsappCTA.tsx";
+import * as $$$$$$$$1 from "./sections/Content/Categories.tsx";
+import * as $$$$$$$$2 from "./sections/Footer.tsx";
+import * as $$$$$$$$3 from "./sections/FullBanner.tsx";
+import * as $$$$$$$$4 from "./sections/Guias.tsx";
+import * as $$$$$$$$5 from "./sections/Header.tsx";
+import * as $$$$$$$$6 from "./sections/Hero.tsx";
+import * as $$$$$$$$7 from "./sections/HQSelectorList.tsx";
+import * as $$$$$$$$8 from "./sections/Pigs.tsx";
+import * as $$$$$$$$9 from "./sections/PostArchive.tsx";
+import * as $$$$$$$$10 from "./sections/PostsSlider.tsx";
+import * as $$$$$$$$11 from "./sections/Theme.tsx";
+import * as $$$$$$$$12 from "./sections/Top5AndCat.tsx";
+import * as $$$$$$$$13 from "./sections/WhatsappCTA.tsx";
 import * as $live_workflows from "$live/routes/live/workflows/run.ts";
 import * as $live_middleware from "$live/routes/_middleware.ts";
 import * as $live_workbench from "$live/routes/live/workbench.ts";
@@ -217,11 +219,12 @@ const manifest = {
     "deco-sites/std/loaders/x/image.ts": i2$$$28,
     "deco-sites/std/loaders/x/redirects.ts": i2$$$29,
     "deco-sites/std/loaders/x/redirectsFromCsv.ts": i2$$$30,
-    "deco-sites/ultimato/loaders/guias.ts": $$$0,
-    "deco-sites/ultimato/loaders/header.ts": $$$1,
-    "deco-sites/ultimato/loaders/news-carousel.ts": $$$2,
-    "deco-sites/ultimato/loaders/post-archive.ts": $$$3,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$4,
+    "deco-sites/ultimato/loaders/categories.ts": $$$0,
+    "deco-sites/ultimato/loaders/guias.ts": $$$1,
+    "deco-sites/ultimato/loaders/header.ts": $$$2,
+    "deco-sites/ultimato/loaders/news-carousel.ts": $$$3,
+    "deco-sites/ultimato/loaders/post-archive.ts": $$$4,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$5,
   },
   "routes": {
     "./routes/_app.tsx": $$$$1,
@@ -266,18 +269,19 @@ const manifest = {
     "deco-sites/std/sections/SEOPLP.tsx": i2$$$$$10,
     "deco-sites/std/sections/VTEXPortalDataLayerCompatibility.tsx": i2$$$$$11,
     "deco-sites/ultimato/sections/Container.tsx": $$$$$$$$0,
-    "deco-sites/ultimato/sections/Footer.tsx": $$$$$$$$1,
-    "deco-sites/ultimato/sections/FullBanner.tsx": $$$$$$$$2,
-    "deco-sites/ultimato/sections/Guias.tsx": $$$$$$$$3,
-    "deco-sites/ultimato/sections/Header.tsx": $$$$$$$$4,
-    "deco-sites/ultimato/sections/Hero.tsx": $$$$$$$$5,
-    "deco-sites/ultimato/sections/HQSelectorList.tsx": $$$$$$$$6,
-    "deco-sites/ultimato/sections/Pigs.tsx": $$$$$$$$7,
-    "deco-sites/ultimato/sections/PostArchive.tsx": $$$$$$$$8,
-    "deco-sites/ultimato/sections/PostsSlider.tsx": $$$$$$$$9,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$10,
-    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$11,
-    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$12,
+    "deco-sites/ultimato/sections/Content/Categories.tsx": $$$$$$$$1,
+    "deco-sites/ultimato/sections/Footer.tsx": $$$$$$$$2,
+    "deco-sites/ultimato/sections/FullBanner.tsx": $$$$$$$$3,
+    "deco-sites/ultimato/sections/Guias.tsx": $$$$$$$$4,
+    "deco-sites/ultimato/sections/Header.tsx": $$$$$$$$5,
+    "deco-sites/ultimato/sections/Hero.tsx": $$$$$$$$6,
+    "deco-sites/ultimato/sections/HQSelectorList.tsx": $$$$$$$$7,
+    "deco-sites/ultimato/sections/Pigs.tsx": $$$$$$$$8,
+    "deco-sites/ultimato/sections/PostArchive.tsx": $$$$$$$$9,
+    "deco-sites/ultimato/sections/PostsSlider.tsx": $$$$$$$$10,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$$$11,
+    "deco-sites/ultimato/sections/Top5AndCat.tsx": $$$$$$$$12,
+    "deco-sites/ultimato/sections/WhatsappCTA.tsx": $$$$$$$$13,
   },
   "name": "deco-sites/ultimato",
   "handlers": {

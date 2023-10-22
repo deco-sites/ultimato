@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { Ref, useEffect, useRef, useState } from "preact/hooks";
 import DecoImage from "deco-sites/std/components/Image.tsx";
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 
@@ -7,11 +7,22 @@ import {
   SwiperContainer,
   SwiperSlide,
 } from "https://esm.sh/swiper@10.3.1/element/bundle?target=es2022";
+import { ComponentChildren } from "preact";
 
-// deno-lint-ignore no-explicit-any
 type CustomElement<T> = Partial<
-  T & { children: any; key?: any; ref?: any; class?: string }
+  T
 >;
+
+type CustomProps = {
+  children?: ComponentChildren;
+  ref: Ref<SwiperContainer>;
+  key?: string;
+  class?: string;
+};
+
+type Container = Omit<SwiperContainer, "children"> & CustomProps;
+
+type Slide = Omit<SwiperSlide, "children"> & CustomProps;
 
 type Kebab<T extends string, A extends string = ""> = T extends
   `${infer F}${infer R}`
@@ -19,13 +30,17 @@ type Kebab<T extends string, A extends string = ""> = T extends
   : A;
 
 type KebabKeys<T> = { [K in keyof T as K extends string ? Kebab<K> : K]: T[K] };
-type Stringfy<T> = { [K in keyof T]: string };
+type Stringfy<T> = {
+  [K in keyof T]: K extends "ref" ? T[K]
+    : K extends "children" ? T[K]
+    : string;
+};
 
 declare global {
   namespace preact.createElement.JSX {
     interface IntrinsicElements {
-      ["swiper-container"]: CustomElement<KebabKeys<Stringfy<SwiperContainer>>>;
-      ["swiper-slide"]: CustomElement<SwiperSlide>;
+      ["swiper-container"]: CustomElement<KebabKeys<Stringfy<Container>>>;
+      ["swiper-slide"]: CustomElement<Slide>;
     }
   }
 }

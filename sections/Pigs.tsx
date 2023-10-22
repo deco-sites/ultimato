@@ -74,8 +74,6 @@ query getPigs {
 function Porquinhos({ posts }: SectionProps<typeof loader>) {
   if (!posts) return null;
 
-  console.log(posts);
-
   return (
     <div className="relative">
       <div className="container px-4 pt-6">
