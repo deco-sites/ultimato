@@ -3,11 +3,12 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$0 from "./loaders/categories.ts";
-import * as $$$1 from "./loaders/guias.ts";
-import * as $$$2 from "./loaders/header.ts";
-import * as $$$3 from "./loaders/news-carousel.ts";
-import * as $$$4 from "./loaders/post-archive.ts";
-import * as $$$5 from "./loaders/top5week.ts";
+import * as $$$1 from "./loaders/footer.ts";
+import * as $$$2 from "./loaders/guias.ts";
+import * as $$$3 from "./loaders/header.ts";
+import * as $$$4 from "./loaders/news-carousel.ts";
+import * as $$$5 from "./loaders/post-archive.ts";
+import * as $$$6 from "./loaders/top5week.ts";
 import * as $$$$0 from "./routes/styles.css.ts";
 import * as $$$$1 from "./routes/_app.tsx";
 import * as $$$$$0 from "./islands/CookiePrompt.tsx";
@@ -220,11 +221,12 @@ const manifest = {
     "deco-sites/std/loaders/x/redirects.ts": i2$$$29,
     "deco-sites/std/loaders/x/redirectsFromCsv.ts": i2$$$30,
     "deco-sites/ultimato/loaders/categories.ts": $$$0,
-    "deco-sites/ultimato/loaders/guias.ts": $$$1,
-    "deco-sites/ultimato/loaders/header.ts": $$$2,
-    "deco-sites/ultimato/loaders/news-carousel.ts": $$$3,
-    "deco-sites/ultimato/loaders/post-archive.ts": $$$4,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$5,
+    "deco-sites/ultimato/loaders/footer.ts": $$$1,
+    "deco-sites/ultimato/loaders/guias.ts": $$$2,
+    "deco-sites/ultimato/loaders/header.ts": $$$3,
+    "deco-sites/ultimato/loaders/news-carousel.ts": $$$4,
+    "deco-sites/ultimato/loaders/post-archive.ts": $$$5,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$6,
   },
   "routes": {
     "./routes/_app.tsx": $$$$1,
