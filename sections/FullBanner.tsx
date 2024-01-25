@@ -1,5 +1,5 @@
-import DecoImage from "deco-sites/std/components/Image.tsx";
-import type { Image as ImageType } from "deco-sites/std/components/types.ts";
+import DecoImage from "apps/website/components/Image.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import { replaceAllSites } from "deco-sites/ultimato/utils/url.ts";
 
 import {
@@ -15,7 +15,7 @@ import {
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 export interface Props {
-  image?: ImageType;
+  image?: ImageWidget;
   alt?: string;
   link?: {
     target?: string;

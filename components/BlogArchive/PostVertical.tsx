@@ -9,7 +9,7 @@ import {
   stripTags,
 } from "deco-sites/ultimato/utils/content.tsx";
 
-import DecoImage from "deco-sites/std/components/Image.tsx";
+import DecoImage from "apps/website/components/Image.tsx";
 
 import { Fragment } from "preact";
 

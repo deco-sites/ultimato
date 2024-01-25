@@ -1,4 +1,4 @@
-import { fetchAPI } from "deco-sites/std/utils/fetch.ts";
+import { fetchAPI } from "deco/utils/fetchAPI.ts";
 
 // Use wordpress GraphQL API
 

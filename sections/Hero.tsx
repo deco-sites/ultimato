@@ -1,4 +1,4 @@
-import type { Image as DecoImage } from "deco-sites/std/components/types.ts";
+import type { ImageWidget as DecoImage } from "apps/admin/widgets.ts";
 
 /** @title {{{title}}} - {{{href}}} */
 export interface Link {

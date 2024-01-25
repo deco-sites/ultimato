@@ -1,5 +1,5 @@
 import { Ref, useEffect, useRef, useState } from "preact/hooks";
-import DecoImage from "deco-sites/std/components/Image.tsx";
+import DecoImage from "apps/website/components/Image.tsx";
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 
 import {
@@ -108,7 +108,9 @@ function Slider({ content }: Props) {
     setRegistered(true);
 
     if (swiperElRef.current) {
-      updatePrevAndNextTitles(swiperElRef);
+      setTimeout(() => {
+        updatePrevAndNextTitles(swiperElRef);
+      }, 100);
 
       swiperElRef.current.addEventListener("slidechange", (e) => {
         setTimeout(() => {

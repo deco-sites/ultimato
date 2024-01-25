@@ -1,4 +1,4 @@
-import DecoImage from "deco-sites/std/components/Image.tsx";
+import DecoImage from "apps/website/components/Image.tsx";
 
 export interface Props {
   image?: string;
