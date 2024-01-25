@@ -20,8 +20,8 @@ export default defineApp(async (_req, ctx) => {
       {/* Include default fonts and css vars */}
       <Theme />
 
-       {/* Include Icons and manifest */}
-       <Head>
+      {/* Include Icons and manifest */}
+      <Head>
         {/* Enable View Transitions API */}
         <meta name="view-transition" content="same-origin" />
 
@@ -30,7 +30,6 @@ export default defineApp(async (_req, ctx) => {
           href={asset(`/styles.css?revision=${revision}`)}
           rel="stylesheet"
         />
-
       </Head>
 
       <GlobalTags />
@@ -38,10 +37,10 @@ export default defineApp(async (_req, ctx) => {
       {!!Context.active().deploymentId && trackingId && (
         <GoogleTagManager trackingId={trackingId} />
       )}
-       {/* Rest of Preact tree */}
-       <ctx.Component />
+      {/* Rest of Preact tree */}
+      <ctx.Component />
 
-         {/* Include service worker */}
+      {/* Include service worker */}
       <script
         type="module"
         dangerouslySetInnerHTML={{ __html: `(${sw})();` }}

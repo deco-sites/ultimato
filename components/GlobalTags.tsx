@@ -3,7 +3,6 @@ import { asset, Head } from "$fresh/runtime.ts";
 function GlobalTags() {
   return (
     <Head>
-
       {/* Icons */}
       <link
         rel="icon"
