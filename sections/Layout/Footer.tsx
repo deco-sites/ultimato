@@ -1,7 +1,7 @@
 import loader from "deco-sites/ultimato/loaders/footer.ts";
 import { asset } from "$fresh/runtime.ts";
 import type { SectionProps } from "deco/mod.ts";
-import Icon from "../components/ui/Icon.tsx";
+import Icon from "../../components/ui/Icon.tsx";
 
 export default function Footer({ menu, posts }: SectionProps<typeof loader>) {
   const mostRead = posts?.slice(0, 5);

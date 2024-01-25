@@ -1,4 +1,4 @@
-import Slider from "../islands/Slider.tsx";
+import Slider from "../../islands/Slider.tsx";
 
 import loader from "deco-sites/ultimato/loaders/news-carousel.ts";
 
