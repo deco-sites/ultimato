@@ -1,5 +1,5 @@
+import type { SectionProps } from "deco/mod.ts";
 import DecoImage from "apps/website/components/Image.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
 import { replaceAllSites } from "deco-sites/ultimato/utils/url.ts";
 
 import {
@@ -15,7 +15,7 @@ import {
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 export interface Props {
-  image?: ImageWidget;
+  image?: string;
   alt?: string;
   link?: {
     target?: string;
@@ -80,7 +80,7 @@ query getBannerHighlight {
 }
 `;
 
-function FullBanner({ image, alt, link, hideComponent, position }: Props) {
+function FullBanner({ image, alt, link, hideComponent, position }: SectionProps<typeof loader>) {
   if (hideComponent || !image) {
     return <div className="mb-10"></div>;
   }

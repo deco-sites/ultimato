@@ -22,6 +22,7 @@ import * as $$$$$$9 from "./sections/Layout/Footer.tsx";
 import * as $$$$$$10 from "./sections/Layout/Header.tsx";
 import * as $$$$$$11 from "./sections/Layout/Hero.tsx";
 import * as $$$$$$12 from "./sections/Other/WhatsappCTA.tsx";
+import * as $$$$$$13 from "./sections/Theme.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -49,6 +50,7 @@ const manifest = {
     "deco-sites/ultimato/sections/Layout/Header.tsx": $$$$$$10,
     "deco-sites/ultimato/sections/Layout/Hero.tsx": $$$$$$11,
     "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$12,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$13,
   },
   "apps": {
     "deco-sites/ultimato/apps/decohub.ts": $$$$$$$$$$$0,

@@ -1,6 +1,6 @@
 import HQSelector from "deco-sites/ultimato/components/HQSelector.tsx";
 import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
-import type { ImageWidget as DecoImage } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 
 /** @title {{{name}}} */
 export interface Selectors {
@@ -11,7 +11,7 @@ export interface Selectors {
   name: string;
 
   /** @description imagem da categoria */
-  image?: DecoImage;
+  image?: ImageWidget
 }
 
 export interface Props {

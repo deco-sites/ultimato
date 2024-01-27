@@ -1,4 +1,4 @@
-import type { ImageWidget as DecoImage } from "apps/admin/widgets.ts";
+import type { ImageWidget} from "apps/admin/widgets.ts";
 
 /** @title {{{title}}} - {{{href}}} */
 export interface Link {
@@ -7,7 +7,7 @@ export interface Link {
 }
 
 export interface Props {
-  logo?: DecoImage;
+  logo?: ImageWidget;
   title?: string;
   /** @format textarea */
   headline?: string;
