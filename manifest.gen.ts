@@ -13,7 +13,7 @@ import * as $$$$$$0 from "./sections/Content/Categories.tsx";
 import * as $$$$$$1 from "./sections/Content/Guias.tsx";
 import * as $$$$$$2 from "./sections/Content/PostArchive.tsx";
 import * as $$$$$$3 from "./sections/Content/Top5AndCat.tsx";
-import * as $$$$$$4 from "./sections/Image/FullBanner.tsx";
+import * as $$$$$$4 from "./sections/Image/Highlight.tsx";
 import * as $$$$$$5 from "./sections/Image/HQSelectorList.tsx";
 import * as $$$$$$6 from "./sections/Image/Pigs.tsx";
 import * as $$$$$$7 from "./sections/Image/PostsSlider.tsx";
@@ -41,7 +41,7 @@ const manifest = {
     "deco-sites/ultimato/sections/Content/Guias.tsx": $$$$$$1,
     "deco-sites/ultimato/sections/Content/PostArchive.tsx": $$$$$$2,
     "deco-sites/ultimato/sections/Content/Top5AndCat.tsx": $$$$$$3,
-    "deco-sites/ultimato/sections/Image/FullBanner.tsx": $$$$$$4,
+    "deco-sites/ultimato/sections/Image/Highlight.tsx": $$$$$$4,
     "deco-sites/ultimato/sections/Image/HQSelectorList.tsx": $$$$$$5,
     "deco-sites/ultimato/sections/Image/Pigs.tsx": $$$$$$6,
     "deco-sites/ultimato/sections/Image/PostsSlider.tsx": $$$$$$7,

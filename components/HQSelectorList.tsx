@@ -11,7 +11,7 @@ export interface Selectors {
   name: string;
 
   /** @description imagem da categoria */
-  image?: ImageWidget
+  image?: ImageWidget;
 }
 
 export interface Props {

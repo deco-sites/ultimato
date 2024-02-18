@@ -6,7 +6,7 @@ import {
   register,
   SwiperContainer,
   SwiperSlide,
-} from "https://esm.sh/swiper@10.3.1/element/bundle?target=es2022";
+} from "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022";
 import { ComponentChildren } from "preact";
 
 type CustomElement<T> = Partial<

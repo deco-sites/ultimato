@@ -1,8 +1,9 @@
-import { useEffect, useId } from "preact/hooks";
+import { useEffect, useId, useRef } from "preact/hooks";
 
 import {
   register,
-} from "https://esm.sh/swiper@10.3.1/element/bundle?target=es2022";
+  SwiperContainer,
+} from "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022";
 
 interface Props {
   posts: {
@@ -18,11 +19,26 @@ function PigsSlider({ posts }: Props) {
   const idController = useId();
   const idThumbs = useId();
 
+  const SwiperControllerRef = useRef<SwiperContainer>(null);
+  const SwiperThumbsRef = useRef<SwiperContainer>(null);
+
   useEffect(() => {
     register();
 
-    const swiperThumbs: Element & { initialize: () => void } | null = document
-      .querySelector(`swiper-container#${idThumbs}`);
+    console.log(register);
+
+    if (SwiperControllerRef.current && SwiperThumbsRef.current) {
+      SwiperControllerRef.current?.setAttribute(
+        "thumbs-swiper",
+        `#${idThumbs}`,
+      );
+    }
+
+    /*   const swiperThumbs: Element & { initialize: () => void } | null = document
+      .querySelector(`#${idThumbs}`);
+
+      const swiperController: Element & { initialize: () => void } | null =
+      document.querySelector(`#${idController}`);
 
     const thumbsProps = {
       spaceBetween: 24,
@@ -31,33 +47,52 @@ function PigsSlider({ posts }: Props) {
       centeredSlides: true,
       centeredSlidesBounds: true,
       watchSlidesProgress: true,
-      watchSlidesVisibility: true,
       freeMode: true,
       breakpoints: {
         320: { slidesPerView: 3.8 },
         400: { slidesPerView: 4.6 },
         600: { slidesPerView: 5.6 },
-        800: { slidesPerView: 9 },
+        800: { slidesPerView: 8 },
       },
     };
 
-    if (swiperThumbs) {
+
+
+    const controllerProps = {
+      thumbs: {
+        swiper: `#${idThumbs}`,
+      },
+      spaceBetween: 0,
+      slidesPerView: 1,
+      autoplay: { delay: 4000 },
+      injectStyles: [
+        `
+          :host {
+            transform: translate3d(0, 10%, 0);
+          }
+        `,
+      ],
+    };
+
+    if (swiperController && swiperThumbs) {
+      Object.assign(swiperController, controllerProps);
       Object.assign(swiperThumbs, thumbsProps);
 
+      swiperController.initialize();
       swiperThumbs.initialize();
-    }
+      console.log(Object.getOwnPropertyNames(swiperThumbs))
+      console.log(swiperThumbs.swiper)
+    } */
   }, []);
 
   return (
     <>
       <swiper-container
         id={idController}
-        space-between="0"
+        ref={SwiperControllerRef}
+        thumbs-swiper={`#${idThumbs}`}
+        space-between="24"
         slides-per-view="1"
-        thumbs-swiper=".pigs-thumbs"
-        autoplay={`{"delay":4000}`}
-        loop="true"
-        style="transform:translate3d(0,10%,0);"
       >
         {posts.map(({ id, slug, title, image, alt }) => {
           return (
@@ -85,32 +120,37 @@ function PigsSlider({ posts }: Props) {
         })}
       </swiper-container>
 
-      <div className="max-w-3xl mx-auto transform-gpu translate-y-1/3">
-        <swiper-container
-          id={idThumbs}
-          class="pigs-thumbs"
-          init="false"
-        >
-          {posts.map(({ id, image, alt, title }) => {
-            return (
-              <swiper-slide key={id} className="pt-8">
-                <div className="thumb-decorator relative bg-white border-2 border-transparent flex justify-center items-center w-20 h-20 rounded-lg transition-all duration-200 cursor-pointer p-[6px]">
-                  {image && (
-                    <div className="relative w-full h-full flex justify-center items-center">
-                      <img
-                        className="object-contain object-center w-full h-full aspect-square"
-                        type="min"
-                        src={image}
-                        alt={alt ?? title}
-                      />
-                    </div>
-                  )}
-                </div>
-              </swiper-slide>
-            );
-          })}
-        </swiper-container>
-      </div>
+      <swiper-container
+        id={idThumbs}
+        ref={SwiperThumbsRef}
+        space-between="24"
+        slides-per-view="2.6"
+        center-insufficient-slides="true"
+        centered-slides="true"
+        centered-slides-bounds="true"
+        watch-slides-progress="true"
+        free-mode="true"
+        breakpoints='{"320": {"slidesPerView": 3.8}, "400": {"slidesPerView": 4.6}, "600": {"slidesPerView": 5.6}, "800": {"slidesPerView": 8}}'
+      >
+        {posts.map(({ id, image, alt, title }) => {
+          return (
+            <swiper-slide key={id} className="pt-8">
+              <div className="thumb-decorator relative bg-white border-2 border-transparent flex justify-center items-center w-20 h-20 rounded-lg transition-all duration-200 cursor-pointer p-[6px]">
+                {image && (
+                  <div className="relative w-full h-full flex justify-center items-center">
+                    <img
+                      className="object-contain object-center w-full h-full aspect-square"
+                      type="min"
+                      src={image}
+                      alt={alt ?? title}
+                    />
+                  </div>
+                )}
+              </div>
+            </swiper-slide>
+          );
+        })}
+      </swiper-container>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import type { ImageWidget} from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 
 /** @title {{{title}}} - {{{href}}} */
 export interface Link {
