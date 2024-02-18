@@ -6,14 +6,23 @@
   "appPort": [8000], // Specify the ports you want to forward
   "forwardPorts": [8000],
   // Set *default* container specific settings.json values on container create.
-  "settings": {},
-  // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    "denoland.vscode-deno",
-    "bradlc.vscode-tailwindcss",
-    "ecmel.vscode-html-css",
-    "Tobermory.es6-string-html"
-  ],
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "denoland.vscode-deno",
+        "bradlc.vscode-tailwindcss",
+        "ecmel.vscode-html-css",
+        "Tobermory.es6-string-html",
+        "GraphQL.vscode-graphql",
+        "eamodio.gitlens",
+        "ms-vsliveshare.vsliveshare",
+        "ms-vscode.vscode-typescript-next",
+        "github.vscode-github-actions"
+      ]
+    }
+  },
   "postCreateCommand": "gh codespace ports visibility 8000:public -c $CODESPACE_NAME",
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
