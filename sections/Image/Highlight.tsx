@@ -15,17 +15,20 @@ import {
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 export interface Props {
-  image?: string;
-  alt?: string;
-  link?: {
-    target?: string;
-    url?: string;
-  };
   hideComponent?: boolean;
   position?: "top" | "bottom" | "middle";
 }
 
-export const loader = async (props: Props, _req: Request): Promise<Props> => {
+export const loader = async (props: Props, _req: Request): Promise<
+  Props & {
+    image: string;
+    alt: string;
+    link: {
+      url: string;
+      target: string;
+    };
+  }
+> => {
   const client = createClient({ endpoint });
 
   const banner = await client.query<{ page: Page }>(
@@ -36,22 +39,30 @@ export const loader = async (props: Props, _req: Request): Promise<Props> => {
 
   const response = {
     ...props,
+    ...{
+      image: "",
+      alt: "Destaque",
+      link: {
+        url: "#",
+        target: "_self",
+      },
+    },
   };
 
   if (banner) {
     response.image = banner.page.pageHighlight?.image?.sourceUrl
       ? banner.page.pageHighlight?.image?.sourceUrl
-      : props.image;
+      : response.image;
     response.alt = banner.page.pageHighlight?.image?.altText
       ? banner.page.pageHighlight?.image?.altText
-      : props.alt;
+      : response.alt;
     response.link = {
       url: banner.page.pageHighlight?.link?.url
         ? banner.page.pageHighlight?.link?.url
-        : props.link?.url,
+        : response.link?.url,
       target: banner.page.pageHighlight?.link?.target
         ? banner.page.pageHighlight?.link?.target
-        : props.link?.target,
+        : response.link?.target,
     };
     response.hideComponent =
       (banner.page.pageHighlight?.hide === "nao" && !props.hideComponent)
@@ -80,7 +91,9 @@ query getBannerHighlight {
 }
 `;
 
-function FullBanner({ image, alt, link, hideComponent, position }: SectionProps<typeof loader>) {
+function FullBanner(
+  { image, alt, link, hideComponent, position }: SectionProps<typeof loader>,
+) {
   if (hideComponent || !image) {
     return <div className="mb-10"></div>;
   }
