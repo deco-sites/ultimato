@@ -40,13 +40,17 @@ export interface LoaderReturn {
 
 export const loader = async (
   { postNumber, sidebar }: Props,
-  _req: Request,
+  req: Request,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
 
+  const urlPath = new URL(req.url).pathname
+
+  const isPaginated = urlPath.slice(1).split("/")[0] === 'page'
+
   const variables = {
     limit: postNumber || 10,
-    skip: 0,
+    skip: isPaginated ? (parseInt(urlPath.slice(1).split("/")[1]) - 1) * (postNumber || 10) : 0,
   };
 
   const postList = await client.query<{ posts: RootQueryToPostConnection }>(
