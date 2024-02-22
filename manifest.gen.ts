@@ -8,7 +8,8 @@ import * as $$$2 from "./loaders/guias.ts";
 import * as $$$3 from "./loaders/header.ts";
 import * as $$$4 from "./loaders/news-carousel.ts";
 import * as $$$5 from "./loaders/post-archive.ts";
-import * as $$$6 from "./loaders/top5week.ts";
+import * as $$$6 from "./loaders/single-post.ts";
+import * as $$$7 from "./loaders/top5week.ts";
 import * as $$$$$$0 from "./sections/Content/Categories.tsx";
 import * as $$$$$$1 from "./sections/Content/Guias.tsx";
 import * as $$$$$$2 from "./sections/Content/PostArchive.tsx";
@@ -21,8 +22,11 @@ import * as $$$$$$8 from "./sections/Layout/Container.tsx";
 import * as $$$$$$9 from "./sections/Layout/Footer.tsx";
 import * as $$$$$$10 from "./sections/Layout/Header.tsx";
 import * as $$$$$$11 from "./sections/Layout/Hero.tsx";
-import * as $$$$$$12 from "./sections/Other/WhatsappCTA.tsx";
-import * as $$$$$$13 from "./sections/Theme.tsx";
+import * as $$$$$$12 from "./sections/Other/Adsense.tsx";
+import * as $$$$$$13 from "./sections/Other/WhatsappCTA.tsx";
+import * as $$$$$$14 from "./sections/SinglePost/PostContent.tsx";
+import * as $$$$$$15 from "./sections/SinglePost/PostCover.tsx";
+import * as $$$$$$16 from "./sections/Theme.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -34,7 +38,8 @@ const manifest = {
     "deco-sites/ultimato/loaders/header.ts": $$$3,
     "deco-sites/ultimato/loaders/news-carousel.ts": $$$4,
     "deco-sites/ultimato/loaders/post-archive.ts": $$$5,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$6,
+    "deco-sites/ultimato/loaders/single-post.ts": $$$6,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$7,
   },
   "sections": {
     "deco-sites/ultimato/sections/Content/Categories.tsx": $$$$$$0,
@@ -49,8 +54,11 @@ const manifest = {
     "deco-sites/ultimato/sections/Layout/Footer.tsx": $$$$$$9,
     "deco-sites/ultimato/sections/Layout/Header.tsx": $$$$$$10,
     "deco-sites/ultimato/sections/Layout/Hero.tsx": $$$$$$11,
-    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$12,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$13,
+    "deco-sites/ultimato/sections/Other/Adsense.tsx": $$$$$$12,
+    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$13,
+    "deco-sites/ultimato/sections/SinglePost/PostContent.tsx": $$$$$$14,
+    "deco-sites/ultimato/sections/SinglePost/PostCover.tsx": $$$$$$15,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$16,
   },
   "apps": {
     "deco-sites/ultimato/apps/decohub.ts": $$$$$$$$$$$0,

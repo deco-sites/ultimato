@@ -119,38 +119,39 @@ function PigsSlider({ posts }: Props) {
           );
         })}
       </swiper-container>
-
-      <swiper-container
-        id={idThumbs}
-        ref={SwiperThumbsRef}
-        space-between="24"
-        slides-per-view="2.6"
-        center-insufficient-slides="true"
-        centered-slides="true"
-        centered-slides-bounds="true"
-        watch-slides-progress="true"
-        free-mode="true"
-        breakpoints='{"320": {"slidesPerView": 3.8}, "400": {"slidesPerView": 4.6}, "600": {"slidesPerView": 5.6}, "800": {"slidesPerView": 8}}'
-      >
-        {posts.map(({ id, image, alt, title }) => {
-          return (
-            <swiper-slide key={id} className="pt-8">
-              <div className="thumb-decorator relative bg-white border-2 border-transparent flex justify-center items-center w-20 h-20 rounded-lg transition-all duration-200 cursor-pointer p-[6px]">
-                {image && (
-                  <div className="relative w-full h-full flex justify-center items-center">
-                    <img
-                      className="object-contain object-center w-full h-full aspect-square"
-                      type="min"
-                      src={image}
-                      alt={alt ?? title}
-                    />
-                  </div>
-                )}
-              </div>
-            </swiper-slide>
-          );
-        })}
-      </swiper-container>
+      <div className="max-w-3xl mx-auto transform-gpu translate-y-1/3">
+        <swiper-container
+          id={idThumbs}
+          ref={SwiperThumbsRef}
+          space-between="24"
+          slides-per-view="2.6"
+          center-insufficient-slides="true"
+          centered-slides="true"
+          centered-slides-bounds="true"
+          watch-slides-progress="true"
+          free-mode="true"
+          breakpoints='{"320": {"slidesPerView": 3.8}, "400": {"slidesPerView": 4.6}, "600": {"slidesPerView": 5.6}, "800": {"slidesPerView": 8}}'
+        >
+          {posts.map(({ id, image, alt, title }) => {
+            return (
+              <swiper-slide key={id} className="pt-8">
+                <div className="thumb-decorator relative bg-white border-2 border-transparent flex justify-center items-center w-20 h-20 rounded-lg transition-all duration-200 cursor-pointer p-[6px] h-[200px]">
+                  {image && (
+                    <div className="relative w-full h-full flex justify-center items-center">
+                      <img
+                        className="object-contain object-center w-full h-full aspect-square"
+                        type="min"
+                        src={image}
+                        alt={alt ?? title}
+                      />
+                    </div>
+                  )}
+                </div>
+              </swiper-slide>
+            );
+          })}
+        </swiper-container>
+      </div>
     </>
   );
 }

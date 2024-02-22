@@ -3,7 +3,7 @@ interface Props {
   className?: string;
   style?: JSX.CSSProperties;
   client?: string;
-  slot: string;
+  slot?: string;
   layout?: string;
   layoutKey?: string;
   format?: string;
