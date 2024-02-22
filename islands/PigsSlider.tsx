@@ -135,7 +135,7 @@ function PigsSlider({ posts }: Props) {
           {posts.map(({ id, image, alt, title }) => {
             return (
               <swiper-slide key={id} className="pt-8">
-                <div className="thumb-decorator relative bg-white border-2 border-transparent flex justify-center items-center w-20 h-20 rounded-lg transition-all duration-200 cursor-pointer p-[6px] h-[200px]">
+                <div className="thumb-decorator relative bg-white border-2 border-transparent flex justify-center items-center w-20 h-20 rounded-lg transition-all duration-200 cursor-pointer p-[6px]">
                   {image && (
                     <div className="relative w-full h-full flex justify-center items-center">
                       <img
