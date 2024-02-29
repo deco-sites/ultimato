@@ -30,30 +30,50 @@ export interface Props {
 
   /** @description Sidebar */
   sidebar?: Section;
+
+  /** @description Categoria */
+  categoria?: string;
 }
 
 export interface LoaderReturn {
   posts?: Post[];
   sidebar?: Section;
   pageInfo: PageInfo;
+  category?: string;
 }
 
 export const loader = async (
-  { postNumber, sidebar }: Props,
+  { postNumber, sidebar, categoria }: Props,
   req: Request,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
 
   const urlPath = new URL(req.url).pathname;
+  const urlArrayPath = urlPath.slice(1).split("/")
 
-  const isPaginated = urlPath.slice(1).split("/")[0] === "page";
+
+  const indexOfPage = urlArrayPath.indexOf("page")
+  const isPaginated = indexOfPage !== -1
+
+  const indexOfCategory = urlArrayPath.indexOf("categoria")
+  const isCategoryPage = indexOfCategory !== -1
+
+  const category = categoria || (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined)
+  const page = isPaginated ? parseInt( urlArrayPath[indexOfPage + 1]) : 0
 
   const variables = {
     limit: postNumber || 10,
     skip: isPaginated
-      ? (parseInt(urlPath.slice(1).split("/")[1]) - 1) * (postNumber || 10)
+      ? (page - 1) * (postNumber || 10)
       : 0,
+    category
   };
+
+  const categoryInfo = category ? await client.query<{ category: { name: string } }>(
+    CategoryQuery,
+    { id: category },
+    "getCategory",
+  ) : undefined;
 
   const postList = await client.query<{ posts: RootQueryToPostConnection }>(
     PostsQuery,
@@ -86,18 +106,19 @@ export const loader = async (
     pageNumber,
   } as PageInfo;
 
-  return { posts, sidebar, pageInfo };
+  return { posts, sidebar, pageInfo, category: categoryInfo?.category?.name };
 };
 
 const PostsQuery = gql`
   ${FeaturedImageFields}
   ${PostArchiveFields}
-  query getPostsArchive($limit: Int!, $skip: Int!) {
+  query getPostsArchive($limit: Int!, $skip: Int!, $category: String = null) {
     posts(
       where: {
         offsetPagination: { offset: $skip, size: $limit }
         orderby: { field: DATE, order: DESC }
         categoryNotIn: "6515"
+        categoryName: $category
       }
     ) {
       edges {
@@ -120,5 +141,13 @@ const PostsQuery = gql`
     }
   }
 `;
+
+const CategoryQuery = gql`
+  query getCategory($id: ID!) {
+    category(id: $id, idType: SLUG) {
+      name
+    }
+  }
+`
 
 export default loader;

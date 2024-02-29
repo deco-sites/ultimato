@@ -2,7 +2,7 @@ import { Fragment } from "preact";
 import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
 import Ad from "deco-sites/ultimato/components/Ad.tsx";
 
-import loader from "deco-sites/ultimato/loaders/guias.ts";
+import loader from "deco-sites/ultimato/loaders/popular-posts.ts";
 
 import type {
   Category,
@@ -11,14 +11,14 @@ import type {
 import type { SectionProps } from "deco/mod.ts";
 import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
 
-function Guias({
+function PopularPosts({
   posts,
   adPosition,
 }: SectionProps<typeof loader>) {
   return (
     <div>
-      <SectionTitle tag="div">
-        Guias
+       <SectionTitle tag="div">
+        As Populares
       </SectionTitle>
       {posts &&
         posts.map((
@@ -51,5 +51,5 @@ function Guias({
   );
 }
 
-export default Guias;
+export default PopularPosts;
 export { loader };

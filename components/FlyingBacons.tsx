@@ -5,6 +5,8 @@ import { asset } from "$fresh/runtime.ts";
 
 export interface IBaconGroup {
   bg: "dark" | "light";
+  density?: number;
+  spread?: boolean;
 }
 
 export interface IBacon {
@@ -17,7 +19,7 @@ export interface IBacon {
 
 type baconPosition = Omit<IBacon, "colorScheme">;
 
-const FlyingBacons = ({ bg }: IBaconGroup) => {
+const FlyingBacons = ({ bg, density, spread = false}: IBaconGroup) => {
   const baconRef = useRef<HTMLDivElement>(null);
 
   const [rightBaconPositions, setRightBaconPositions] = useState<
@@ -27,7 +29,7 @@ const FlyingBacons = ({ bg }: IBaconGroup) => {
     baconPosition[]
   >();
 
-  const spacing = 400;
+  const spacing = 400 * (1/(density ?? 1));
 
   const setDebounced = debounce((_n: number, fn: () => void) => {
     fn();
@@ -38,11 +40,15 @@ const FlyingBacons = ({ bg }: IBaconGroup) => {
     const maxRight = window.innerWidth;
     const top = el.offsetTop as number;
 
-    const {
+    let {
       left: maxLeft,
       right: minRight,
       height,
     } = el.getBoundingClientRect() as DOMRect;
+
+    maxLeft = spread ?  window.innerWidth / 2 : maxLeft
+    minRight = spread ?  window.innerWidth / 2 : minRight
+
     const numberOfBacon = Math.round(height / spacing);
 
     const left = Array.from({ length: numberOfBacon }, () => {

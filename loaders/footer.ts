@@ -54,10 +54,7 @@ const FooterQuery = gql`
       }
     }
 
-    posts( where: {
-        offsetPagination: { size: 50 }
-        orderby: { field: DATE, order: DESC }
-      }) {
+    posts: popularPosts {
         edges {
         node {
           id

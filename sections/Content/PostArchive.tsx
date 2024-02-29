@@ -6,7 +6,7 @@ import loader from "deco-sites/ultimato/loaders/post-archive.ts";
 import type { SectionProps } from "deco/mod.ts";
 
 function PostArchive(
-  { posts, pageInfo, sidebar }: SectionProps<typeof loader>,
+  { posts, pageInfo, sidebar, category }: SectionProps<typeof loader>,
 ) {
   if (!posts || posts.length < 1) {
     return (
@@ -20,7 +20,7 @@ function PostArchive(
     <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
       <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
         <SectionTitle tag="div">
-          Notícias, Matérias e Reviews
+          {category ? `Últimas postagens sobre "${category}"` : `Notícias, Matérias e Reviews`}
           {pageInfo.hasPrevious ? ` - Página ${pageInfo.pageNumber}` : ``}
         </SectionTitle>
 
