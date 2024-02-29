@@ -49,31 +49,31 @@ export const loader = async (
   const client = createClient({ endpoint });
 
   const urlPath = new URL(req.url).pathname;
-  const urlArrayPath = urlPath.slice(1).split("/")
+  const urlArrayPath = urlPath.slice(1).split("/");
 
+  const indexOfPage = urlArrayPath.indexOf("page");
+  const isPaginated = indexOfPage !== -1;
 
-  const indexOfPage = urlArrayPath.indexOf("page")
-  const isPaginated = indexOfPage !== -1
+  const indexOfCategory = urlArrayPath.indexOf("categoria");
+  const isCategoryPage = indexOfCategory !== -1;
 
-  const indexOfCategory = urlArrayPath.indexOf("categoria")
-  const isCategoryPage = indexOfCategory !== -1
-
-  const category = categoria || (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined)
-  const page = isPaginated ? parseInt( urlArrayPath[indexOfPage + 1]) : 0
+  const category = categoria ||
+    (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined);
+  const page = isPaginated ? parseInt(urlArrayPath[indexOfPage + 1]) : 0;
 
   const variables = {
     limit: postNumber || 10,
-    skip: isPaginated
-      ? (page - 1) * (postNumber || 10)
-      : 0,
-    category
+    skip: isPaginated ? (page - 1) * (postNumber || 10) : 0,
+    category,
   };
 
-  const categoryInfo = category ? await client.query<{ category: { name: string } }>(
-    CategoryQuery,
-    { id: category },
-    "getCategory",
-  ) : undefined;
+  const categoryInfo = category
+    ? await client.query<{ category: { name: string } }>(
+      CategoryQuery,
+      { id: category },
+      "getCategory",
+    )
+    : undefined;
 
   const postList = await client.query<{ posts: RootQueryToPostConnection }>(
     PostsQuery,
@@ -148,6 +148,6 @@ const CategoryQuery = gql`
       name
     }
   }
-`
+`;
 
 export default loader;

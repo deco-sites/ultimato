@@ -19,7 +19,7 @@ export interface IBacon {
 
 type baconPosition = Omit<IBacon, "colorScheme">;
 
-const FlyingBacons = ({ bg, density, spread = false}: IBaconGroup) => {
+const FlyingBacons = ({ bg, density, spread = false }: IBaconGroup) => {
   const baconRef = useRef<HTMLDivElement>(null);
 
   const [rightBaconPositions, setRightBaconPositions] = useState<
@@ -29,7 +29,7 @@ const FlyingBacons = ({ bg, density, spread = false}: IBaconGroup) => {
     baconPosition[]
   >();
 
-  const spacing = 400 * (1/(density ?? 1));
+  const spacing = 400 * (1 / (density ?? 1));
 
   const setDebounced = debounce((_n: number, fn: () => void) => {
     fn();
@@ -46,8 +46,8 @@ const FlyingBacons = ({ bg, density, spread = false}: IBaconGroup) => {
       height,
     } = el.getBoundingClientRect() as DOMRect;
 
-    maxLeft = spread ?  window.innerWidth / 2 : maxLeft
-    minRight = spread ?  window.innerWidth / 2 : minRight
+    maxLeft = spread ? window.innerWidth / 2 : maxLeft;
+    minRight = spread ? window.innerWidth / 2 : minRight;
 
     const numberOfBacon = Math.round(height / spacing);
 

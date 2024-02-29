@@ -17,7 +17,7 @@ function PopularPosts({
 }: SectionProps<typeof loader>) {
   return (
     <div>
-       <SectionTitle tag="div">
+      <SectionTitle tag="div">
         As Populares
       </SectionTitle>
       {posts &&

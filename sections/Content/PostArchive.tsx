@@ -20,7 +20,9 @@ function PostArchive(
     <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
       <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
         <SectionTitle tag="div">
-          {category ? `Últimas postagens sobre "${category}"` : `Notícias, Matérias e Reviews`}
+          {category
+            ? `Últimas postagens sobre "${category}"`
+            : `Notícias, Matérias e Reviews`}
           {pageInfo.hasPrevious ? ` - Página ${pageInfo.pageNumber}` : ``}
         </SectionTitle>
 

@@ -34,16 +34,19 @@ export const loader = async (
   const client = createClient({ endpoint });
 
   const urlPath = new URL(req.url).pathname;
-  const urlArrayPath = urlPath.slice(1).split("/")
+  const urlArrayPath = urlPath.slice(1).split("/");
 
-  const indexOfCategory = urlArrayPath.indexOf("categoria")
-  const isCategoryPage = indexOfCategory !== -1
+  const indexOfCategory = urlArrayPath.indexOf("categoria");
+  const isCategoryPage = indexOfCategory !== -1;
 
-  const category = categoria || (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined)
+  const category = categoria ||
+    (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined);
 
-  const postList = await client.query<{ popularPostsByCategory: RootQueryToPostConnection }>(
+  const postList = await client.query<
+    { popularPostsByCategory: RootQueryToPostConnection }
+  >(
     PostsQuery,
-    {categoryName: category},
+    { categoryName: category },
     "getPopular",
   );
 
