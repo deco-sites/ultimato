@@ -34,7 +34,7 @@ function HQSelectorList({ selectors }: Props) {
                   key={index}
                   image={image}
                   title={name}
-                  link={`/hqs-${slug}`}
+                  link={`/hqs/${slug}`}
                 />
               );
             })}
