@@ -7,9 +7,10 @@ import type {
 
 interface Props {
   posts: PostType[];
+  colorScheme?: "dark" | "light";
 }
 
-function LatestPosts({ posts }: Props) {
+function LatestPosts({ posts, colorScheme = "light" }: Props) {
   return (
     <div className="flex flex-wrap">
       <div className="w-full">
@@ -34,6 +35,7 @@ function LatestPosts({ posts }: Props) {
               date={date}
               readingTime={readingTime}
               excerpt={excerpt}
+              colorScheme={colorScheme}
               categories={categories
                 ? categories.nodes as Category[]
                 : undefined}

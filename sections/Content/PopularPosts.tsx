@@ -14,6 +14,7 @@ import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
 function PopularPosts({
   posts,
   adPosition,
+  colorScheme = "light",
 }: SectionProps<typeof loader>) {
   return (
     <div>
@@ -32,6 +33,7 @@ function PopularPosts({
               image={featuredImage ? featuredImage.node : null}
               date={date}
               readingTime={readingTime}
+              colorScheme={colorScheme}
               categories={categories
                 ? categories.nodes as Category[]
                 : undefined}

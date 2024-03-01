@@ -22,6 +22,7 @@ export type PageInfo = OffsetPaginationPageInfo & {
   skip: number;
   totalPages: number;
   pageNumber: number;
+  pathPrefix: string;
 };
 
 export interface Props {
@@ -33,6 +34,15 @@ export interface Props {
 
   /** @description Categoria */
   categoria?: string;
+
+  /** @description Color Scheme */
+  colorScheme?: "dark" | "light";
+
+  /** @description Show Featured */
+  showFeatured?: boolean;
+
+  /** @description Call to Action */
+  callToAction?: Section;
 }
 
 export interface LoaderReturn {
@@ -40,10 +50,13 @@ export interface LoaderReturn {
   sidebar?: Section;
   pageInfo: PageInfo;
   category?: string;
+  colorScheme?: "dark" | "light";
+  showFeatured?: boolean;
+  callToAction?: Section;
 }
 
 export const loader = async (
-  { postNumber, sidebar, categoria }: Props,
+  { postNumber, sidebar, categoria, colorScheme, showFeatured, callToAction }: Props,
   req: Request,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
@@ -57,8 +70,14 @@ export const loader = async (
   const indexOfCategory = urlArrayPath.indexOf("categoria");
   const isCategoryPage = indexOfCategory !== -1;
 
+  const indexOfHqs = urlArrayPath.indexOf("hqs");
+  const isHqsPage = indexOfHqs !== -1;
+
+  const hqs = isHqsPage ? urlArrayPath[indexOfHqs + 1] : undefined;
+
   const category = categoria ||
-    (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined);
+    (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined) || hqs;
+
   const page = isPaginated ? parseInt(urlArrayPath[indexOfPage + 1]) : 0;
 
   const variables = {
@@ -104,9 +123,10 @@ export const loader = async (
     skip: variables.skip,
     totalPages,
     pageNumber,
+    pathPrefix: hqs ? `/hqs/${category}` : category ? `/hqs/${category}` : "/",
   } as PageInfo;
 
-  return { posts, sidebar, pageInfo, category: categoryInfo?.category?.name };
+  return { posts, sidebar, pageInfo, category: categoryInfo?.category?.name, colorScheme, showFeatured, callToAction};
 };
 
 const PostsQuery = gql`
