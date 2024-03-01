@@ -56,7 +56,8 @@ export interface LoaderReturn {
 }
 
 export const loader = async (
-  { postNumber, sidebar, categoria, colorScheme, showFeatured, callToAction }: Props,
+  { postNumber, sidebar, categoria, colorScheme, showFeatured, callToAction }:
+    Props,
   req: Request,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
@@ -126,7 +127,15 @@ export const loader = async (
     pathPrefix: hqs ? `/hqs/${category}` : category ? `/hqs/${category}` : "/",
   } as PageInfo;
 
-  return { posts, sidebar, pageInfo, category: categoryInfo?.category?.name, colorScheme, showFeatured, callToAction};
+  return {
+    posts,
+    sidebar,
+    pageInfo,
+    category: categoryInfo?.category?.name,
+    colorScheme,
+    showFeatured,
+    callToAction,
+  };
 };
 
 const PostsQuery = gql`

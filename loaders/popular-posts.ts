@@ -51,8 +51,6 @@ export const loader = async (
   const category = categoria ||
     (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined) || hqs;
 
-
-
   const postList = await client.query<
     { popularPostsByCategory: RootQueryToPostConnection }
   >(
