@@ -4,6 +4,8 @@ import loader from "deco-sites/ultimato/loaders/single-post.ts";
 import type { SectionProps } from "deco/mod.ts";
 import DecoImage from "apps/website/components/Image.tsx";
 
+import { asset } from "$fresh/runtime.ts";
+
 import { stripTags } from "deco-sites/ultimato/utils/content.tsx";
 import {
   categoryURI,
@@ -12,14 +14,38 @@ import {
 
 import type {
   Category as CategoryType,
+  Post as PostType,
+  Page as PageType
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
-function PostCover({ singlePost }: SectionProps<typeof loader>) {
-  if (!singlePost) return <div></div>;
+function PostCover({ singlePost, page, contentTypeName }: SectionProps<typeof loader>) {
+  if (!singlePost && !page) return <div></div>;
 
-  const { title, featuredImage, date, readingTime } = singlePost;
+  if (contentTypeName === "page") {
+    const { title } = page as PageType;
 
-  const categories = singlePost.categories?.nodes as CategoryType[];
+    return (
+      <div class="relative w-full lg:h-[400px]">
+      <div class="z-10 text-white flex flex-col justify-center items-center h-full relative max-w-screen-md mx-auto pt-8">
+        <h1 class="max-w-sm lg:max-w-screen-md z-10 text-white font-bold text-2xl lg:text-5xl mx-auto text-center">
+          {stripTags(title as string)}
+        </h1>
+      </div>
+        <img
+          src={asset("/images/page_pattern.png")}
+          width={1800}
+          alt={title as string}
+          className="w-full h-full absolute z-0 object-center object-cover top-0 left-0"
+          loading="eager"
+        />
+
+    </div>
+    );
+  }
+
+  const { title, featuredImage, date, readingTime } = singlePost as PostType;
+
+  const categories = singlePost?.categories?.nodes as CategoryType[];
 
   return (
     <div class="relative w-full bg-black h-[200px] lg:h-[500px]">

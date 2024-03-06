@@ -7,6 +7,7 @@ import {
 import type {
   Category,
   Post,
+  Page,
   RootQueryToPostConnection,
   RootQueryToPostConnectionEdge,
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
@@ -14,11 +15,14 @@ import type {
 import {
   PostFields,
   SeoFields,
+  PageFields
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 export interface LoaderReturn {
+  contentTypeName?: string;
   singlePost?: Post;
   relatedPosts?: Post[];
+  page?: Page
 }
 
 export const loader = async (
@@ -30,6 +34,24 @@ export const loader = async (
   const variables = {
     slug: new URL(req.url).pathname.slice(1).split("/")[0],
   };
+
+  const contentType = await client.query<{ contentNode: { contentTypeName: string } }>(
+    GetContentType,
+    { id: `/${variables.slug}` },
+    "getContentType",
+  );
+
+  if (contentType?.contentNode.contentTypeName === "page") {
+
+    const page = await client.query<{ page: Page }>(
+      PageQuery,
+      variables,
+      "getPage",
+    );
+
+    return { ...page, contentTypeName: contentType.contentNode.contentTypeName};
+
+  }
 
   const singlePost = await client.query<{ singlePost: Post }>(
     PostsQuery,
@@ -59,8 +81,29 @@ export const loader = async (
       (item) => item.node as Post,
     );
 
-  return { ...singlePost, relatedPosts: related };
+  return { ...singlePost, relatedPosts: related, contentTypeName: contentType?.contentNode.contentTypeName };
 };
+
+const GetContentType = gql`
+  query getContentType($id: ID!) {
+    contentNode(id: $id, idType: URI) {
+      contentTypeName
+    }
+  }
+`;
+
+const PageQuery = gql`
+${PageFields}
+${SeoFields}
+query getPage($slug: ID!) {
+  page(id: $slug, idType: URI) {
+    ...PageFields
+    seo {
+      ...SeoFields
+    }
+  }
+}
+`;
 
 const PostsQuery = gql`
   ${PostFields}
