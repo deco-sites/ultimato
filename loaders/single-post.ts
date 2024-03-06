@@ -6,23 +6,23 @@ import {
 
 import type {
   Category,
-  Post,
   Page,
+  Post,
   RootQueryToPostConnection,
   RootQueryToPostConnectionEdge,
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
 import {
+  PageFields,
   PostFields,
   SeoFields,
-  PageFields
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 export interface LoaderReturn {
   contentTypeName?: string;
   singlePost?: Post;
   relatedPosts?: Post[];
-  page?: Page
+  page?: Page;
 }
 
 export const loader = async (
@@ -35,22 +35,25 @@ export const loader = async (
     slug: new URL(req.url).pathname.slice(1).split("/")[0],
   };
 
-  const contentType = await client.query<{ contentNode: { contentTypeName: string } }>(
+  const contentType = await client.query<
+    { contentNode: { contentTypeName: string } }
+  >(
     GetContentType,
     { id: `/${variables.slug}` },
     "getContentType",
   );
 
   if (contentType?.contentNode.contentTypeName === "page") {
-
     const page = await client.query<{ page: Page }>(
       PageQuery,
       variables,
       "getPage",
     );
 
-    return { ...page, contentTypeName: contentType.contentNode.contentTypeName};
-
+    return {
+      ...page,
+      contentTypeName: contentType.contentNode.contentTypeName,
+    };
   }
 
   const singlePost = await client.query<{ singlePost: Post }>(
@@ -81,7 +84,11 @@ export const loader = async (
       (item) => item.node as Post,
     );
 
-  return { ...singlePost, relatedPosts: related, contentTypeName: contentType?.contentNode.contentTypeName };
+  return {
+    ...singlePost,
+    relatedPosts: related,
+    contentTypeName: contentType?.contentNode.contentTypeName,
+  };
 };
 
 const GetContentType = gql`
