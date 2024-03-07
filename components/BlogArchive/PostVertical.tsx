@@ -50,7 +50,7 @@ const PostVertical = (
               src={image?.sourceUrl}
               width={layout === "reduced" ? 300 : 600}
               alt={image?.altText || ""}
-              className="w-full h-full object-center object-cover"
+              className={`h-24 w-24 lg:w-full lg:h-full object-center object-cover`}
               loading="lazy"
             />
           </a>
