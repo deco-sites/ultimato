@@ -18,6 +18,8 @@ import {
   SeoFields,
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
+import { FnContext } from "deco/types.ts";
+
 export interface LoaderReturn {
   contentTypeName?: string;
   singlePost?: Post;
@@ -26,8 +28,9 @@ export interface LoaderReturn {
 }
 
 export const loader = async (
-  _props: unknown,
+  props: unknown,
   req: Request,
+  ctx: FnContext,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
 
@@ -42,6 +45,11 @@ export const loader = async (
     { id: `/${variables.slug}` },
     "getContentType",
   );
+
+  if(!contentType?.contentNode) {
+    ctx.response.status = 404;
+    return props as LoaderReturn;
+  }
 
   if (contentType?.contentNode.contentTypeName === "page") {
     const page = await client.query<{ page: Page }>(

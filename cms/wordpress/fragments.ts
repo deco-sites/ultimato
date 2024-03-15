@@ -76,9 +76,13 @@ export const PageFields = gql`
 export const SeoFields = gql`
   fragment SeoFields on PostTypeSEO {
     title
+    canonical
     metaDesc
     metaKeywords
-    canonical
+    metaRobotsNofollow
+    metaRobotsNoindex
+    opengraphAuthor
+    opengraphDescription
     opengraphModifiedTime
     opengraphPublishedTime
     opengraphPublisher
@@ -86,10 +90,7 @@ export const SeoFields = gql`
     opengraphTitle
     opengraphType
     opengraphUrl
-    opengraphAuthor
-    opengraphDescription
     opengraphImage {
-      altText
       sourceUrl
     }
     twitterTitle
@@ -98,8 +99,7 @@ export const SeoFields = gql`
       sourceUrl
     }
     schema {
-      articleType
-      pageType
+      raw
     }
   }
 `;

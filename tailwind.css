@@ -18,6 +18,26 @@
     -moz-appearance: textfield;
     appearance: textfield;
   }
+
+  /* wordpress */
+  .wp-block-image .aligncenter,
+  .wp-block-image .aligncenter > figcaption,
+  .wp-block-image .alignleft,
+  .wp-block-image .alignleft > figcaption,
+  .wp-block-image .alignright,
+  .wp-block-image .alignright > figcaption,
+  article .inline-gatsby-image-wrapper,
+  article .inline-gatsby-image-wrapper span {
+    @apply block;
+  }
+
+  .wp-block-image .aligncenter {
+    @apply mx-auto;
+  }
+
+  .wp-block-image figure {
+    @apply m-0;
+  }
 }
 
 @layer components {

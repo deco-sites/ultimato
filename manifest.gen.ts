@@ -16,20 +16,21 @@ import * as $$$$$$1 from "./sections/Content/Categories.tsx";
 import * as $$$$$$2 from "./sections/Content/Guias.tsx";
 import * as $$$$$$3 from "./sections/Content/PopularPosts.tsx";
 import * as $$$$$$4 from "./sections/Content/PostArchive.tsx";
-import * as $$$$$$5 from "./sections/Content/Top5AndCat.tsx";
-import * as $$$$$$6 from "./sections/Image/Highlight.tsx";
-import * as $$$$$$7 from "./sections/Image/HQSelectorList.tsx";
-import * as $$$$$$8 from "./sections/Image/Pigs.tsx";
-import * as $$$$$$9 from "./sections/Image/PostsSlider.tsx";
-import * as $$$$$$10 from "./sections/Layout/Container.tsx";
-import * as $$$$$$11 from "./sections/Layout/Footer.tsx";
-import * as $$$$$$12 from "./sections/Layout/Header.tsx";
-import * as $$$$$$13 from "./sections/Layout/Hero.tsx";
-import * as $$$$$$14 from "./sections/Other/Adsense.tsx";
-import * as $$$$$$15 from "./sections/Other/WhatsappCTA.tsx";
-import * as $$$$$$16 from "./sections/SinglePost/PostContent.tsx";
-import * as $$$$$$17 from "./sections/SinglePost/PostCover.tsx";
-import * as $$$$$$18 from "./sections/Theme.tsx";
+import * as $$$$$$5 from "./sections/Content/RelatedPosts.tsx";
+import * as $$$$$$6 from "./sections/Content/Top5AndCat.tsx";
+import * as $$$$$$7 from "./sections/Image/Highlight.tsx";
+import * as $$$$$$8 from "./sections/Image/HQSelectorList.tsx";
+import * as $$$$$$9 from "./sections/Image/Pigs.tsx";
+import * as $$$$$$10 from "./sections/Image/PostsSlider.tsx";
+import * as $$$$$$11 from "./sections/Layout/Container.tsx";
+import * as $$$$$$12 from "./sections/Layout/Footer.tsx";
+import * as $$$$$$13 from "./sections/Layout/Header.tsx";
+import * as $$$$$$14 from "./sections/Layout/Hero.tsx";
+import * as $$$$$$15 from "./sections/Other/Adsense.tsx";
+import * as $$$$$$16 from "./sections/Other/WhatsappCTA.tsx";
+import * as $$$$$$17 from "./sections/SinglePost/PostContent.tsx";
+import * as $$$$$$18 from "./sections/SinglePost/PostCover.tsx";
+import * as $$$$$$19 from "./sections/Theme.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -51,20 +52,21 @@ const manifest = {
     "deco-sites/ultimato/sections/Content/Guias.tsx": $$$$$$2,
     "deco-sites/ultimato/sections/Content/PopularPosts.tsx": $$$$$$3,
     "deco-sites/ultimato/sections/Content/PostArchive.tsx": $$$$$$4,
-    "deco-sites/ultimato/sections/Content/Top5AndCat.tsx": $$$$$$5,
-    "deco-sites/ultimato/sections/Image/Highlight.tsx": $$$$$$6,
-    "deco-sites/ultimato/sections/Image/HQSelectorList.tsx": $$$$$$7,
-    "deco-sites/ultimato/sections/Image/Pigs.tsx": $$$$$$8,
-    "deco-sites/ultimato/sections/Image/PostsSlider.tsx": $$$$$$9,
-    "deco-sites/ultimato/sections/Layout/Container.tsx": $$$$$$10,
-    "deco-sites/ultimato/sections/Layout/Footer.tsx": $$$$$$11,
-    "deco-sites/ultimato/sections/Layout/Header.tsx": $$$$$$12,
-    "deco-sites/ultimato/sections/Layout/Hero.tsx": $$$$$$13,
-    "deco-sites/ultimato/sections/Other/Adsense.tsx": $$$$$$14,
-    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$15,
-    "deco-sites/ultimato/sections/SinglePost/PostContent.tsx": $$$$$$16,
-    "deco-sites/ultimato/sections/SinglePost/PostCover.tsx": $$$$$$17,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$18,
+    "deco-sites/ultimato/sections/Content/RelatedPosts.tsx": $$$$$$5,
+    "deco-sites/ultimato/sections/Content/Top5AndCat.tsx": $$$$$$6,
+    "deco-sites/ultimato/sections/Image/Highlight.tsx": $$$$$$7,
+    "deco-sites/ultimato/sections/Image/HQSelectorList.tsx": $$$$$$8,
+    "deco-sites/ultimato/sections/Image/Pigs.tsx": $$$$$$9,
+    "deco-sites/ultimato/sections/Image/PostsSlider.tsx": $$$$$$10,
+    "deco-sites/ultimato/sections/Layout/Container.tsx": $$$$$$11,
+    "deco-sites/ultimato/sections/Layout/Footer.tsx": $$$$$$12,
+    "deco-sites/ultimato/sections/Layout/Header.tsx": $$$$$$13,
+    "deco-sites/ultimato/sections/Layout/Hero.tsx": $$$$$$14,
+    "deco-sites/ultimato/sections/Other/Adsense.tsx": $$$$$$15,
+    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$16,
+    "deco-sites/ultimato/sections/SinglePost/PostContent.tsx": $$$$$$17,
+    "deco-sites/ultimato/sections/SinglePost/PostCover.tsx": $$$$$$18,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$19,
   },
   "apps": {
     "deco-sites/ultimato/apps/decohub.ts": $$$$$$$$$$$0,

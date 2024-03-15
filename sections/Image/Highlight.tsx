@@ -2,6 +2,8 @@ import type { SectionProps } from "deco/mod.ts";
 import DecoImage from "apps/website/components/Image.tsx";
 import { replaceAllSites } from "deco-sites/ultimato/utils/url.ts";
 
+import { FnContext } from "deco/types.ts";
+
 import {
   createClient,
   endpoint,
@@ -19,7 +21,7 @@ export interface Props {
   position?: "top" | "bottom" | "middle";
 }
 
-export const loader = async (props: Props, _req: Request): Promise<
+export const loader = async (props: Props, _req: Request, ctx: FnContext): Promise<
   Props & {
     image: string;
     alt: string;
@@ -29,13 +31,6 @@ export const loader = async (props: Props, _req: Request): Promise<
     };
   }
 > => {
-  const client = createClient({ endpoint });
-
-  const banner = await client.query<{ page: Page }>(
-    Query,
-    {},
-    "getBannerHighlight",
-  );
 
   const response = {
     ...props,
@@ -48,6 +43,14 @@ export const loader = async (props: Props, _req: Request): Promise<
       },
     },
   };
+
+  const client = createClient({ endpoint });
+
+  const banner = await client.query<{ page: Page }>(
+    Query,
+    {},
+    "getBannerHighlight",
+  );
 
   if (banner) {
     response.image = banner.page.pageHighlight?.image?.sourceUrl
