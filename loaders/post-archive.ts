@@ -8,11 +8,13 @@ import type {
   OffsetPaginationPageInfo,
   Post,
   RootQueryToPostConnection,
+  PostTypeSeo
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
 import {
   FeaturedImageFields,
   PostArchiveFields,
+  SeoFields,
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 import { Section } from "deco/blocks/section.ts";
@@ -49,10 +51,16 @@ export interface LoaderReturn {
   posts?: Post[];
   sidebar?: Section;
   pageInfo: PageInfo;
-  category?: string;
+  category?: {
+    name?: string;
+    seo?: PostTypeSeo;
+  };
   colorScheme?: "dark" | "light";
   showFeatured?: boolean;
   callToAction?: Section;
+  home?: {
+    seo: PostTypeSeo;
+  };
 }
 
 export const loader = async (
@@ -88,14 +96,14 @@ export const loader = async (
   };
 
   const categoryInfo = category
-    ? await client.query<{ category: { name: string } }>(
+    ? await client.query<{ category: { name: string, seo: PostTypeSeo } }>(
       CategoryQuery,
       { id: category },
       "getCategory",
     )
     : undefined;
 
-  const postList = await client.query<{ posts: RootQueryToPostConnection }>(
+  const postList = await client.query<{ posts: RootQueryToPostConnection, home: { seo: PostTypeSeo} }>(
     PostsQuery,
     variables,
     "getPostsArchive",
@@ -131,16 +139,21 @@ export const loader = async (
     posts,
     sidebar,
     pageInfo,
-    category: categoryInfo?.category?.name,
+    category: {
+      name: categoryInfo?.category?.name,
+      seo: categoryInfo?.category?.seo,
+    },
     colorScheme,
     showFeatured,
     callToAction,
+    home: postList?.home,
   };
 };
 
 const PostsQuery = gql`
   ${FeaturedImageFields}
   ${PostArchiveFields}
+  ${SeoFields}
   query getPostsArchive($limit: Int!, $skip: Int!, $category: String = null) {
     posts(
       where: {
@@ -168,13 +181,22 @@ const PostsQuery = gql`
         }
       }
     }
+    home: contentNode(id: "/", idType: URI) {
+      seo {
+        ...SeoFields
+      }
+    }
   }
 `;
 
 const CategoryQuery = gql`
+  ${SeoFields}
   query getCategory($id: ID!) {
     category(id: $id, idType: SLUG) {
       name
+      seo {
+        ...SeoFields
+      }
     }
   }
 `;

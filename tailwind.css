@@ -18,26 +18,6 @@
     -moz-appearance: textfield;
     appearance: textfield;
   }
-
-  /* wordpress */
-  .wp-block-image .aligncenter,
-  .wp-block-image .aligncenter > figcaption,
-  .wp-block-image .alignleft,
-  .wp-block-image .alignleft > figcaption,
-  .wp-block-image .alignright,
-  .wp-block-image .alignright > figcaption,
-  article .inline-gatsby-image-wrapper,
-  article .inline-gatsby-image-wrapper span {
-    @apply block;
-  }
-
-  .wp-block-image .aligncenter {
-    @apply mx-auto;
-  }
-
-  .wp-block-image figure {
-    @apply m-0;
-  }
 }
 
 @layer components {
@@ -71,4 +51,37 @@
   .swiper-slide-thumb-active .thumb-decorator::before {
     @apply opacity-100;
   }
+}
+
+/* wordpress */
+.wp-block-image .aligncenter,
+.wp-block-image .aligncenter > figcaption,
+.wp-block-image .alignleft,
+.wp-block-image .alignleft > figcaption,
+.wp-block-image .alignright,
+.wp-block-image .alignright > figcaption,
+article .inline-gatsby-image-wrapper,
+article .inline-gatsby-image-wrapper span {
+  @apply block;
+}
+
+.wp-block-image .aligncenter {
+  @apply mx-auto;
+}
+
+.wp-block-image figure {
+  @apply m-0;
+}
+
+.wp-block-image img {
+  @apply max-w-full;
+}
+
+article .aligncenter,
+article .aligncenter img {
+  @apply mx-auto;
+}
+
+.has-text-align-center {
+  @apply text-center;
 }

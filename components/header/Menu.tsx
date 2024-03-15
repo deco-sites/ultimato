@@ -57,7 +57,7 @@ function Menu({ data, wrapperProps }: Props) {
         <Hamburger />
       </div>
       <nav
-        className={`absolute pt-32 w-screen h-screen z-10 bg-black bg-opacity-70 top-0 left-0 lg:flex justify-center lg:pt-0 lg:relative lg:w-auto lg:h-auto lg:bg-opacity-0 lg:items-center ${
+        className={`absolute pt-32 w-screen h-screen z-10 bg-black bg-opacity-80 top-0 left-0 lg:flex justify-center lg:pt-0 lg:relative lg:w-auto lg:h-auto lg:bg-opacity-0 lg:items-center ${
           menuState.value.open ? "flex" : "hidden"
         }`}
         ref={navRef}

@@ -7,6 +7,7 @@ import * as $CookiePrompt from "./islands/CookiePrompt.tsx";
 import * as $FlyingBacons from "./islands/FlyingBacons.tsx";
 import * as $Menu from "./islands/Menu.tsx";
 import * as $PigsSlider from "./islands/PigsSlider.tsx";
+import * as $Search from "./islands/Search.tsx";
 import * as $Slider from "./islands/Slider.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
@@ -19,6 +20,7 @@ const manifest = {
     "./islands/FlyingBacons.tsx": $FlyingBacons,
     "./islands/Menu.tsx": $Menu,
     "./islands/PigsSlider.tsx": $PigsSlider,
+    "./islands/Search.tsx": $Search,
     "./islands/Slider.tsx": $Slider,
   },
   baseUrl: import.meta.url,
