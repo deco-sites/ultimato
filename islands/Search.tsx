@@ -7,8 +7,7 @@ export const searchState = signal({
   open: false,
 });
 
-
-function Search(){
+function Search() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -26,9 +25,9 @@ function Search(){
   return (
     <>
       <button
-      name="Pesquisar"
-      class="cursor-pointer rounded-full p-2 bg-slate-500 z-20"
-      ref={buttonRef}
+        name="Pesquisar"
+        class="cursor-pointer rounded-full p-2 bg-slate-500 z-20"
+        ref={buttonRef}
       >
         <Icon
           id={searchState.value.open ? "Times" : "MagnifyingGlass"}
@@ -38,8 +37,16 @@ function Search(){
         />
       </button>
 
-      <div class={`absolute pt-32 lg:pt-40 px-4 w-screen h-screen z-10 bg-black bg-opacity-80 top-0 left-0 justify-center ${searchState.value.open ? 'block' : 'hidden'}`}>
-        <form action="/search" method="GET" class="relative w-full max-w-5xl bg-white mx-auto rounded-xl">
+      <div
+        class={`absolute pt-32 lg:pt-40 px-4 w-screen h-screen z-10 bg-black bg-opacity-80 top-0 left-0 justify-center ${
+          searchState.value.open ? "block" : "hidden"
+        }`}
+      >
+        <form
+          action="/search"
+          method="GET"
+          class="relative w-full max-w-5xl bg-white mx-auto rounded-xl"
+        >
           <input
             type="text"
             class="w-full p-2 rounded-xl bg-white text-slate-500"
@@ -57,7 +64,7 @@ function Search(){
         </form>
       </div>
     </>
-  )
+  );
 }
 
 export default Search;

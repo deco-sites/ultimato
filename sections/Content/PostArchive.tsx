@@ -7,7 +7,7 @@ import Seo from "deco-sites/ultimato/components/Seo.tsx";
 
 import type {
   Category,
-  PostTypeSeo
+  PostTypeSeo,
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
 import loader from "deco-sites/ultimato/loaders/post-archive.ts";
@@ -22,7 +22,7 @@ function PostArchive(
     colorScheme,
     showFeatured,
     callToAction,
-    home
+    home,
   }: SectionProps<typeof loader>,
 ) {
   if (!posts || posts.length < 1) {
@@ -35,9 +35,9 @@ function PostArchive(
 
   return (
     <>
-      {(category && category.name) ? (<Seo seo={category?.seo as PostTypeSeo} type="archive" />) : <Seo seo={home?.seo as PostTypeSeo} type="home" />
-
-      }
+      {(category && category.name)
+        ? <Seo seo={category?.seo as PostTypeSeo} type="archive" />
+        : <Seo seo={home?.seo as PostTypeSeo} type="home" />}
       <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
         <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
           <SectionTitle tag="div">

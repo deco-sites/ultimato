@@ -25,7 +25,7 @@ function Header({ cover, menu }: SectionProps<typeof loader>) {
             )}
 
             <div class="order-3 self-center">
-                <Search />
+              <Search />
             </div>
           </div>
         </div>

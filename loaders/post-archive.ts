@@ -7,8 +7,8 @@ import {
 import type {
   OffsetPaginationPageInfo,
   Post,
+  PostTypeSeo,
   RootQueryToPostConnection,
-  PostTypeSeo
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
 import {
@@ -96,14 +96,16 @@ export const loader = async (
   };
 
   const categoryInfo = category
-    ? await client.query<{ category: { name: string, seo: PostTypeSeo } }>(
+    ? await client.query<{ category: { name: string; seo: PostTypeSeo } }>(
       CategoryQuery,
       { id: category },
       "getCategory",
     )
     : undefined;
 
-  const postList = await client.query<{ posts: RootQueryToPostConnection, home: { seo: PostTypeSeo} }>(
+  const postList = await client.query<
+    { posts: RootQueryToPostConnection; home: { seo: PostTypeSeo } }
+  >(
     PostsQuery,
     variables,
     "getPostsArchive",
