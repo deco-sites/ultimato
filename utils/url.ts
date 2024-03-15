@@ -3,8 +3,8 @@ const replaceAllSites = (str: string) => {
     /(http[s]?)(:\/\/)(ultimatodobacon\.com|ultimatodobacon\.local|admin\.ultimatodobacon.com|wp\.ultimatodobacon.com|ultimato\.onserp\.dev)/gm,
     "",
   )
-  // remove trailing slash
-  .replace(/\/$/, "")
+    // remove trailing slash
+    .replace(/\/$/, "");
 };
 
 const isExternalURL = (url: string) => {

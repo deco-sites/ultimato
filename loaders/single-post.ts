@@ -46,7 +46,7 @@ export const loader = async (
     "getContentType",
   );
 
-  if(!contentType?.contentNode) {
+  if (!contentType?.contentNode) {
     ctx.response.status = 404;
     return props as LoaderReturn;
   }

@@ -10,8 +10,7 @@ import type { SectionProps } from "deco/mod.ts";
 export default function RelatedPosts(
   { relatedPosts, contentTypeName }: SectionProps<typeof loader>,
 ) {
-
-  if(!relatedPosts || !contentTypeName) {
+  if (!relatedPosts || !contentTypeName) {
     return <></>;
   }
 
@@ -21,7 +20,7 @@ export default function RelatedPosts(
       <div class="flex justify-between flex-wrap flex-col md:flex-row mb-20">
         {relatedPosts &&
           relatedPosts.map(
-            ({ slug, title, featuredImage, date, readingTime } ) => (
+            ({ slug, title, featuredImage, date, readingTime }) => (
               <div
                 key={slug}
                 class="w-full flex flex-wrap justify-between flex-row-reverse gap-4 mb-8 md:flex-col md:w-1/4 md:mb-0 md:gap-0 lg:w-1/4"
@@ -30,7 +29,10 @@ export default function RelatedPosts(
                   featuredImage?.node?.sourceUrl &&
                   (
                     <a href={`/${slug}`}>
-                      <div class="rounded-lg overflow-hidden w-24 h-24 sm:w-32 sm:h-32 md:w-full md:h-32 md:flex md:mb-4 lg:h-48" title={stripTags(title as string)}>
+                      <div
+                        class="rounded-lg overflow-hidden w-24 h-24 sm:w-32 sm:h-32 md:w-full md:h-32 md:flex md:mb-4 lg:h-48"
+                        title={stripTags(title as string)}
+                      >
                         <DecoImage
                           src={featuredImage?.node?.sourceUrl as string}
                           width={300}
@@ -46,11 +48,11 @@ export default function RelatedPosts(
                     <a href={`/${slug}`}>{stripTags(title as string)}</a>
                   </h4>
                   <p class="text-xs text-gray-400">
-                    {formatDate(date as string)} {' • '} {readingTime}
+                    {formatDate(date as string)} {" • "} {readingTime}
                   </p>
                 </div>
               </div>
-            )
+            ),
           )}
       </div>
     </>

@@ -21,7 +21,11 @@ export interface Props {
   position?: "top" | "bottom" | "middle";
 }
 
-export const loader = async (props: Props, _req: Request, ctx: FnContext): Promise<
+export const loader = async (
+  props: Props,
+  _req: Request,
+  ctx: FnContext,
+): Promise<
   Props & {
     image: string;
     alt: string;
@@ -31,7 +35,6 @@ export const loader = async (props: Props, _req: Request, ctx: FnContext): Promi
     };
   }
 > => {
-
   const response = {
     ...props,
     ...{
