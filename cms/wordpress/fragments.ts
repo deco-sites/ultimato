@@ -104,6 +104,37 @@ export const SeoFields = gql`
   }
 `;
 
+export const SeoFieldsTax = gql`
+  fragment SeoFieldsTax on TaxonomySEO {
+    title
+    canonical
+    metaDesc
+    metaKeywords
+    metaRobotsNofollow
+    metaRobotsNoindex
+    opengraphAuthor
+    opengraphDescription
+    opengraphModifiedTime
+    opengraphPublishedTime
+    opengraphPublisher
+    opengraphSiteName
+    opengraphTitle
+    opengraphType
+    opengraphUrl
+    opengraphImage {
+      sourceUrl
+    }
+    twitterTitle
+    twitterDescription
+    twitterImage {
+      sourceUrl
+    }
+    schema {
+      raw
+    }
+  }
+`;
+
 export const PostArchiveFields = gql`
   fragment PostArchiveFields on Post {
     id

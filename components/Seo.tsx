@@ -6,9 +6,10 @@ import type { PostTypeSeo } from "deco-sites/ultimato/cms/wordpress/graphql-type
 interface Props {
   seo: PostTypeSeo;
   type?: "post" | "page" | "archive" | "home";
+  archiveTitle?: string;
 }
 
-function Seo({ seo, type }: Props) {
+function Seo({ seo, type, archiveTitle }: Props) {
   const {
     title,
     canonical,
@@ -43,9 +44,13 @@ function Seo({ seo, type }: Props) {
     return JSON.parse(schemaReplace);
   }
 
+  const siteName = "Ultimato do Bacon";
+
+  const definitiveTitle = type === 'archive' ? `Últimas postagens sobre "${archiveTitle}" - ${siteName}` : title;
+
   return (
     <Head>
-      <title>{title}</title>
+      <title>{definitiveTitle}</title>
       <link
         rel="canonical"
         href={`https://ultimatodobacon.com${

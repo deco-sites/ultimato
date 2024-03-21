@@ -3,6 +3,8 @@ import LatestPosts from "deco-sites/ultimato/components/BlogArchive/LatestPosts.
 import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
 import Pagination from "deco-sites/ultimato/components/BlogArchive/Pagination.tsx";
 
+import Page404 from "deco-sites/ultimato/components/ui/404.tsx";
+
 import Seo from "deco-sites/ultimato/components/Seo.tsx";
 
 import type {
@@ -26,23 +28,19 @@ function PostArchive(
   }: SectionProps<typeof loader>,
 ) {
   if (!posts || posts.length < 1) {
-    return (
-      <div className="text-gray-500 font-bold text-2xl text-center py-48">
-        Não há posts nesta categoria.
-      </div>
-    );
+    return <Page404 />;
   }
 
   return (
     <>
       {(category && category.name)
-        ? <Seo seo={category?.seo as PostTypeSeo} type="archive" />
+        ? <Seo seo={category?.seo as PostTypeSeo} type="archive" archiveTitle={category.name} />
         : <Seo seo={home?.seo as PostTypeSeo} type="home" />}
       <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
         <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
           <SectionTitle tag="div">
             {(category && category.name)
-              ? `Últimas postagens sobre "${category}"`
+              ? `Últimas postagens sobre "${category.name}"`
               : `Notícias, Matérias e Reviews`}
             {pageInfo.hasPrevious ? ` - Página ${pageInfo.pageNumber}` : ``}
           </SectionTitle>

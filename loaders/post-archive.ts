@@ -7,17 +7,21 @@ import {
 import type {
   OffsetPaginationPageInfo,
   Post,
+  TaxonomySeo,
   PostTypeSeo,
+  Category as CategoryType,
   RootQueryToPostConnection,
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
 import {
   FeaturedImageFields,
   PostArchiveFields,
+  SeoFieldsTax,
   SeoFields,
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 import { Section } from "deco/blocks/section.ts";
+import { FnContext } from "deco/types.ts";
 
 export type PageInfo = OffsetPaginationPageInfo & {
   limit: number;
@@ -53,7 +57,7 @@ export interface LoaderReturn {
   pageInfo: PageInfo;
   category?: {
     name?: string;
-    seo?: PostTypeSeo;
+    seo?: TaxonomySeo;
   };
   colorScheme?: "dark" | "light";
   showFeatured?: boolean;
@@ -67,7 +71,10 @@ export const loader = async (
   { postNumber, sidebar, categoria, colorScheme, showFeatured, callToAction }:
     Props,
   req: Request,
+  ctx: FnContext,
 ): Promise<LoaderReturn> => {
+
+
   const client = createClient({ endpoint });
 
   const urlPath = new URL(req.url).pathname;
@@ -96,12 +103,26 @@ export const loader = async (
   };
 
   const categoryInfo = category
-    ? await client.query<{ category: { name: string; seo: PostTypeSeo } }>(
+    ? await client.query<{ category: { name: string; seo: TaxonomySeo; parent: { node: CategoryType} } }>(
       CategoryQuery,
       { id: category },
       "getCategory",
     )
     : undefined;
+
+    if (isHqsPage && categoryInfo?.category?.parent?.node?.slug !== 'quadrinhos') {
+      ctx.response.status = 404;
+      return {
+        posts: [],
+        pageInfo: {
+          limit: 0,
+          skip:0,
+          totalPages:0,
+          pageNumber: 0,
+          pathPrefix: ''
+        }
+      };
+    }
 
   const postList = await client.query<
     { posts: RootQueryToPostConnection; home: { seo: PostTypeSeo } }
@@ -192,12 +213,17 @@ const PostsQuery = gql`
 `;
 
 const CategoryQuery = gql`
-  ${SeoFields}
+  ${SeoFieldsTax}
   query getCategory($id: ID!) {
     category(id: $id, idType: SLUG) {
       name
+      parent {
+        node {
+          slug
+        }
+      }
       seo {
-        ...SeoFields
+        ...SeoFieldsTax
       }
     }
   }

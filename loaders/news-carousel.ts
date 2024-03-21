@@ -7,12 +7,15 @@ import {
 import type {
   Post,
   RootQueryToPostConnection,
+  Category as CategoryType
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
 import {
   FeaturedImageFields,
   PostArchiveFields,
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
+
+import { FnContext } from "deco/types.ts";
 
 export interface Props {
   /** @description Quantidade de posts */
@@ -29,6 +32,7 @@ export interface LoaderReturn {
 export const loader = async (
   { postNumber, categoria }: Props,
   req: Request,
+  ctx: FnContext,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
 
@@ -38,19 +42,31 @@ export const loader = async (
   const indexOfCategory = urlArrayPath.indexOf("hqs");
   const isCategoryPage = indexOfCategory !== -1;
 
+  const indexOfHqs = urlArrayPath.indexOf("hqs");
+  const isHqsPage = indexOfHqs !== -1;
+
   const category = categoria ||
     (isCategoryPage ? urlArrayPath[indexOfCategory + 1] : undefined);
 
   const variables = {
     postNumber: postNumber || 5,
     category: category || "slider",
+    categoryID: category || "slider",
   };
 
-  const postList = await client.query<{ posts: RootQueryToPostConnection }>(
+  const postList = await client.query<{ posts: RootQueryToPostConnection;  category: { parent: { node: CategoryType} }  }>(
     SliderQuery,
     variables,
     "getNewsSlider",
   );
+
+  if (isHqsPage && postList?.category?.parent?.node?.slug !== 'quadrinhos') {
+    ctx.response.status = 404;
+    return {
+      posts: [],
+    };
+  }
+
 
   const posts = postList?.posts?.edges?.map((edge) => {
     return edge?.node as Post;
@@ -62,7 +78,14 @@ export const loader = async (
 const SliderQuery = gql`
   ${FeaturedImageFields}
   ${PostArchiveFields}
-  query getNewsSlider($postNumber: Int!, $category: String!) {
+  query getNewsSlider($postNumber: Int!, $category: String!, $categoryID: ID!) {
+  category (id: $categoryID, idType: SLUG) {
+    parent {
+      node {
+        slug
+      }
+    }
+  }
   posts(
       where: {
       offsetPagination: { size: $postNumber }
