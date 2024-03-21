@@ -46,7 +46,9 @@ function Seo({ seo, type, archiveTitle }: Props) {
 
   const siteName = "Ultimato do Bacon";
 
-  const definitiveTitle = type === 'archive' ? `Últimas postagens sobre "${archiveTitle}" - ${siteName}` : title;
+  const definitiveTitle = type === "archive"
+    ? `Últimas postagens sobre "${archiveTitle}" - ${siteName}`
+    : title;
 
   return (
     <Head>

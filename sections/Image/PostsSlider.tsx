@@ -6,9 +6,7 @@ import loader from "deco-sites/ultimato/loaders/news-carousel.ts";
 import type { SectionProps } from "deco/mod.ts";
 
 function PostsSlider({ posts }: SectionProps<typeof loader>) {
-
   if (!posts || posts?.length === 0) return <GenericCover title="Erro 404" />;
-
 
   const sliderData = posts?.filter(({ id, title, slug, featuredImage }) =>
     id && title && slug && featuredImage

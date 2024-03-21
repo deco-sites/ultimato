@@ -34,7 +34,13 @@ function PostArchive(
   return (
     <>
       {(category && category.name)
-        ? <Seo seo={category?.seo as PostTypeSeo} type="archive" archiveTitle={category.name} />
+        ? (
+          <Seo
+            seo={category?.seo as PostTypeSeo}
+            type="archive"
+            archiveTitle={category.name}
+          />
+        )
         : <Seo seo={home?.seo as PostTypeSeo} type="home" />}
       <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
         <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">

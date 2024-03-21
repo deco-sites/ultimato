@@ -5,9 +5,9 @@ import {
 } from "deco-sites/ultimato/cms/wordpress/client.ts";
 
 import type {
+  Category as CategoryType,
   Post,
   RootQueryToPostConnection,
-  Category as CategoryType
 } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
 
 import {
@@ -54,19 +54,23 @@ export const loader = async (
     categoryID: category || "slider",
   };
 
-  const postList = await client.query<{ posts: RootQueryToPostConnection;  category: { parent: { node: CategoryType} }  }>(
+  const postList = await client.query<
+    {
+      posts: RootQueryToPostConnection;
+      category: { parent: { node: CategoryType } };
+    }
+  >(
     SliderQuery,
     variables,
     "getNewsSlider",
   );
 
-  if (isHqsPage && postList?.category?.parent?.node?.slug !== 'quadrinhos') {
+  if (isHqsPage && postList?.category?.parent?.node?.slug !== "quadrinhos") {
     ctx.response.status = 404;
     return {
       posts: [],
     };
   }
-
 
   const posts = postList?.posts?.edges?.map((edge) => {
     return edge?.node as Post;
