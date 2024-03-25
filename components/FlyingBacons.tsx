@@ -37,7 +37,7 @@ const FlyingBacons = ({ bg, density, spread = false }: IBaconGroup) => {
 
   function calculatePositions(el: HTMLElement) {
     const minLeft = 1;
-    const maxRight = window.innerWidth;
+    const maxRight = globalThis.innerWidth;
     const top = el.offsetTop as number;
 
     let {
@@ -46,8 +46,8 @@ const FlyingBacons = ({ bg, density, spread = false }: IBaconGroup) => {
       height,
     } = el.getBoundingClientRect() as DOMRect;
 
-    maxLeft = spread ? window.innerWidth / 2 : maxLeft;
-    minRight = spread ? window.innerWidth / 2 : minRight;
+    maxLeft = spread ? globalThis.innerWidth / 2 : maxLeft;
+    minRight = spread ? globalThis.innerWidth / 2 : minRight;
 
     const numberOfBacon = Math.round(height / spacing);
 
@@ -92,7 +92,7 @@ const FlyingBacons = ({ bg, density, spread = false }: IBaconGroup) => {
   }, []);
 
   useEventListener("resize", () => {
-    const windowWidth = window.innerWidth;
+    const windowWidth = globalThis.innerWidth;
     setDebounced(windowWidth, renderBacons);
   });
 
