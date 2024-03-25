@@ -13,7 +13,6 @@ function Header(
     typeof loader
   >,
 ) {
-
   return (
     <>
       <header class="absolute top-0 z-30 w-full">

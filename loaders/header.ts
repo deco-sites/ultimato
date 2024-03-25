@@ -27,7 +27,6 @@ export interface Props {
     apiKey: Secret;
     indexName: string;
   };
-
 }
 
 export interface LoaderReturn {
