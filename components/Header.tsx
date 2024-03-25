@@ -1,6 +1,6 @@
 import Logo from "deco-sites/ultimato/components/ui/Logo.tsx";
 import Menu from "deco-sites/ultimato/islands/Menu.tsx";
-import Search from "deco-sites/ultimato/islands/Search.tsx";
+import Search from "deco-sites/ultimato/components/Search/Search.tsx";
 
 import loader from "deco-sites/ultimato/loaders/header.ts";
 
@@ -8,7 +8,12 @@ import GenericCover from "deco-sites/ultimato/components/ui/GenericCover.tsx";
 
 import type { SectionProps } from "deco/mod.ts";
 
-function Header({ cover, menu }: SectionProps<typeof loader>) {
+function Header(
+  { cover, menu, algoliaOpts }: SectionProps<
+    typeof loader
+  >,
+) {
+
   return (
     <>
       <header class="absolute top-0 z-30 w-full">
@@ -25,7 +30,16 @@ function Header({ cover, menu }: SectionProps<typeof loader>) {
             )}
 
             <div class="order-3 self-center">
-              <Search />
+              {algoliaOpts?.appId && algoliaOpts?.indexName && (
+                <>
+                  <Search
+                    appId={algoliaOpts?.appId}
+                    apiKey={Deno.env.get("ALGOLIA_SEARCH_KEY") ||
+                      algoliaOpts?.apiKey as string}
+                    indexName={algoliaOpts?.indexName}
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>

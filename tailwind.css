@@ -85,3 +85,37 @@ article .aligncenter img {
 .has-text-align-center {
   @apply text-center;
 }
+
+/* algolia */
+
+#algolia-searchbox .ais-SearchBox form {
+  @apply w-full bg-white rounded-lg overflow-hidden relative;
+}
+
+#algolia-searchbox .ais-SearchBox-input {
+  @apply w-full py-2 pl-4 pr-8 text-lg bg-white;
+}
+
+#algolia-searchbox .ais-SearchBox-submit {
+  @apply absolute right-0 top-0 pt-4 pr-4;
+}
+
+#algolia-searchbox .ais-SearchBox-submit svg {
+  @apply !w-4 !h-4;
+}
+
+#algolia-hits .ais-Hits-list {
+  @apply grid grid-cols-1 gap-4;
+}
+
+#algolia-stats .ais-Stats-text {
+  @apply text-xs;
+}
+
+#algolia-poweredby {
+  @apply text-xs text-gray-400;
+}
+
+#algolia-poweredby svg {
+  @apply !h-3 !w-24;
+}

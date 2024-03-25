@@ -2,6 +2,8 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
+import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$0 from "./loaders/categories.ts";
 import * as $$$1 from "./loaders/footer.ts";
 import * as $$$2 from "./loaders/guias.ts";
@@ -18,8 +20,8 @@ import * as $$$$$$3 from "./sections/Content/PopularPosts.tsx";
 import * as $$$$$$4 from "./sections/Content/PostArchive.tsx";
 import * as $$$$$$5 from "./sections/Content/RelatedPosts.tsx";
 import * as $$$$$$6 from "./sections/Content/Top5AndCat.tsx";
-import * as $$$$$$7 from "./sections/Image/Highlight.tsx";
-import * as $$$$$$8 from "./sections/Image/HQSelectorList.tsx";
+import * as $$$$$$8 from "./sections/Image/Highlight.tsx";
+import * as $$$$$$7 from "./sections/Image/HQSelectorList.tsx";
 import * as $$$$$$9 from "./sections/Image/Pigs.tsx";
 import * as $$$$$$10 from "./sections/Image/PostsSlider.tsx";
 import * as $$$$$$11 from "./sections/Layout/Container.tsx";
@@ -31,8 +33,6 @@ import * as $$$$$$16 from "./sections/Other/WhatsappCTA.tsx";
 import * as $$$$$$17 from "./sections/SinglePost/PostContent.tsx";
 import * as $$$$$$18 from "./sections/SinglePost/PostCover.tsx";
 import * as $$$$$$19 from "./sections/Theme.tsx";
-import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
-import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
 const manifest = {
   "loaders": {
@@ -54,8 +54,8 @@ const manifest = {
     "deco-sites/ultimato/sections/Content/PostArchive.tsx": $$$$$$4,
     "deco-sites/ultimato/sections/Content/RelatedPosts.tsx": $$$$$$5,
     "deco-sites/ultimato/sections/Content/Top5AndCat.tsx": $$$$$$6,
-    "deco-sites/ultimato/sections/Image/Highlight.tsx": $$$$$$7,
-    "deco-sites/ultimato/sections/Image/HQSelectorList.tsx": $$$$$$8,
+    "deco-sites/ultimato/sections/Image/Highlight.tsx": $$$$$$8,
+    "deco-sites/ultimato/sections/Image/HQSelectorList.tsx": $$$$$$7,
     "deco-sites/ultimato/sections/Image/Pigs.tsx": $$$$$$9,
     "deco-sites/ultimato/sections/Image/PostsSlider.tsx": $$$$$$10,
     "deco-sites/ultimato/sections/Layout/Container.tsx": $$$$$$11,
