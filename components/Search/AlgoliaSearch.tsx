@@ -1,130 +1,130 @@
 import { useEffect } from "preact/hooks";
 
-import algoliasearch from "algoliasearch/lite";
+import algoliasearch, { SearchClient } from "algoliasearch/lite";
 import instantsearch from "instantsearch.js";
-import { hits, poweredBy, searchBox, stats } from "instantsearch.js/es/widgets";
+import {
+  configure,
+  hits,
+  poweredBy,
+  searchBox,
+  stats,
+} from "instantsearch.js/es/widgets";
 
 export interface Props {
-  appId: string;
-  apiKey: string;
+  applicationId: string;
+  searchApiKey: string;
   indexName: string;
-  wrapperId: string;
-  buttonId: string;
+  id: string;
+  query?: string | null;
+  resultsPage?: boolean;
 }
 
 function AlgoliaSearch(
-  { appId, apiKey, indexName, buttonId, wrapperId }: Props,
+  { applicationId, searchApiKey, indexName, id, query, resultsPage }: Props,
 ) {
   useEffect(() => {
-    const button = document.getElementById(buttonId);
-    const element = document.getElementById(wrapperId);
+    const algoliaClient = algoliasearch(
+      applicationId,
+      searchApiKey,
+    );
 
-    let isOpen = false;
-
-    if (button) {
-      button.addEventListener("click", () => {
-        if (element) {
-          element.classList.toggle("hidden");
-          element.classList.toggle("block");
-        }
-
-        button.querySelector(".open")?.classList.toggle("hidden");
-        button.querySelector(".close")?.classList.toggle("hidden");
-        document.body.classList.toggle("overflow-hidden");
-
-        isOpen = !isOpen;
-
-        if (isOpen) {
-          // focus on the search input
-          element?.querySelector("input")?.focus();
-
-          // close on click outside
-          element?.addEventListener("click", (e) => {
-            const searchEl = element?.querySelector(".search");
-
-            if (element && !searchEl?.contains(e.target as Node)) {
-              element.classList.add("hidden");
-              element.classList.remove("block");
-
-              button.querySelector(".open")?.classList.remove("hidden");
-              button.querySelector(".close")?.classList.add("hidden");
-              document.body.classList.remove("overflow-hidden");
-
-              isOpen = false;
-            }
+    const searchClient: SearchClient = {
+      ...algoliaClient,
+      search: (requests) => {
+        if (requests.every(({ params }) => !params?.query)) {
+          return Promise.resolve({
+            results: requests.map(() => ({
+              hits: [],
+              nbHits: 0,
+              nbPages: 0,
+              page: 0,
+              processingTimeMS: 0,
+              hitsPerPage: 0,
+              exhaustiveNbHits: false,
+              query: "",
+              params: "",
+            })),
           });
         }
-      });
-    }
-  }, [buttonId, wrapperId]);
-
-  useEffect(() => {
-    const algoliaClient = algoliasearch(
-      appId,
-      apiKey,
-    );
+        return algoliaClient.search(requests);
+      },
+    };
 
     const search = instantsearch({
       indexName,
-      searchClient: algoliaClient,
+      searchClient: searchClient,
       insights: true,
       initialUiState: {
-        searchBox: {
-          query: "",
+        prod_UB: {
+          query: query || "",
         },
       },
     });
 
     let timerId: number;
 
-    search.addWidgets([
+    const widgets = [
+      configure({
+        hitsPerPage: resultsPage ? 20 : 10,
+      }),
       searchBox({
-        container: "#algolia-searchbox",
+        container: `#${id}-algolia-searchbox`,
         placeholder: "Digite aqui a sua busca",
         showSubmit: true,
         showReset: false,
         showLoadingIndicator: true,
         queryHook: (query, refine) => {
           clearTimeout(timerId);
-          timerId = setTimeout(() => refine(query), 200);
+          timerId = setTimeout(() => refine(query), 300);
         },
       }),
       hits({
-        container: "#algolia-hits",
+        container: `#${id}-algolia-hits`,
         templates: {
-          item: (hit, { html, components }) =>
-            html`
-              <a class="hit text-primary font-medium text-sm lg:text-base mb-3" href="/${hit.objectID}">
-                <h3>
-                  ${
-              components.Highlight({
-                attribute: "title",
-                hit,
-                highlightedTagName: "b",
-              })
-            }
-                </h3>
-                <p class="hidden sm:block text-xs text-gray-400 mb-1">${hit.date}</p>
-                <p class="text-xs lg:text-sm text-gray-700 line-clamp-3">
-                  ${
-              components.Snippet({
-                attribute: "content",
-                hit,
-                highlightedTagName: "b",
-              })
-            }
-                </p>
+          item: (hit, { html, components }) => {
+            const title = components.Highlight({
+              attribute: "title",
+              hit,
+              highlightedTagName: "b",
+            });
+
+            const excerpt = components.Snippet({
+              attribute: "content",
+              hit,
+              highlightedTagName: "b",
+            });
+
+            return html`
+              <a class="hit text-primary font-medium text-sm lg:text-base mb-3 flex" href="/${hit.objectID}">
+                <div class="w-24 h-20 lg:w-32 mr-2 lg:mr-4 lg:h-24 min-w-[6rem] min-h-[5rem] lg:min-w-[8rem] lg:min-h-[6rem]">
+                  <img
+                    src="https://ultimato.netlify.app${hit.image}"
+                    alt="${hit.title}"
+                    class="object-cover w-full h-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <h3>
+                    ${title}
+                  </h3>
+                  <p class="hidden sm:block text-xs text-gray-400 mb-1">${hit.date}</p>
+                  <p class="text-xs lg:text-sm text-gray-700 line-clamp-3">
+                    ${excerpt}
+                  </p>
+                </div>
               </a>
-            `,
+            `;
+          },
           empty: "Nenhum resultado encontrado",
         },
       }),
       stats({
-        container: "#algolia-stats",
+        container: `#${id}-algolia-stats`,
         templates: {
           text: ({ nbHits, processingTimeMS }) =>
             nbHits === 0
-              ? "Nenhum resultado encontrado"
+              ? ""
               : `${nbHits} resultado${
                 nbHits > 1 ? "s" : ""
               } encontrados em ${processingTimeMS}ms`,
@@ -132,26 +132,51 @@ function AlgoliaSearch(
       }),
 
       poweredBy({
-        container: "#algolia-poweredby",
+        container: `#${id}-algolia-poweredby`,
         theme: "light",
       }),
-    ]);
+    ];
+
+    search.addWidgets(widgets);
 
     search.start();
-  }, [appId, apiKey, indexName]);
+
+    document.querySelector(`#${id}-algolia-searchbox form`)?.addEventListener(
+      "submit",
+      (e) => {
+        const searchInput = document.querySelector(
+          `#${id}-algolia-searchbox input`,
+        ) as HTMLInputElement;
+        const searchValue = searchInput.value;
+
+        if (searchValue === "") {
+          e.preventDefault();
+        }
+
+        window.location.href = `/search?q=${searchValue}`;
+      },
+    );
+  }, [applicationId, searchApiKey, indexName]);
 
   return (
     <>
       <div class="max-w-6xl w-full sm:w-4/5 px-4 mx-auto">
         <div class="overflow-hidden rounded-lg bg-white search">
-          <div id="algolia-searchbox"></div>
+          <div
+            id={`${id}-algolia-searchbox`}
+            class={`${resultsPage && "hidden"}`}
+          >
+          </div>
           <div class="flex justify-between pb-4 px-4">
-            <div id="algolia-stats"></div>
-            <div id="algolia-poweredby"></div>
+            <div id={`${id}-algolia-stats`}></div>
+            <div id={`${id}-algolia-poweredby`}></div>
           </div>
           <div
-            id="algolia-hits"
-            class="h-full overflow-y-auto overflow-x-hidden px-4 max-h-[60vh] bg-white"
+            id={`${id}-algolia-hits`}
+            class={`bg-white ${
+              !resultsPage &&
+              "h-full overflow-y-auto overflow-x-hidden px-4 max-h-[60vh]"
+            }`}
           >
           </div>
         </div>

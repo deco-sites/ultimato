@@ -60,39 +60,89 @@ function Seo({ seo, type, archiveTitle }: Props) {
         }`}
       />
       <meta name="description" content={metaDesc as string} />
-      <meta name="keywords" content={metaKeywords as string} />
-      <meta name="robots" content={robots} />
+      {metaKeywords && (
+        <meta
+          name="keywords"
+          content={metaKeywords as string}
+        />
+      )}
+      {robots && <meta name="robots" content={robots} />}
 
-      <meta property="og:title" content={opengraphTitle as string} />
-      <meta
-        property="og:description"
-        content={opengraphDescription as string}
-      />
-      <meta
-        property="og:url"
-        content={replaceAllSites(opengraphUrl as string)}
-      />
-      <meta property="og:type" content={opengraphType as string} />
-      <meta property="og:site_name" content={opengraphSiteName as string} />
-      <meta
-        property="og:published_time"
-        content={opengraphPublishedTime as string}
-      />
-      <meta
-        property="og:modified_time"
-        content={opengraphModifiedTime as string}
-      />
-      <meta property="og:author" content={opengraphAuthor as string} />
-      <meta property="og:publisher" content={opengraphPublisher as string} />
-      <meta property="og:image" content={opengraphImage?.sourceUrl as string} />
+      {opengraphTitle && (
+        <meta property="og:title" content={opengraphTitle as string} />
+      )}
 
-      <meta name="twitter:title" content={twitterTitle as string} />
-      <meta name="twitter:description" content={twitterDescription as string} />
-      <meta name="twitter:image" content={twitterImage?.sourceUrl as string} />
+      {opengraphDescription && (
+        <meta
+          property="og:description"
+          content={opengraphDescription as string}
+        />
+      )}
 
-      <script type="application/ld+json">
-        {JSON.stringify(formatSchema(schema?.raw as string))}
-      </script>
+      {opengraphUrl && (
+        <meta
+          property="og:url"
+          content={replaceAllSites(opengraphUrl as string)}
+        />
+      )}
+
+      {opengraphType && (
+        <meta property="og:type" content={opengraphType as string} />
+      )}
+
+      {opengraphSiteName && (
+        <meta property="og:site_name" content={opengraphSiteName as string} />
+      )}
+
+      {opengraphPublishedTime && (
+        <meta
+          property="og:published_time"
+          content={opengraphPublishedTime as string}
+        />
+      )}
+
+      {opengraphModifiedTime && (
+        <meta
+          property="og:modified_time"
+          content={opengraphModifiedTime as string}
+        />
+      )}
+
+      {opengraphAuthor && (
+        <meta property="og:author" content={opengraphAuthor as string} />
+      )}
+
+      {opengraphPublisher && (
+        <meta property="og:publisher" content={opengraphPublisher as string} />
+      )}
+
+      {opengraphImage && (
+        <meta
+          property="og:image"
+          content={opengraphImage.sourceUrl as string}
+        />
+      )}
+
+      {twitterTitle && (
+        <meta name="twitter:title" content={twitterTitle as string} />
+      )}
+
+      {twitterDescription && (
+        <meta
+          name="twitter:description"
+          content={twitterDescription as string}
+        />
+      )}
+
+      {twitterImage && (
+        <meta name="twitter:image" content={twitterImage.sourceUrl as string} />
+      )}
+
+      {schema && (
+        <script type="application/ld+json">
+          {JSON.stringify(formatSchema(schema.raw as string))}
+        </script>
+      )}
     </Head>
   );
 }

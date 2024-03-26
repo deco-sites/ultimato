@@ -29,12 +29,12 @@ function Header(
             )}
 
             <div class="order-3 self-center">
-              {algoliaOpts?.appId && algoliaOpts?.indexName && (
+              {algoliaOpts?.applicationId && algoliaOpts?.indexName && (
                 <>
                   <Search
-                    appId={algoliaOpts?.appId}
-                    apiKey={Deno.env.get("ALGOLIA_SEARCH_KEY") ||
-                      algoliaOpts?.apiKey as string}
+                    applicationId={algoliaOpts?.applicationId}
+                    searchApiKey={Deno.env.get("ALGOLIA_SEARCH_KEY") ||
+                      algoliaOpts?.searchApiKey as string}
                     indexName={algoliaOpts?.indexName}
                   />
                 </>

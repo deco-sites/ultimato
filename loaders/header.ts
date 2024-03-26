@@ -15,33 +15,27 @@ import {
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
 import { Section } from "deco/blocks/section.ts";
-import { Secret } from "apps/website/loaders/secret.ts";
+import type { AppContext } from "deco-sites/ultimato/apps/site.ts";
 
 export interface Props {
   /** @description Cover section. */
   cover?: Section;
-
-  /** @description Algolia configuration. */
-  algoliaOpts?: {
-    appId: string;
-    apiKey: Secret;
-    indexName: string;
-  };
 }
 
 export interface LoaderReturn {
   cover?: Section;
   menu?: Menu;
   algoliaOpts?: {
-    appId?: string;
-    apiKey?: string;
+    applicationId?: string;
+    searchApiKey?: string;
     indexName?: string;
   };
 }
 
 export const loader = async (
-  { cover, algoliaOpts }: Props,
+  { cover }: Props,
   _req: Request,
+  ctx: AppContext,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
 
@@ -53,12 +47,10 @@ export const loader = async (
 
   const menu = header?.menus?.edges?.[0]?.node as Menu;
 
-  const apiKey = algoliaOpts?.apiKey.get() as string;
-
   return {
     menu,
     cover,
-    algoliaOpts: { ...algoliaOpts, apiKey },
+    algoliaOpts: ctx.algolia,
   };
 };
 

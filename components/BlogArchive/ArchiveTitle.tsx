@@ -7,6 +7,7 @@ import {
 import type { SectionProps } from "deco/mod.ts";
 
 import FlyingBacons from "deco-sites/ultimato/islands/FlyingBacons.tsx";
+import GenericCover from "deco-sites/ultimato/components/ui/GenericCover.tsx";
 
 export interface Props {
   /** @description Categoria */
@@ -18,6 +19,8 @@ export interface LoaderReturn {
 }
 
 function ArchiveTitle({ category }: SectionProps<typeof loader>) {
+  if (!category) return <GenericCover title="Erro 404" />;
+
   return (
     <div class="container-wrapper">
       <div class="h-[290px] lg:h-[500px] relative w-full bg-gradient-to-b from-[#18181B] via-gray-700 to-gray-600 bacon-background">

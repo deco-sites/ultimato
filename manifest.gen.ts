@@ -2,8 +2,9 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
-import * as $$$$$$$$$$$1 from "./apps/site.ts";
+import * as $$$$$$$$$$$0 from "./apps/algolia.ts";
+import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
+import * as $$$$$$$$$$$2 from "./apps/site.ts";
 import * as $$$0 from "./loaders/categories.ts";
 import * as $$$1 from "./loaders/footer.ts";
 import * as $$$2 from "./loaders/guias.ts";
@@ -28,11 +29,13 @@ import * as $$$$$$11 from "./sections/Layout/Container.tsx";
 import * as $$$$$$12 from "./sections/Layout/Footer.tsx";
 import * as $$$$$$13 from "./sections/Layout/Header.tsx";
 import * as $$$$$$14 from "./sections/Layout/Hero.tsx";
-import * as $$$$$$15 from "./sections/Other/Adsense.tsx";
-import * as $$$$$$16 from "./sections/Other/WhatsappCTA.tsx";
-import * as $$$$$$17 from "./sections/SinglePost/PostContent.tsx";
-import * as $$$$$$18 from "./sections/SinglePost/PostCover.tsx";
-import * as $$$$$$19 from "./sections/Theme.tsx";
+import * as $$$$$$15 from "./sections/Layout/PageTitle.tsx";
+import * as $$$$$$16 from "./sections/Other/Adsense.tsx";
+import * as $$$$$$17 from "./sections/Other/SearchPage.tsx";
+import * as $$$$$$18 from "./sections/Other/WhatsappCTA.tsx";
+import * as $$$$$$19 from "./sections/SinglePost/PostContent.tsx";
+import * as $$$$$$20 from "./sections/SinglePost/PostCover.tsx";
+import * as $$$$$$21 from "./sections/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -62,15 +65,18 @@ const manifest = {
     "deco-sites/ultimato/sections/Layout/Footer.tsx": $$$$$$12,
     "deco-sites/ultimato/sections/Layout/Header.tsx": $$$$$$13,
     "deco-sites/ultimato/sections/Layout/Hero.tsx": $$$$$$14,
-    "deco-sites/ultimato/sections/Other/Adsense.tsx": $$$$$$15,
-    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$16,
-    "deco-sites/ultimato/sections/SinglePost/PostContent.tsx": $$$$$$17,
-    "deco-sites/ultimato/sections/SinglePost/PostCover.tsx": $$$$$$18,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$19,
+    "deco-sites/ultimato/sections/Layout/PageTitle.tsx": $$$$$$15,
+    "deco-sites/ultimato/sections/Other/Adsense.tsx": $$$$$$16,
+    "deco-sites/ultimato/sections/Other/SearchPage.tsx": $$$$$$17,
+    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$18,
+    "deco-sites/ultimato/sections/SinglePost/PostContent.tsx": $$$$$$19,
+    "deco-sites/ultimato/sections/SinglePost/PostCover.tsx": $$$$$$20,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$21,
   },
   "apps": {
-    "deco-sites/ultimato/apps/decohub.ts": $$$$$$$$$$$0,
-    "deco-sites/ultimato/apps/site.ts": $$$$$$$$$$$1,
+    "deco-sites/ultimato/apps/algolia.ts": $$$$$$$$$$$0,
+    "deco-sites/ultimato/apps/decohub.ts": $$$$$$$$$$$1,
+    "deco-sites/ultimato/apps/site.ts": $$$$$$$$$$$2,
   },
   "name": "deco-sites/ultimato",
   "baseUrl": import.meta.url,

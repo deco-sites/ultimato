@@ -1,17 +1,21 @@
 import AlgoliaSearch from "deco-sites/ultimato/islands/AlgoliaSearch.tsx";
+import Backdrop from "deco-sites/ultimato/islands/Backdrop.tsx";
+
 
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 import { useId } from "preact/hooks";
 
 export interface Props {
-  appId: string;
-  apiKey: string;
+  applicationId: string;
+  searchApiKey: string;
   indexName: string;
 }
 
-function Search({ appId, apiKey, indexName }: Props) {
+function Search({ applicationId, searchApiKey, indexName }: Props) {
   const wrapperId = useId();
   const buttonId = useId();
+
+  const algoliaId = useId();
 
   return (
     <>
@@ -37,12 +41,12 @@ function Search({ appId, apiKey, indexName }: Props) {
         id={wrapperId}
         class={`absolute pt-32 lg:pt-40 px-4 w-screen h-screen z-10 bg-black bg-opacity-80 top-0 left-0 justify-center hidden`}
       >
+        <Backdrop wrapperId={wrapperId} buttonId={buttonId} />
         <AlgoliaSearch
-          appId={appId}
-          apiKey={apiKey}
+          applicationId={applicationId}
+          searchApiKey={searchApiKey}
           indexName={indexName}
-          buttonId={buttonId}
-          wrapperId={wrapperId}
+          id={algoliaId}
         />
       </div>
     </>
