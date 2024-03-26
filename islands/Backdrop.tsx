@@ -5,8 +5,7 @@ export interface Props {
   buttonId: string;
 }
 
-function Backdrop({wrapperId, buttonId}: Props) {
-
+function Backdrop({ wrapperId, buttonId }: Props) {
   useEffect(() => {
     const button = document.getElementById(buttonId);
     const element = document.getElementById(wrapperId);
@@ -50,9 +49,7 @@ function Backdrop({wrapperId, buttonId}: Props) {
     }
   }, [buttonId, wrapperId]);
 
-  return (
-    <div data-backdrop-js></div>
-  )
+  return <div data-backdrop-js></div>;
 }
 
 export default Backdrop;

@@ -1,7 +1,6 @@
 import AlgoliaSearch from "deco-sites/ultimato/islands/AlgoliaSearch.tsx";
 import Backdrop from "deco-sites/ultimato/islands/Backdrop.tsx";
 
-
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 import { useId } from "preact/hooks";
 
