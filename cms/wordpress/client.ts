@@ -1,7 +1,8 @@
 import { fetchAPI } from "deco/utils/fetchAPI.ts";
 
-// Use wordpress GraphQL API
+import { fetchAPI as _fetchAPI } from "apps/utils/fetch.ts";
 
+// Use wordpress GraphQL API
 export const endpoint = "https://admin.ultimatodobacon.com/graphql";
 
 // Implementation from https://github.com/deco-cx/apps/blob/29fcea976c0ba19006d45c26fa7ee525e8fa90a3/utils/graphql.ts#L22
@@ -57,4 +58,22 @@ export const createClient = ({
   return {
     query,
   };
+};
+
+export const adminUrl = "https://admin.ultimatodobacon.com";
+const restEndpoint = `${adminUrl}/wp-json`;
+
+export const fetch = {
+  wp: (path: string, options: RequestInit = {}) => {
+    return _fetchAPI(`${restEndpoint}${path}`, options);
+  },
+  yoast: (path: string, options: RequestInit = {}) => {
+    return _fetchAPI(`${restEndpoint}/yoast/v1${path}`, options);
+  },
+  cf7: (path: string, options: RequestInit = {}) => {
+    return _fetchAPI(`${restEndpoint}/contact-form-7/v1${path}`, options);
+  },
+  jwt: (path: string, options: RequestInit = {}) => {
+    return _fetchAPI(`${restEndpoint}/jwt-auth/v1${path}`, options);
+  }
 };

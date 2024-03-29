@@ -1,0 +1,5 @@
+apis:
+  contact-form-7@v1:
+    root: ./cms/wordpress/schema/contact-form-7.json
+    x-openapi-ts:
+      output: ./cms/wordpress/types/contact-form-7.ts

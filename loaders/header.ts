@@ -14,26 +14,16 @@ import {
   MenuFields,
 } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
 
-import { Section } from "deco/blocks/section.ts";
 import type { AppContext } from "deco-sites/ultimato/apps/site.ts";
-
-export interface Props {
-  /** @description Cover section. */
-  cover?: Section;
-}
+import type { AlgoliaOpts } from "deco-sites/ultimato/apps/site.ts";
 
 export interface LoaderReturn {
-  cover?: Section;
   menu?: Menu;
-  algoliaOpts?: {
-    applicationId?: string;
-    searchApiKey?: string;
-    indexName?: string;
-  };
+  algoliaOpts?: AlgoliaOpts;
 }
 
 export const loader = async (
-  { cover }: Props,
+  _props: unknown,
   _req: Request,
   ctx: AppContext,
 ): Promise<LoaderReturn> => {
@@ -49,7 +39,6 @@ export const loader = async (
 
   return {
     menu,
-    cover,
     algoliaOpts: ctx.algolia,
   };
 };

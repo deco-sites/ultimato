@@ -1,17 +1,27 @@
-import Logo from "deco-sites/ultimato/components/ui/Logo.tsx";
-import Menu from "deco-sites/ultimato/islands/Menu.tsx";
-import Search from "deco-sites/ultimato/components/Search/Search.tsx";
+import type { AlgoliaOpts } from "deco-sites/ultimato/apps/site.ts";
+import type { Section } from "deco/blocks/section.ts";
 
-import loader from "deco-sites/ultimato/loaders/header.ts";
+import type { Menu } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+
+import Logo from "deco-sites/ultimato/components/ui/Logo.tsx";
+import MenuIsland from "deco-sites/ultimato/islands/Menu.tsx";
+import Search from "deco-sites/ultimato/components/Search/Search.tsx";
 
 import GenericCover from "deco-sites/ultimato/components/ui/GenericCover.tsx";
 
-import type { SectionProps } from "deco/mod.ts";
+export interface Props {
+  /** @description Cover section. */
+  cover?: Section;
+
+  /** @description Menu data. */
+  menu?: Menu;
+
+  /** @description Algolia search options. */
+  algoliaOpts?: AlgoliaOpts;
+}
 
 function Header(
-  { cover, menu, algoliaOpts }: SectionProps<
-    typeof loader
-  >,
+  { cover, menu, algoliaOpts }: Props,
 ) {
   return (
     <>
@@ -24,7 +34,7 @@ function Header(
 
             {menu && (
               <div class="order-1 lg:order-2">
-                <Menu data={menu} />
+                <MenuIsland data={menu} />
               </div>
             )}
 
@@ -51,4 +61,3 @@ function Header(
 }
 
 export default Header;
-export { loader };
