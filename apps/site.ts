@@ -25,7 +25,7 @@ export type Props =
     platform: Platform;
     theme?: Section;
 
-    algolia?: AlgoliaOpts
+    algolia?: AlgoliaOpts;
   }
   & CommerceProps;
 

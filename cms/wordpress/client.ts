@@ -1,6 +1,9 @@
 import { fetchAPI } from "deco/utils/fetchAPI.ts";
 
-import { fetchAPI as _fetchAPI } from "apps/utils/fetch.ts";
+import { fetchSafe } from "apps/utils/fetch.ts";
+
+import { createHttpClient } from "apps/utils/http.ts";
+import { OpenAPI } from "deco-sites/ultimato/cms/wordpress/types/wp.openapi.gen.ts";
 
 // Use wordpress GraphQL API
 export const endpoint = "https://admin.ultimatodobacon.com/graphql";
@@ -63,17 +66,7 @@ export const createClient = ({
 export const adminUrl = "https://admin.ultimatodobacon.com";
 const restEndpoint = `${adminUrl}/wp-json`;
 
-export const fetch = {
-  wp: (path: string, options: RequestInit = {}) => {
-    return _fetchAPI(`${restEndpoint}${path}`, options);
-  },
-  yoast: (path: string, options: RequestInit = {}) => {
-    return _fetchAPI(`${restEndpoint}/yoast/v1${path}`, options);
-  },
-  cf7: (path: string, options: RequestInit = {}) => {
-    return _fetchAPI(`${restEndpoint}/contact-form-7/v1${path}`, options);
-  },
-  jwt: (path: string, options: RequestInit = {}) => {
-    return _fetchAPI(`${restEndpoint}/jwt-auth/v1${path}`, options);
-  }
-};
+export const fetch = createHttpClient<OpenAPI>({
+  base: restEndpoint,
+  fetcher: fetchSafe,
+});
