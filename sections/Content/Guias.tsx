@@ -2,39 +2,42 @@ import { Fragment } from "preact";
 import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
 import Ad from "deco-sites/ultimato/components/Ad.tsx";
 
-import loader from "deco-sites/ultimato/loaders/guias.ts";
-
-import type {
-  Category,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
-
-import type { SectionProps } from "deco/mod.ts";
 import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
 
+import type {
+  DecoPostArchive,
+} from "deco-sites/ultimato/loaders/post-archive.ts";
+
+export interface Props {
+  /** @description Query de guias */
+  content: DecoPostArchive;
+
+  /** @description Mostrar Anúncios? */
+  adPosition?: "alternating" | "end";
+}
+
 function Guias({
-  posts,
+  content,
   adPosition,
-}: SectionProps<typeof loader>) {
+}: Props) {
   return (
     <div>
       <SectionTitle tag="div">
         Guias
       </SectionTitle>
-      {posts &&
-        posts.map((
-          { id, title, slug, featuredImage, date, readingTime, categories },
+      {content.posts &&
+        content.posts.map((
+          { id, title, slug, image, date, readingTime, categories },
           index,
         ) => (
           <Fragment key={id}>
             <Post
               title={title}
               slug={slug}
-              image={featuredImage ? featuredImage.node : null}
+              image={image}
               date={date}
               readingTime={readingTime}
-              categories={categories
-                ? categories.nodes as Category[]
-                : undefined}
+              categories={categories}
               layout="horizontal-reduced"
             />
             {(!adPosition || adPosition === "alternating") &&
@@ -52,4 +55,3 @@ function Guias({
 }
 
 export default Guias;
-export { loader };

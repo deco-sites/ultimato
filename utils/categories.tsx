@@ -1,11 +1,12 @@
-// deno-lint-ignore no-explicit-any
-const hasCategory = (node: any, category: string) => {
-  if (node.categories === null || node.categories.nodes.length == 0) {
+import type { BlogPost } from "deco-sites/ultimato/utils/transform.ts";
+
+const hasCategory = (post: BlogPost, category: string) => {
+  if (!post.categories || post.categories.length === 0) {
     return false;
   }
-  const categories = node.categories.nodes;
 
-  /** @ts-ignore */
+  const categories = post.categories;
+
   return categories.some((cat) => cat.slug === category);
 };
 

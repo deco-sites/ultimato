@@ -1,14 +1,21 @@
 import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
-import HQSelectorList from "deco-sites/ultimato/components/HQSelectorList.tsx";
+import HQSelectorList, {
+  type Selectors,
+} from "deco-sites/ultimato/components/HQSelectorList.tsx";
 import FeaturedPosts from "deco-sites/ultimato/components/BlogArchive/FeaturedPosts.tsx";
 
+import { type BlogPost } from "deco-sites/ultimato/utils/transform.ts";
+
+import type { AppContext } from "deco-sites/ultimato/apps/site.ts";
+
 import type { SectionProps } from "deco/mod.ts";
-
-import type {
-  RootQueryToPostConnectionEdge,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
-
-import loader from "deco-sites/ultimato/loaders/top5week.ts";
+export interface Props {
+  /**
+   * @title Selectores de HQ
+   * @description Lista de seletores de HQ
+   */
+  selectors: Selectors[];
+}
 
 function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
   return (
@@ -17,9 +24,9 @@ function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
         <SectionTitle tag="div">
           TOP 5 DA SEMANA
         </SectionTitle>
-        {posts && posts.featured && posts.featured.edges && (
+        {posts && (
           <FeaturedPosts
-            posts={posts.featured.edges as RootQueryToPostConnectionEdge[]}
+            posts={posts.slice(0, 5)}
           />
         )}
       </div>
@@ -30,5 +37,27 @@ function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
   );
 }
 
+export const loader = async (
+  { selectors }: Props,
+  _req: Request,
+  ctx: AppContext,
+): Promise<{
+  selectors: Selectors[];
+  posts: BlogPost[];
+}> => {
+  const content = await ctx.invoke(
+    "deco-sites/ultimato/loaders/post-archive.ts",
+    {
+      perPage: 30,
+      orderBy: "date",
+      order: "desc",
+    },
+  );
+
+  return {
+    selectors,
+    posts: content.posts,
+  };
+};
+
 export default Top5AndCat;
-export { loader };

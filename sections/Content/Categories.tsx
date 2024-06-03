@@ -1,57 +1,74 @@
-import { Fragment } from "preact";
 import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
 import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
 
-import loader from "deco-sites/ultimato/loaders/categories.ts";
-
 import type {
-  Category,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+  DecoPostArchive,
+} from "deco-sites/ultimato/loaders/post-archive.ts";
 
-import type { SectionProps } from "deco/mod.ts";
+import FlyingBacons from "deco-sites/ultimato/islands/FlyingBacons.tsx";
+
+/** @title {{{name}}} */
+export interface CategoryGroup {
+  name: string;
+  queryPosts: DecoPostArchive;
+}
+
+/**
+ * @title Get Posts by Category
+ * @description Select 3 categories and display their posts.
+ */
+
+export interface Props {
+  categoryGroups: CategoryGroup[];
+}
 
 function Categories({
-  categories,
-}: SectionProps<typeof loader>) {
+  categoryGroups,
+}: Props) {
   return (
-    <div className="flex flex-wrap justify-between py-28 border-b border-gray-600">
-      {categories &&
-        categories.map((item, index) => (
-          <div className="w-full mb-24 lg:w-1/3 lg:pr-4 lg:mb-0 xl:px-8">
-            <SectionTitle variation="dark" tag="div">
-              {item.name}
-            </SectionTitle>
+    <div className="container-wrapper bg-dark group/container-dark">
+      <FlyingBacons bg="dark" />
+      <div className="container px-4 bacon-background">
+        <div className="flex flex-wrap justify-between py-28 border-b border-gray-600">
+          {categoryGroups &&
+            categoryGroups.map((item) => (
+              <div
+                className="w-full mb-24 lg:w-1/3 lg:pr-4 lg:mb-0 xl:px-8"
+                key={item.name}
+              >
+                <SectionTitle variation="dark" tag="div">
+                  {item.name}
+                </SectionTitle>
 
-            {item.posts &&
-              item.posts.map((
-                {
-                  id,
-                  title,
-                  slug,
-                  featuredImage,
-                  date,
-                  readingTime,
-                  categories,
-                },
-                index,
-              ) => (
-                <div key={id} className="mb-12 last:mb-0">
-                  <Post
-                    title={title}
-                    slug={slug}
-                    image={featuredImage ? featuredImage.node : null}
-                    date={date}
-                    readingTime={readingTime}
-                    layout="vertical-reduced"
-                    colorScheme="dark"
-                  />
-                </div>
-              ))}
-          </div>
-        ))}
+                {item.queryPosts.posts
+                  .map((
+                    {
+                      id,
+                      title,
+                      slug,
+                      image,
+                      date,
+                      readingTime,
+                    },
+                  ) => (
+                    <div key={id} className="mb-12 last:mb-0">
+                      <Post
+                        title={title}
+                        slug={slug}
+                        image={image}
+                        date={date}
+                        readingTime={readingTime}
+                        layout="vertical-reduced"
+                        colorScheme="dark"
+                      />
+                    </div>
+                  ))}
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
   );
 }
 
 export default Categories;
-export { loader };

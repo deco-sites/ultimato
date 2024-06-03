@@ -1,0 +1,5 @@
+apis:
+  wp@v2:
+    root: ./cms/wordpress/schema/wp.yaml
+    x-openapi-ts:
+      output: ./cms/wordpress/types/paths.ts

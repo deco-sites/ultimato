@@ -11,6 +11,10 @@ import { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
+export type AlgoliaOpts = AlgoliaProps & {
+  indexName: string;
+};
+
 export type Props =
   & {
     /**
@@ -21,9 +25,7 @@ export type Props =
     platform: Platform;
     theme?: Section;
 
-    algolia?: AlgoliaProps & {
-      indexName: string;
-    };
+    algolia?: AlgoliaOpts;
   }
   & CommerceProps;
 

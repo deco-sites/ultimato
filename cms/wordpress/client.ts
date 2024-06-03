@@ -1,7 +1,6 @@
 import { fetchAPI } from "deco/utils/fetchAPI.ts";
 
 // Use wordpress GraphQL API
-
 export const endpoint = "https://admin.ultimatodobacon.com/graphql";
 
 // Implementation from https://github.com/deco-cx/apps/blob/29fcea976c0ba19006d45c26fa7ee525e8fa90a3/utils/graphql.ts#L22
@@ -58,3 +57,62 @@ export const createClient = ({
     query,
   };
 };
+
+interface Endpoint {
+  base: string;
+  options: RequestInit;
+}
+
+type FetchEndpoints = {
+  [K in "wp" | "yoast" | "cf7" | "jwt"]: Endpoint;
+};
+
+export const adminUrl = "https://admin.ultimatodobacon.com";
+const restEndpoint = `${adminUrl}/wp-json`;
+
+const endpoints: FetchEndpoints = {
+  wp: { base: `${restEndpoint}/wp/v2`, options: {} as RequestInit },
+  yoast: { base: `${restEndpoint}/yoast/v1`, options: {} as RequestInit },
+  cf7: {
+    base: `${restEndpoint}/contact-form-7/v1`,
+    options: {} as RequestInit,
+  },
+  jwt: { base: `${restEndpoint}/jwt-auth/v1`, options: {} as RequestInit },
+};
+
+function createFetch<T extends Record<string, Endpoint>>(endpoints: T) {
+  const fetchFunctions = {} as {
+    [K in keyof T]: <R>(
+      path: string,
+      options: RequestInit,
+    ) => Promise<{ content: R; headers: Headers }>;
+  };
+
+  for (const key in endpoints) {
+    fetchFunctions[key] = async function <R>(
+      path: string,
+      options: RequestInit = {},
+    ) {
+      const callAPI = await fetch(`${endpoints[key].base}${path}`, options);
+
+      const headers = callAPI.headers;
+      const response = await callAPI.json();
+
+      if (
+        callAPI instanceof Error
+      ) {
+        console.error(callAPI);
+        throw new Error(`Failed to fetch ${path}`);
+      }
+
+      return {
+        content: response as R,
+        headers,
+      };
+    };
+  }
+
+  return fetchFunctions;
+}
+
+export const fetchUB = createFetch(endpoints);

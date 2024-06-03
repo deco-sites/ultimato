@@ -1,15 +1,12 @@
 import { fetchUB as fetch } from "deco-sites/ultimato/cms/wordpress/client.ts";
 
 import type {
-  WP_REST_API_Categories,
+  WP_REST_API_Attachments,
 } from "deco-sites/ultimato/cms/wordpress/types/wp-types.ts";
 
 import { AppContext } from "../apps/site.ts";
 
-import {
-  type Category,
-  toCategory,
-} from "deco-sites/ultimato/utils/transform.ts";
+import { type Media, toMedia } from "deco-sites/ultimato/utils/transform.ts";
 
 export interface Props {
   /** @description Página atual da coleção. */
@@ -50,13 +47,14 @@ export interface Props {
   /** @description  Ordenar coleção por termo de atributo. */
   orderBy?:
     | "id"
+    | "author"
     | "include"
-    | "name"
+    | "date"
+    | "modified"
+    | "parent"
     | "slug"
     | "include_slugs"
-    | "term_group"
-    | "description"
-    | "count";
+    | "title";
 
   /** @description  Se deseja ocultar termos não atribuídos a posts.*/
   hideEmpty?: boolean;
@@ -69,10 +67,18 @@ export interface Props {
 
   /** @description  Limitar resultados a termos com um ou mais slugs específicos.*/
   slug?: string[];
+
+  /** @description Limitar resultados de posts atribuído por um ou mais status. */
+  status?: "publish" | "future" | "draft" | "pending" | "private";
+
+  /** @description Limitar resultados a anexos de um tipo de mídia em particular. */
+  mediaType?: ("image" | "video" | "text" | "application" | "audio")[];
+  /** @description Limitar resultados a anexos de um tipo MIME em particular. */
+  mimeType?: string;
 }
 
-export interface DecoCategories {
-  categories: Category[];
+export interface DecoMedia {
+  mediaItens: Media[];
 }
 
 /**
@@ -91,15 +97,18 @@ const loader = async (
     before,
     offset,
     order = "asc",
-    orderBy = "name",
+    orderBy = "date",
     hideEmpty,
     parent,
     post,
     slug,
+    mediaType,
+    mimeType,
+    status,
   }: Props,
   _req: Request,
   _ctx: AppContext,
-): Promise<DecoCategories> => {
+): Promise<DecoMedia> => {
   const input = {
     page: page.toString(),
     per_page: perPage.toString(),
@@ -117,6 +126,9 @@ const loader = async (
     hide_empty: hideEmpty,
     parent,
     post,
+    media_type: mediaType?.join(","),
+    mime_type: mimeType,
+    status,
   };
 
   const variables = Object.fromEntries(
@@ -127,15 +139,13 @@ const loader = async (
       .map(([key, value]) => [key, value as string]),
   ) as { [k: string]: string };
 
-  const path = `/categories?${new URLSearchParams(variables)}`;
+  const path = `/media?${new URLSearchParams(variables)}`;
 
-  const response = await fetch.wp<WP_REST_API_Categories>(path, {});
+  const response = await fetch.wp<WP_REST_API_Attachments>(path, {});
 
-  const normalizedCategories = response.content.map((category) =>
-    toCategory(category)
-  );
+  const normalizedMedia = response.content.map((media) => toMedia(media));
 
-  return { categories: normalizedCategories };
+  return { mediaItens: normalizedMedia };
 };
 
 export default loader;

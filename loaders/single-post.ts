@@ -1,164 +1,60 @@
 import {
-  createClient,
-  endpoint,
-  gql,
-} from "deco-sites/ultimato/cms/wordpress/client.ts";
+  type BlogPost,
+  type Page,
+} from "deco-sites/ultimato/utils/transform.ts";
 
-import type {
-  Category,
-  Page,
-  Post,
-  RootQueryToPostConnection,
-  RootQueryToPostConnectionEdge,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
-
-import {
-  PageFields,
-  PostFields,
-  SeoFields,
-} from "deco-sites/ultimato/cms/wordpress/fragments.ts";
-
-import { FnContext } from "deco/types.ts";
-
-export interface LoaderReturn {
+import { AppContext } from "../apps/site.ts";
+export interface DecoSinglePost {
   contentTypeName?: string;
-  singlePost?: Post;
-  relatedPosts?: Post[];
+  singlePost?: BlogPost;
+  relatedPosts?: BlogPost[];
   page?: Page;
 }
 
-export const loader = async (
-  props: unknown,
+const loader = async (
+  _props: unknown,
   req: Request,
-  ctx: FnContext,
-): Promise<LoaderReturn> => {
-  const client = createClient({ endpoint });
-
+  ctx: AppContext,
+): Promise<DecoSinglePost> => {
   const variables = {
     slug: new URL(req.url).pathname.slice(1).split("/")[0],
   };
 
-  const contentType = await client.query<
-    { contentNode: { contentTypeName: string } }
-  >(
-    GetContentType,
-    { id: `/${variables.slug}` },
-    "getContentType",
+  const getPosts = await ctx.invoke(
+    "deco-sites/ultimato/loaders/post-archive.ts",
+    {
+      slug: [variables.slug],
+    },
   );
 
-  if (!contentType?.contentNode) {
-    ctx.response.status = 404;
-    return props as LoaderReturn;
-  }
+  console.log(getPosts);
 
-  if (contentType?.contentNode.contentTypeName === "page") {
-    const page = await client.query<{ page: Page }>(
-      PageQuery,
-      variables,
-      "getPage",
-    );
+  if (getPosts.posts.length === 0) {
+    const page = await ctx.invoke("deco-sites/ultimato/loaders/single-page.ts");
 
     return {
-      ...page,
-      contentTypeName: contentType.contentNode.contentTypeName,
+      contentTypeName: "page",
+      page: page.page,
     };
   }
 
-  const singlePost = await client.query<{ singlePost: Post }>(
-    PostsQuery,
-    variables,
-    "getSinglePost",
-  );
+  const categories = getPosts.posts[0].categories?.map((category) =>
+    category.id
+  ).join(",");
 
-  const postID = singlePost?.singlePost.databaseId as number;
-  const postCategoriesIDs =
-    (singlePost?.singlePost?.categories?.nodes as Category[]).map((item) =>
-      item.databaseId
-    );
-
-  const relatedPosts = await client.query<
-    { relatedPosts: RootQueryToPostConnection }
-  >(
-    RelatedPostsQuery,
+  const relatedPosts = await ctx.invoke(
+    "deco-sites/ultimato/loaders/post-archive.ts",
     {
-      postIDs: [postID],
-      categories: postCategoriesIDs,
+      categories: categories,
+      perPage: 3,
     },
-    "getRelatedPosts",
   );
-
-  const related =
-    (relatedPosts?.relatedPosts?.edges as RootQueryToPostConnectionEdge[]).map(
-      (item) => item.node as Post,
-    );
 
   return {
-    ...singlePost,
-    relatedPosts: related,
-    contentTypeName: contentType?.contentNode.contentTypeName,
+    contentTypeName: "post",
+    singlePost: getPosts.posts[0],
+    relatedPosts: relatedPosts.posts,
   };
 };
-
-const GetContentType = gql`
-  query getContentType($id: ID!) {
-    contentNode(id: $id, idType: URI) {
-      contentTypeName
-    }
-  }
-`;
-
-const PageQuery = gql`
-${PageFields}
-${SeoFields}
-query getPage($slug: ID!) {
-  page(id: $slug, idType: URI) {
-    ...PageFields
-    seo {
-      ...SeoFields
-    }
-  }
-}
-`;
-
-const PostsQuery = gql`
-  ${PostFields}
-  ${SeoFields}
-  query getSinglePost($slug: ID!){
-    singlePost: post(id: $slug, idType: SLUG) {
-    ...PostFields
-      featuredImage {
-        node {
-          sourceUrl
-          altText
-        }
-      }
-      seo {
-        ...SeoFields
-      }
-    }
-  }
-`;
-
-const RelatedPostsQuery = gql`
-  query getRelatedPosts ($postIDs: [ID!],  $categories: [ID!]) {
-    relatedPosts: posts(where: {categoryIn: $categories, notIn: $postIDs, offsetPagination: {size: 3}}) {
-      edges {
-        node {
-          id
-          title
-          slug
-          date
-          featuredImage {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-        }
-      }
-    }
-  }
-
-`;
 
 export default loader;

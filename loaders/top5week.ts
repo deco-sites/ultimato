@@ -45,7 +45,7 @@ export const loader = async (
 const PageQuery = gql`
   ${FeaturedImageFields}
   ${PostArchiveFields}
-  query getFeaturedPosts {  
+  query getFeaturedPosts {
     featured: posts(
       where: {
         offsetPagination: { size: 50 }

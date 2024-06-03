@@ -1,13 +1,10 @@
 import { fetchUB as fetch } from "deco-sites/ultimato/cms/wordpress/client.ts";
-import {
-  type BlogPost,
-  toBlogPost,
-} from "deco-sites/ultimato/utils/transform.ts";
+import { type Page, toPage } from "deco-sites/ultimato/utils/transform.ts";
 
 //import { STALE } from "apps/utils/fetch.ts";
 
 import type {
-  WP_REST_API_Posts,
+  WP_REST_API_Pages,
 } from "deco-sites/ultimato/cms/wordpress/types/wp-types.ts";
 
 import { AppContext } from "../apps/site.ts";
@@ -79,8 +76,8 @@ export interface Props {
   tagsExclude?: string;
 }
 
-export interface DecoPostArchive {
-  posts: BlogPost[];
+export interface DecoPageArchive {
+  page: Page[];
   pageContext: {
     page: number;
     perPage: number;
@@ -113,9 +110,9 @@ const loader = async (
     categoriesExclude,
     tagsExclude,
   }: Props,
-  req: Request,
+  _req: Request,
   ctx: AppContext,
-): Promise<DecoPostArchive> => {
+): Promise<DecoPageArchive> => {
   //assign the variables to the query if they are not undefined
   const input = {
     page: page.toString(),
@@ -146,27 +143,8 @@ const loader = async (
       .map(([key, value]) => [key, value as string]),
   ) as { [k: string]: string };
 
-  if (req.url.includes("page/")) {
-    const page = req.url.split("page/")[1].split("/")[0];
-    variables.page = page;
-  }
-
-  const postsPath = `/posts?${new URLSearchParams(variables)}`;
-  const postList = await fetch.wp<WP_REST_API_Posts>(postsPath, {});
-
-  const categoryIds = postList.content.map(({ categories }) => categories).flat(
-    1,
-  ).map((id) => id).filter(Boolean) as number[];
-  // remove repeated ids
-  const categoryUniqueIds = [...new Set(categoryIds)];
-
-  const categoriesPosts = await ctx.invoke(
-    "deco-sites/ultimato/loaders/categories.ts",
-    {
-      include: categoryUniqueIds,
-      perPage: 99,
-    },
-  );
+  const postsPath = `/pages?${new URLSearchParams(variables)}`;
+  const postList = await fetch.wp<WP_REST_API_Pages>(postsPath, {});
 
   const featuredImageIds = postList.content.map(({ featured_media }) =>
     featured_media
@@ -180,26 +158,25 @@ const loader = async (
     },
   );
 
-  const normalizedPosts = postList.content.map((post) => {
-    return toBlogPost(
-      post,
-      categoriesPosts.categories,
+  const normalizedPosts = postList.content.map((page) => {
+    return toPage(
+      page,
       featuredImages.mediaItens,
     );
   });
 
-  const totalPosts = postList.headers.get("X-WP-Total") as string;
+  const totalPosts = postList.headers.get("X-WP-Total") as unknown as number;
   const totalPages = postList.headers.get(
     "X-WP-TotalPages",
-  ) as string;
+  ) as unknown as number;
 
   return {
-    posts: normalizedPosts,
+    page: normalizedPosts,
     pageContext: {
-      page: variables.page ? parseInt(variables.page) : 1,
+      page,
       perPage,
-      totalPosts: parseInt(totalPosts),
-      totalPages: parseInt(totalPages),
+      totalPosts,
+      totalPages,
     },
   };
 };

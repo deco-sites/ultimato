@@ -1,36 +1,20 @@
-import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
+import type { BlogPost } from "deco-sites/ultimato/utils/transform.ts";
 import { hasCategory } from "deco-sites/ultimato/utils/categories.tsx";
 
-import type {
-  Category,
-  Post as PostType,
-  RootQueryToPostConnectionEdge as PostEdge,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
 
-function FeaturedPosts({ posts }: { posts: PostEdge[] }) {
+function FeaturedPosts({ posts }: { posts: BlogPost[] }) {
   if (posts.length === 0) {
     return <div></div>;
   }
 
-  const today = new Date();
-  const lastWeek = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() - 7,
-  );
-
   const weekPosts = posts
-    .filter((post) => post && post.node && post.node.date)
-    .filter(({ node }) => node && new Date(node.date as string) > lastWeek)
-    .filter(({ node }) => !hasCategory(node, "porquinhos"))
+    .filter((post) => post)
+    .filter((post) => !hasCategory(post, "porquinhos"))
     /** @ts-ignore */
     .sort((postA, postB) => {
-      const postViewsA = postA?.node?.acfPostParams?.postviews
-        ? postA.node.acfPostParams.postviews
-        : 0;
-      const postViewsB = postB?.node?.acfPostParams?.postviews
-        ? postB.node.acfPostParams.postviews
-        : 0;
+      const postViewsA = postA?.views ? postA.views : 0;
+      const postViewsB = postB?.views ? postB.views : 0;
 
       if (
         postViewsA > postViewsB
@@ -39,8 +23,7 @@ function FeaturedPosts({ posts }: { posts: PostEdge[] }) {
       }
     });
 
-  const heroPost =
-    (weekPosts.length > 4 ? weekPosts[0].node : posts[0].node) as PostType;
+  const heroPost = (weekPosts.length > 4 ? weekPosts[0] : posts[0]) as BlogPost;
 
   const otherPosts = weekPosts.length > 4
     ? weekPosts.slice(1, 5)
@@ -52,31 +35,27 @@ function FeaturedPosts({ posts }: { posts: PostEdge[] }) {
         <Post
           title={heroPost?.title}
           slug={heroPost?.slug}
-          image={heroPost?.featuredImage ? heroPost?.featuredImage?.node : null}
+          image={heroPost?.image}
           readingTime={heroPost?.readingTime}
           excerpt={heroPost?.excerpt}
-          categories={(heroPost?.categories
-            ?.nodes as Category[]).filter(
-              (c) => c,
-            )}
+          categories={heroPost?.categories}
           date={heroPost?.date}
           layout="vertical-full"
         />
       </div>
       <div className="w-full lg:w-1/2 xl:w-2/5">
         {otherPosts &&
-          otherPosts.map(({ node }) => (
+          otherPosts.map((
+            { id, title, slug, image, date, readingTime, categories },
+          ) => (
             <Post
-              key={node?.id}
-              title={node?.title}
-              slug={node?.slug}
-              image={node?.featuredImage ? node.featuredImage.node : null}
-              date={node?.date}
-              readingTime={node?.readingTime}
-              categories={(node?.categories
-                ?.nodes as Category[]).filter(
-                  (c) => c,
-                )}
+              key={id}
+              title={title}
+              slug={slug}
+              image={image}
+              date={date}
+              readingTime={readingTime}
+              categories={categories}
               layout="horizontal-reduced"
             />
           ))}

@@ -1,12 +1,8 @@
 import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
 
-import type {
-  Category,
-  Post as PostType,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
-
+import type { BlogPost } from "deco-sites/ultimato/utils/transform.ts";
 interface Props {
-  posts: PostType[];
+  posts: BlogPost[];
   colorScheme?: "dark" | "light";
 }
 
@@ -20,7 +16,7 @@ function LatestPosts({ posts, colorScheme = "light" }: Props) {
               id,
               title,
               slug,
-              featuredImage,
+              image,
               readingTime,
               excerpt,
               date,
@@ -31,14 +27,12 @@ function LatestPosts({ posts, colorScheme = "light" }: Props) {
               key={id}
               title={title}
               slug={slug}
-              image={featuredImage ? featuredImage.node : null}
+              image={image}
               date={date}
               readingTime={readingTime}
               excerpt={excerpt}
               colorScheme={colorScheme}
-              categories={categories
-                ? categories.nodes as Category[]
-                : undefined}
+              categories={categories}
               layout="horizontal-full"
             />
           ))}
