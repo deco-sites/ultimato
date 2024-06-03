@@ -1,50 +1,49 @@
 import { Fragment } from "preact";
-import loader from "deco-sites/ultimato/loaders/single-post.ts";
 
-import type { SectionProps } from "deco/mod.ts";
 import DecoImage from "apps/website/components/Image.tsx";
-
 import GenericCover from "deco-sites/ultimato/components/ui/GenericCover.tsx";
 
-import { stripTags } from "deco-sites/ultimato/utils/content.tsx";
-import {
-  categoryURI,
-  filterCategories,
-} from "deco-sites/ultimato/utils/categories.tsx";
+import { filterCategories } from "deco-sites/ultimato/utils/categories.tsx";
 
-import type {
-  Category as CategoryType,
-  Page as PageType,
-  Post as PostType,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import {
+  type BlogPost,
+  type Category as CategoryType,
+  type Page,
+} from "deco-sites/ultimato/utils/transform.ts";
+
+import type { DecoSinglePost } from "deco-sites/ultimato/loaders/single-post.ts";
+
+export interface Props {
+  postContent: DecoSinglePost;
+}
 
 function PostCover(
-  { singlePost, page, contentTypeName }: SectionProps<typeof loader>,
+  { postContent: { singlePost, page, contentTypeName } }: Props,
 ) {
   if (!singlePost && !page) return <GenericCover title="Erro 404" />;
 
   if (contentTypeName === "page") {
-    const { title } = page as PageType;
+    const { title } = page as Page;
 
     return <GenericCover title={title as string} />;
   }
 
-  const { title, featuredImage, date, readingTime } = singlePost as PostType;
+  const { title, image, date, readingTime } = singlePost as BlogPost;
 
-  const categories = singlePost?.categories?.nodes as CategoryType[];
+  const categories = singlePost?.categories as CategoryType[];
 
   return (
     <div class="relative w-full bg-black h-[290px] lg:h-[500px]">
       <div class="z-10 text-white flex flex-col justify-center items-center h-full relative max-w-screen-md mx-auto pt-8">
         <h1 class="font-extrabold mb-4 text-xl max-w-xs text-center lg:text-4xl lg:max-w-max">
-          {stripTags(title as string)}
+          {title}
         </h1>
         <div class="text-center text-xs lg:text-sm">
           <div>
             {categories
               .filter((category) =>
                 filterCategories(
-                  categoryURI(category.slug as string, category.ancestors),
+                  category.slug,
                 )
               )
               .map((category, index, arr) => (
@@ -65,11 +64,11 @@ function PostCover(
           </div>
         </div>
       </div>
-      {featuredImage && featuredImage?.node?.sourceUrl && (
+      {image && image?.url && (
         <DecoImage
-          src={featuredImage?.node?.sourceUrl}
+          src={image?.url}
           width={1800}
-          alt={featuredImage?.node?.altText || ""}
+          alt={image?.alt}
           className="w-full h-full absolute z-0 object-center object-cover opacity-30 top-0 left-0"
           loading="eager"
         />

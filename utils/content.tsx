@@ -50,4 +50,31 @@ const camelize = (str: string) => {
     .replace(/\s+/g, "");
 };
 
-export { camelize, formatDate, formatExcerpt, stripTags };
+const formatContent = (content: string) => {
+  // change all links to site's domain
+  const links = content.replace(
+    /(<a\s+[^>]*href=["'])(https?:\/\/)?(www\.)?admin\.ultimatodobacon\.com([^"']*["'][^>]*>)/gi,
+    (_match, p1, p2, p3, p4) =>
+      `${p1}${p2 || ""}${p3 ? "" : ""}ultimatodobacon.com${p4}`,
+  );
+
+  return links;
+};
+
+const getReadingTime = (content: string) => {
+  //words count only the text, not the html tags or images
+  const cleanContent = stripTags(content);
+
+  const wordsPerMinute = 200;
+  const textLength = cleanContent.split(" ").length;
+  return Math.ceil(textLength / wordsPerMinute);
+};
+
+export {
+  camelize,
+  formatContent,
+  formatDate,
+  formatExcerpt,
+  getReadingTime,
+  stripTags,
+};

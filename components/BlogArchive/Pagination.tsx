@@ -1,21 +1,26 @@
-import type { PageInfo } from "../../loaders/post-archive.ts";
-
 export interface PaginationProps {
-  context: PageInfo;
+  context: {
+    page: number;
+    perPage: number;
+    totalPosts: number;
+    totalPages: number;
+  };
   pathPrefix: string;
 }
 
 function Pagination({ context, pathPrefix }: PaginationProps) {
+  console.log(context);
+
   const linkStyle =
     "border-2 border-primary font-bold flex items-center justify-center h-10 text-primary rounded-lg mr-1 text-xs md:mr-2 md:text-sm lg:text-base hover:bg-primary hover:text-white";
 
-  const { pageNumber, totalPages } = context;
+  const { page, totalPages } = context;
 
-  const previousPagePath = pageNumber > 1
-    ? `${pathPrefix === "/" ? "" : pathPrefix}/page/${pageNumber - 1}`
+  const previousPagePath = page > 1
+    ? `${pathPrefix === "/" ? "" : pathPrefix}/page/${page - 1}`
     : null;
-  const nextPagePath = pageNumber < totalPages
-    ? `${pathPrefix === "/" ? "" : pathPrefix}/page/${pageNumber + 1}`
+  const nextPagePath = page < totalPages
+    ? `${pathPrefix === "/" ? "" : pathPrefix}/page/${page + 1}`
     : null;
 
   /**
@@ -100,7 +105,7 @@ function Pagination({ context, pathPrefix }: PaginationProps) {
     return paginationArray;
   };
 
-  const paginationLinks = createPaginationLinks(pageNumber, totalPages);
+  const paginationLinks = createPaginationLinks(page, totalPages);
 
   return (
     <nav className={`flex justify-center my-12`}>
@@ -114,22 +119,22 @@ function Pagination({ context, pathPrefix }: PaginationProps) {
         </a>
       )}
 
-      {paginationLinks.map((page, index) => {
-        const paginationLink = page === 1
+      {paginationLinks.map((p, index) => {
+        const paginationLink = p === 1
           ? pathPrefix
           : pathPrefix === "/"
-          ? `/page/${page}`
-          : `${pathPrefix}/page/${page}`;
+          ? `/page/${p}`
+          : `${pathPrefix}/page/${p}`;
 
-        return "number" === typeof page
+        return "number" === typeof p
           ? (
             <a key={`id-${index}`} href={paginationLink}>
               <div
                 className={`w-10 ${linkStyle} ${
-                  page === pageNumber ? "bg-primary text-white" : ""
+                  p === page ? "bg-primary text-white" : ""
                 }`}
               >
-                {page}
+                {p}
               </div>
               {" "}
             </a>
@@ -140,7 +145,7 @@ function Pagination({ context, pathPrefix }: PaginationProps) {
               key={`id-${index}`}
               className="px-1 py-2 mr-1 lg:px-3 lg:mr-2"
             >
-              {page}
+              {p}
             </span>
           );
       })}

@@ -2052,6 +2052,10 @@ export interface WP_REST_API_Post {
     | {
       [k: string]: unknown;
     };
+
+  acf: {
+    [k: string]: unknown;
+  };
   /**
    * Whether or not the post should be treated as sticky. Only present for the 'post' post type.
    */

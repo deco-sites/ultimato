@@ -24,7 +24,7 @@ export interface Props {
 export const loader = async (
   props: Props,
   _req: Request,
-  ctx: FnContext,
+  _ctx: FnContext,
 ): Promise<
   Props & {
     image: string;

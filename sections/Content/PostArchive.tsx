@@ -5,110 +5,113 @@ import Pagination from "deco-sites/ultimato/components/BlogArchive/Pagination.ts
 
 import Page404 from "deco-sites/ultimato/components/ui/404.tsx";
 
-import Seo from "deco-sites/ultimato/components/Seo.tsx";
-
 import type {
-  Category,
-  PostTypeSeo,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+  DecoPostArchive,
+} from "deco-sites/ultimato/loaders/post-archive.ts";
 
-import loader from "deco-sites/ultimato/loaders/post-archive.ts";
-import type { SectionProps } from "deco/mod.ts";
+import { Section } from "deco/blocks/section.ts";
+
+import FlyingBacons from "deco-sites/ultimato/islands/FlyingBacons.tsx";
+export interface Props {
+  postsContent: DecoPostArchive;
+  sidebar?: Section;
+  colorScheme?: "dark" | "light";
+  showFeatured?: boolean;
+  callToAction?: Section;
+  categoryName?: string;
+  paginationPrefix?: string;
+}
 
 function PostArchive(
   {
-    posts,
-    pageInfo,
+    postsContent,
     sidebar,
-    category,
-    colorScheme,
+    colorScheme = "light",
     showFeatured,
     callToAction,
-    home,
-  }: SectionProps<typeof loader>,
+    categoryName,
+    paginationPrefix = "/",
+  }: Props,
 ) {
-  if (!posts || posts.length < 1) {
+  if (!postsContent || !postsContent.posts || postsContent.posts.length < 1) {
     return <Page404 />;
   }
+  const pageInfo = postsContent.pageContext;
 
   return (
-    <>
-      {(category && category.name)
-        ? (
-          <Seo
-            seo={category?.seo as PostTypeSeo}
-            type="archive"
-            archiveTitle={category.name}
-          />
-        )
-        : <Seo seo={home?.seo as PostTypeSeo} type="home" />}
-      <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
-        <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
-          <SectionTitle tag="div">
-            {(category && category.name)
-              ? `Últimas postagens sobre "${category.name}"`
-              : `Notícias, Matérias e Reviews`}
-            {pageInfo.hasPrevious ? ` - Página ${pageInfo.pageNumber}` : ``}
-          </SectionTitle>
+    <div className="container-wrapper bg-white group/container-light">
+      <FlyingBacons bg="light" />
+      <div className="container px-4 bacon-background">
+        <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
+          <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
+            <SectionTitle tag="div">
+              {categoryName
+                ? `Últimas postagens sobre "${categoryName}"`
+                : `Notícias, Matérias e Reviews`}
+              {(pageInfo.page > 1) ? ` - Página ${pageInfo.page}` : ``}
+            </SectionTitle>
 
-          {showFeatured
-            ? (
-              <>
-                <Post
-                  key={posts[0].id}
-                  title={posts[0].title}
-                  slug={posts[0].slug}
-                  image={posts[0].featuredImage
-                    ? posts[0].featuredImage.node
-                    : null}
-                  date={posts[0].date}
-                  readingTime={posts[0].readingTime}
-                  excerpt={posts[0].excerpt}
-                  colorScheme={colorScheme}
-                  categories={posts[0].categories
-                    ? posts[0].categories.nodes as Category[]
-                    : undefined}
-                  layout="vertical-full"
-                />
+            {showFeatured
+              ? (
+                <>
+                  <Post
+                    key={postsContent.posts[0].id}
+                    title={postsContent.posts[0].title}
+                    slug={postsContent.posts[0].slug}
+                    image={postsContent.posts[0].image}
+                    date={postsContent.posts[0].date}
+                    readingTime={postsContent.posts[0].readingTime}
+                    excerpt={postsContent.posts[0].excerpt}
+                    colorScheme={colorScheme}
+                    categories={postsContent.posts[0].categories}
+                    layout="vertical-full"
+                  />
 
-                {callToAction && (
-                  <callToAction.Component {...callToAction.props} />
-                )}
+                  {callToAction && (
+                    <callToAction.Component {...callToAction.props} />
+                  )}
 
-                <LatestPosts
-                  posts={posts.slice(1)}
-                  colorScheme={colorScheme}
-                />
-              </>
-            )
-            : (
-              <>
-                {callToAction && (
-                  <callToAction.Component {...callToAction.props} />
-                )}
-                <LatestPosts
-                  posts={posts}
-                  colorScheme={colorScheme}
-                />
-              </>
+                  {
+                    <LatestPosts
+                      posts={postsContent.posts.slice(1)}
+                      colorScheme={colorScheme}
+                    />
+                  }
+                </>
+              )
+              : (
+                <>
+                  {callToAction && (
+                    <callToAction.Component {...callToAction.props} />
+                  )}
+                  {
+                    <LatestPosts
+                      posts={postsContent.posts}
+                      colorScheme={colorScheme}
+                    />
+                  }
+                </>
+              )}
+
+            <Pagination
+              context={postsContent.pageContext}
+              pathPrefix={paginationPrefix}
+            />
+          </div>
+          {sidebar &&
+            (
+              <aside
+                className={`flex-1 max-w-md rounded-lg px-6 py-6 hidden lg:block ${
+                  colorScheme === "light" ? "bg-neutral" : ""
+                }`}
+              >
+                <sidebar.Component {...sidebar.props} />
+              </aside>
             )}
-
-          <Pagination context={pageInfo} pathPrefix={pageInfo.pathPrefix} />
         </div>
-        {sidebar &&
-          (
-            <aside
-              className={`flex-1 max-w-md rounded-lg px-6 py-6 hidden lg:block ${
-                colorScheme === "light" ? "bg-neutral" : ""
-              }`}
-            >
-              <sidebar.Component {...sidebar.props} />
-            </aside>
-          )}
       </div>
-    </>
+    </div>
   );
 }
 
 export default PostArchive;
-export { loader };

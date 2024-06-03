@@ -8,7 +8,6 @@ interface Props {
   layoutKey?: string;
   format?: string;
   responsive?: string;
-  pageLevelAds?: boolean;
   adTest?: string;
   children?: JSX.Element;
 }
@@ -22,7 +21,6 @@ function Ad({
   layoutKey = "",
   format = "auto",
   responsive = "false",
-  pageLevelAds = false,
   adTest,
   children,
   ...rest

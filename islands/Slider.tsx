@@ -112,7 +112,7 @@ function Slider({ content }: Props) {
         updatePrevAndNextTitles(swiperElRef);
       }, 100);
 
-      swiperElRef.current.addEventListener("slidechange", (e) => {
+      swiperElRef.current.addEventListener("slidechange", () => {
         setTimeout(() => {
           updatePrevAndNextTitles(swiperElRef);
         }, 100);

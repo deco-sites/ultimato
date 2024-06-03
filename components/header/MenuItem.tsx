@@ -1,4 +1,4 @@
-import { cleanUpUrl, isExternalURL } from "deco-sites/ultimato/utils/url.ts";
+import { cleanUpUrl /* , isExternalURL */ } from "deco-sites/ultimato/utils/url.ts";
 
 import type {
   MenuItem as MenuItemType,
@@ -14,7 +14,7 @@ export interface Props {
 }
 
 function MenuItem(
-  { name, cssClasses, target, children, href, submenu }: Props,
+  { name, cssClasses, children, href, submenu }: Props,
 ) {
   const menuItemParentClasses =
     "uppercase font-bold active:text-white focus:!text-white hover:text-white";

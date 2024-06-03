@@ -9,11 +9,14 @@ import * as $$$0 from "./loaders/categories.ts";
 import * as $$$1 from "./loaders/footer.ts";
 import * as $$$2 from "./loaders/guias.ts";
 import * as $$$3 from "./loaders/header.ts";
-import * as $$$4 from "./loaders/news-carousel.ts";
-import * as $$$5 from "./loaders/popular-posts.ts";
-import * as $$$6 from "./loaders/post-archive.ts";
-import * as $$$7 from "./loaders/single-post.ts";
-import * as $$$8 from "./loaders/top5week.ts";
+import * as $$$4 from "./loaders/media.ts";
+import * as $$$5 from "./loaders/news-carousel.ts";
+import * as $$$6 from "./loaders/page-archive.ts";
+import * as $$$7 from "./loaders/popular-posts.ts";
+import * as $$$8 from "./loaders/post-archive.ts";
+import * as $$$9 from "./loaders/single-page.ts";
+import * as $$$10 from "./loaders/single-post.ts";
+import * as $$$11 from "./loaders/top5week.ts";
 import * as $$$$$$0 from "./sections/Content/ArchiveTitle.tsx";
 import * as $$$$$$1 from "./sections/Content/Categories.tsx";
 import * as $$$$$$2 from "./sections/Content/Guias.tsx";
@@ -43,11 +46,14 @@ const manifest = {
     "deco-sites/ultimato/loaders/footer.ts": $$$1,
     "deco-sites/ultimato/loaders/guias.ts": $$$2,
     "deco-sites/ultimato/loaders/header.ts": $$$3,
-    "deco-sites/ultimato/loaders/news-carousel.ts": $$$4,
-    "deco-sites/ultimato/loaders/popular-posts.ts": $$$5,
-    "deco-sites/ultimato/loaders/post-archive.ts": $$$6,
-    "deco-sites/ultimato/loaders/single-post.ts": $$$7,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$8,
+    "deco-sites/ultimato/loaders/media.ts": $$$4,
+    "deco-sites/ultimato/loaders/news-carousel.ts": $$$5,
+    "deco-sites/ultimato/loaders/page-archive.ts": $$$6,
+    "deco-sites/ultimato/loaders/popular-posts.ts": $$$7,
+    "deco-sites/ultimato/loaders/post-archive.ts": $$$8,
+    "deco-sites/ultimato/loaders/single-page.ts": $$$9,
+    "deco-sites/ultimato/loaders/single-post.ts": $$$10,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$11,
   },
   "sections": {
     "deco-sites/ultimato/sections/Content/ArchiveTitle.tsx": $$$$$$0,

@@ -1,20 +1,13 @@
 import PostHorizontal from "deco-sites/ultimato/components/BlogArchive/PostHorizontal.tsx";
 import PostVertical from "deco-sites/ultimato/components/BlogArchive/PostVertical.tsx";
 
-import type {
-  Category,
-  MediaItem,
-  Post,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import type { BlogPost } from "deco-sites/ultimato/utils/transform.ts";
 
-export interface PostProps {
-  title: Post["title"];
-  slug: Post["slug"];
-  readingTime: Post["readingTime"];
-  categories?: Category[];
-  image?: MediaItem | null;
-  date: Post["date"];
-  excerpt?: Post["excerpt"] | null;
+type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+export interface Props
+  extends
+    MakeOptional<Omit<BlogPost, "id" | "content">, "categories" | "excerpt"> {
   layout: layout;
   colorScheme?: "dark" | "light";
 }
@@ -27,7 +20,7 @@ type layout =
   | "vertical-medium"
   | "vertical-reduced";
 
-const Post: React.FC<PostProps> = ({
+function Post({
   title,
   slug,
   readingTime,
@@ -36,8 +29,8 @@ const Post: React.FC<PostProps> = ({
   date,
   categories,
   layout,
-  colorScheme,
-}) => {
+  colorScheme = "light",
+}: Props) {
   const isFull = layout.includes("full");
   const isMedium = layout.includes("medium");
 
@@ -74,6 +67,6 @@ const Post: React.FC<PostProps> = ({
       )}
     </>
   );
-};
+}
 
 export default Post;
