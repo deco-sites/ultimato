@@ -9,13 +9,12 @@ export const menuState = signal({
   open: false,
 });
 
-import type {
-  Menu as MenuType,
-  MenuItem as MenuItemType,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import type { DecoMenu } from "deco-sites/ultimato/loaders/menus.ts";
+
+import type { DecoMenuItem } from "deco-sites/ultimato/utils/transform.ts";
 
 export interface Props {
-  data: MenuType;
+  data: DecoMenu;
   wrapperProps?: JSX.HTMLAttributes<HTMLDivElement>;
 }
 
@@ -51,6 +50,8 @@ function Menu({ data, wrapperProps }: Props) {
     }
   }, [navRef]);
 
+  console.log(data);
+
   return (
     <div {...wrapperProps}>
       <div className="lg:hidden">
@@ -65,16 +66,16 @@ function Menu({ data, wrapperProps }: Props) {
         <div className="overflow-y-scroll lg:overflow-y-visible">
           <ul className="text-white menu lg:menu-horizontal items-stretch">
             {data &&
-              data.menuItems && data.menuItems.nodes &&
-              (data.menuItems.nodes as MenuItemType[]).map((
-                { id, path, label, target, cssClasses, childItems },
+              data.menu && data.menu.items &&
+              (data.menu.items as DecoMenuItem[]).map((
+                { id, url, title, target, classes, children },
               ) => (
                 <MenuItem
                   key={id}
-                  name={label}
-                  href={path}
-                  children={childItems?.nodes as MenuItemType[]}
-                  cssClasses={cssClasses}
+                  name={title}
+                  href={url}
+                  children={children as DecoMenuItem[]}
+                  cssClasses={classes}
                   target={target}
                 />
               ))}

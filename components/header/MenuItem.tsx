@@ -1,15 +1,13 @@
 import { cleanUpUrl /* , isExternalURL */ } from "deco-sites/ultimato/utils/url.ts";
 
-import type {
-  MenuItem as MenuItemType,
-} from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import { DecoMenuItem } from "deco-sites/ultimato/utils/transform.ts";
 
 export interface Props {
-  name: MenuItemType["label"];
-  href: MenuItemType["path"];
-  cssClasses?: MenuItemType["cssClasses"];
-  target?: MenuItemType["target"];
-  children?: MenuItemType[];
+  name: DecoMenuItem["title"];
+  href: DecoMenuItem["url"];
+  cssClasses?: DecoMenuItem["classes"];
+  target?: DecoMenuItem["target"];
+  children?: DecoMenuItem["children"];
   submenu?: boolean;
 }
 
@@ -60,10 +58,10 @@ function MenuItem(
                 {children.map((child) => (
                   <MenuItem
                     key={child.id}
-                    cssClasses={child.cssClasses as string[]}
-                    href={child?.path}
-                    name={child.label}
-                    children={child.childItems?.nodes as MenuItemType[]}
+                    cssClasses={child.classes as string[]}
+                    href={child?.url as string}
+                    name={child.title}
+                    children={child.children as DecoMenuItem[]}
                     submenu
                   />
                 ))}

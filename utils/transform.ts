@@ -6,11 +6,20 @@ import type {
 } from "deco-sites/ultimato/cms/wordpress/types/wp-types.ts";
 
 import type {
+  NavMenu,
+  NavMenuItem,
+} from "deco-sites/ultimato/loaders/menus.ts";
+
+import type {
   BlogPost as _BlogPost,
   Category as _Category,
 } from "apps/blog/types.ts";
 
 import { filterCategories } from "deco-sites/ultimato/utils/categories.tsx";
+import {
+  isExternalURL,
+  replaceAllSites,
+} from "deco-sites/ultimato/utils/url.ts";
 
 import {
   formatContent,
@@ -44,6 +53,15 @@ export interface Page {
   title: string;
   content: string;
   image?: Media;
+}
+
+export interface DecoMenuItem extends Omit<NavMenuItem, "title"> {
+  title: string;
+  children?: DecoMenuItem[];
+}
+
+export interface DecoMenu extends Omit<NavMenu, "items"> {
+  items: DecoMenuItem[];
 }
 
 export const toBlogPost = (
@@ -106,5 +124,51 @@ export const toPage = (
     image: featuredImage,
     title: stripTags(page.title.rendered),
     content: formatContent(page.content.rendered),
+  };
+};
+
+export const toMenu = (menu: NavMenu): DecoMenu => {
+  const menuItems = menu.items;
+
+  // iterate over all items
+
+  const items = menuItems.map((item) => {
+    const { id, url, title, target, classes, attr_title, menus, parent } = item;
+
+    const formattedURL = isExternalURL(url) ? url : `/${replaceAllSites(url)}`;
+
+    return {
+      id,
+      url: formattedURL,
+      title: title.rendered,
+      target,
+      classes,
+      attr_title,
+      menus,
+      parent,
+    };
+  });
+
+  const itemMap = new Map<number, DecoMenuItem>();
+  items.forEach((item) => itemMap.set(item.id, { ...item, children: [] }));
+
+  const result: DecoMenuItem[] = [];
+
+  items.forEach((item) => {
+    const currentItem = itemMap.get(item.id) as DecoMenuItem;
+
+    if (item.parent === 0) {
+      result.push(currentItem);
+    } else {
+      const parent = itemMap.get(item.parent);
+      if (parent) {
+        parent.children?.push(currentItem);
+      }
+    }
+  });
+
+  return {
+    id: menu.id,
+    items: result,
   };
 };
