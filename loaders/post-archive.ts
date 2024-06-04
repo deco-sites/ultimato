@@ -1,6 +1,7 @@
 import { fetchUB as fetch } from "deco-sites/ultimato/cms/wordpress/client.ts";
 import {
   type BlogPost,
+  formatQuery,
   toBlogPost,
 } from "deco-sites/ultimato/utils/transform.ts";
 
@@ -138,17 +139,33 @@ const loader = async (
     tags_exclude: tagsExclude,
   };
 
-  const variables = Object.fromEntries(
-    Object.entries(input)
-      .filter(([_, value]) =>
-        value !== undefined && value !== "" && value !== null
-      )
-      .map(([key, value]) => [key, value as string]),
-  ) as { [k: string]: string };
+  const variables = formatQuery(input);
 
-  if (req.url.includes("page/")) {
+  // page url arguments
+  const isPaginated = req.url.includes("page/");
+  const isCategory = req.url.includes("categoria/");
+  const isHQ = req.url.includes("hq/");
+
+  if (isPaginated) {
     const page = req.url.split("page/")[1].split("/")[0];
     variables.page = page;
+  }
+
+  if (isCategory || isHQ) {
+    const cat = isCategory
+      ? req.url.split("categoria/")[1].split("/")[0]
+      : req.url.split("hq/")[1].split("/")[0];
+
+    const categories = await ctx.invoke(
+      "deco-sites/ultimato/loaders/categories.ts",
+      {
+        slug: [cat],
+      },
+    );
+
+    if (categories.categories.length) {
+      variables.categories = categories.categories[0].id.toString();
+    }
   }
 
   const postsPath = `/posts?${new URLSearchParams(variables)}`;
