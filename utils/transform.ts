@@ -173,7 +173,9 @@ export const toMenu = (menu: NavMenu): DecoMenu => {
   };
 };
 
-export const formatQuery = (input: Record<string, string | undefined | null>) => {
+export const formatQuery = (
+  input: Record<string, string | undefined | null>,
+) => {
   return Object.fromEntries(
     Object.entries(input)
       .filter(([_, value]) =>

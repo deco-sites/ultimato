@@ -9,11 +9,10 @@ import type {
 } from "deco-sites/ultimato/loaders/post-archive.ts";
 
 export interface Props {
-  content?: DecoPostArchive
+  content?: DecoPostArchive;
   adPosition?: "alternating" | "end";
   colorScheme?: "dark" | "light";
 }
-
 
 function PopularPosts({
   content,
