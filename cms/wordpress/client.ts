@@ -64,7 +64,7 @@ interface Endpoint {
 }
 
 type FetchEndpoints = {
-  [K in "wp" | "yoast" | "cf7" | "jwt"]: Endpoint;
+  [K in "wp" | "yoast" | "cf7" | "jwt" | "ub"]: Endpoint;
 };
 
 export const adminUrl = "https://admin.ultimatodobacon.com";
@@ -78,6 +78,7 @@ const endpoints: FetchEndpoints = {
     options: {} as RequestInit,
   },
   jwt: { base: `${restEndpoint}/jwt-auth/v1`, options: {} as RequestInit },
+  ub: { base: `${restEndpoint}/ub/v1`, options: {} as RequestInit },
 };
 
 function createFetch<T extends Record<string, Endpoint>>(endpoints: T) {
@@ -98,11 +99,8 @@ function createFetch<T extends Record<string, Endpoint>>(endpoints: T) {
       const headers = callAPI.headers;
       const response = await callAPI.json();
 
-      if (
-        callAPI instanceof Error
-      ) {
-        console.error(callAPI);
-        throw new Error(`Failed to fetch ${path}`);
+      if (response?.code && response?.message) {
+        throw new Error(`Failed to parse response from ${path}`, response);
       }
 
       return {

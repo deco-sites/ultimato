@@ -9,8 +9,6 @@ export interface PaginationProps {
 }
 
 function Pagination({ context, pathPrefix }: PaginationProps) {
-  console.log(context);
-
   const linkStyle =
     "border-2 border-primary font-bold flex items-center justify-center h-10 text-primary rounded-lg mr-1 text-xs md:mr-2 md:text-sm lg:text-base hover:bg-primary hover:text-white";
 

@@ -2,29 +2,39 @@ import { type Page } from "deco-sites/ultimato/utils/transform.ts";
 
 import { AppContext } from "../apps/site.ts";
 
+import type { Status } from "std/http/mod.ts";
+
+import type { Props as PageProps } from "deco-sites/ultimato/loaders/page-archive.ts";
+
 export interface DecoSinglePage {
   contentTypeName?: string;
   page?: Page;
+  status: Status;
 }
-
 export interface Props {
-  id: number;
+  /** @description Slug da página. */
+  slug?: string;
+
+  /** @description ID da página. */
+  id?: number;
 }
 
 const loader = async (
-  _props: unknown,
+  props: Props,
   req: Request,
   ctx: AppContext,
 ): Promise<DecoSinglePage> => {
-  const variables = {
-    slug: new URL(req.url).pathname.slice(1).split("/")[0],
+  const variables: PageProps = {
+    slug: props.slug
+      ? [props.slug]
+      : [new URL(req.url).pathname.slice(1).split("/")[0] as string],
+    include: props.id ? [props.id] : undefined,
+    perPage: 1,
   };
 
   const getPage = await ctx.invoke(
     "deco-sites/ultimato/loaders/page-archive.ts",
-    {
-      slug: [variables.slug],
-    },
+    variables,
   );
 
   if (!getPage) {
@@ -32,12 +42,14 @@ const loader = async (
     return {
       contentTypeName: "page",
       page: undefined,
+      status: ctx.response.status as Status,
     };
   }
 
   return {
     contentTypeName: "page",
     page: getPage.page[0],
+    status: ctx.response.status as Status,
   };
 };
 

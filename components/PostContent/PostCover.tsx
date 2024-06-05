@@ -56,11 +56,7 @@ function PostCover(
               ))}
           </div>
           <div>
-            Em {new Date(date as string).toLocaleString("pt-BR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })} {" • "} {`${readingTime} minutos de leitura`}
+            Em {date} {" • "} {`${readingTime} minutos de leitura`}
           </div>
         </div>
       </div>

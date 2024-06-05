@@ -1,11 +1,9 @@
-import type { AlgoliaOpts } from "deco-sites/ultimato/apps/site.ts";
 import type { Section } from "deco/blocks/section.ts";
 
-import type { Menu } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import type { DecoMenu } from "deco-sites/ultimato/loaders/menus.ts";
 
 import Logo from "deco-sites/ultimato/components/ui/Logo.tsx";
 import MenuIsland from "deco-sites/ultimato/islands/Menu.tsx";
-import Search from "deco-sites/ultimato/components/Search/Search.tsx";
 
 import GenericCover from "deco-sites/ultimato/components/ui/GenericCover.tsx";
 
@@ -14,14 +12,14 @@ export interface Props {
   cover?: Section;
 
   /** @description Menu data. */
-  menu?: Menu;
+  menu?: DecoMenu;
 
-  /** @description Algolia search options. */
-  algoliaOpts?: AlgoliaOpts;
+  /** @description Algolia section */
+  algolia?: Section;
 }
 
 function Header(
-  { cover, menu, algoliaOpts }: Props,
+  { cover, menu, algolia }: Props,
 ) {
   return (
     <>
@@ -39,14 +37,9 @@ function Header(
             )}
 
             <div class="order-3 self-center">
-              {algoliaOpts?.applicationId && algoliaOpts?.indexName && (
+              {algolia && (
                 <>
-                  <Search
-                    applicationId={algoliaOpts?.applicationId}
-                    searchApiKey={Deno.env.get("ALGOLIA_SEARCH_KEY") ||
-                      algoliaOpts?.searchApiKey as string}
-                    indexName={algoliaOpts?.indexName}
-                  />
+                  <algolia.Component {...algolia.props} />
                 </>
               )}
             </div>

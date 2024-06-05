@@ -1,8 +1,11 @@
 import { fetchUB as fetch } from "deco-sites/ultimato/cms/wordpress/client.ts";
 import {
   type BlogPost,
+  formatQuery,
   toBlogPost,
 } from "deco-sites/ultimato/utils/transform.ts";
+
+import type { Status } from "std/http/mod.ts";
 
 //import { STALE } from "apps/utils/fetch.ts";
 
@@ -86,6 +89,7 @@ export interface DecoPostArchive {
     perPage: number;
     totalPosts: number;
     totalPages: number;
+    status: Status;
   };
 }
 
@@ -138,21 +142,46 @@ const loader = async (
     tags_exclude: tagsExclude,
   };
 
-  const variables = Object.fromEntries(
-    Object.entries(input)
-      .filter(([_, value]) =>
-        value !== undefined && value !== "" && value !== null
-      )
-      .map(([key, value]) => [key, value as string]),
-  ) as { [k: string]: string };
+  const variables = formatQuery(input);
 
-  if (req.url.includes("page/")) {
+  // page url arguments
+  const isPaginated = req.url.includes("page/");
+  const isCategory = req.url.includes("categoria/");
+  const isHQ = req.url.includes("hq/");
+
+  if (isPaginated) {
     const page = req.url.split("page/")[1].split("/")[0];
     variables.page = page;
   }
 
+  if (isCategory || isHQ) {
+    const cat = isCategory
+      ? req.url.split("categoria/")[1].split("/")[0]
+      : req.url.split("hq/")[1].split("/")[0];
+
+    const categories = await ctx.invoke(
+      "deco-sites/ultimato/loaders/categories.ts",
+      {
+        slug: [cat],
+      },
+    );
+
+    if (categories.categories.length) {
+      variables.categories = categories.categories[0].id.toString();
+    } else {
+      ctx.response.status = 404;
+    }
+  }
+
   const postsPath = `/posts?${new URLSearchParams(variables)}`;
   const postList = await fetch.wp<WP_REST_API_Posts>(postsPath, {});
+
+  console.log("\n\n");
+  console.log("%cLoader: Post Archive", "color: blue;");
+  console.log("Path: ", postsPath);
+  console.table(variables);
+  console.log("Post IDs: ", postList.content.map(({ id }) => id));
+  console.log("\n\n");
 
   const categoryIds = postList.content.map(({ categories }) => categories).flat(
     1,
@@ -200,15 +229,16 @@ const loader = async (
       perPage,
       totalPosts: parseInt(totalPosts),
       totalPages: parseInt(totalPages),
+      status: ctx.response.status as Status,
     },
   };
 };
 
 export const cache = "stale-while-revalidate";
 
-export const cacheKey = (_props: Props, req: Request, _ctx: AppContext) => {
+export const cacheKey = (props: Props, req: Request, _ctx: AppContext) => {
   const url = new URL(req.url);
-  return url.href;
+  return url.href + btoa(JSON.stringify(props));
 };
 
 export default loader;

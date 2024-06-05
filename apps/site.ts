@@ -11,6 +11,7 @@ import { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
+import type { Secret } from "apps/website/loaders/secret.ts";
 export type AlgoliaOpts = AlgoliaProps & {
   indexName: string;
 };
@@ -26,6 +27,26 @@ export type Props =
     theme?: Section;
 
     algolia?: AlgoliaOpts;
+
+    wordpress?: {
+      /**
+       * @title Wordpress Site URL
+       * @description The URL of the Wordpress Site
+       */
+      url: string;
+
+      /**
+       * @title Wordpress username
+       * @description The username of the Wordpress Site
+       */
+      username: string;
+
+      /**
+       * @title Wordpress password
+       * @description The password of the Wordpress Site
+       */
+      password: Secret;
+    };
   }
   & CommerceProps;
 

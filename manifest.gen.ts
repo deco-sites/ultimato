@@ -10,13 +10,16 @@ import * as $$$1 from "./loaders/footer.ts";
 import * as $$$2 from "./loaders/guias.ts";
 import * as $$$3 from "./loaders/header.ts";
 import * as $$$4 from "./loaders/media.ts";
-import * as $$$5 from "./loaders/news-carousel.ts";
-import * as $$$6 from "./loaders/page-archive.ts";
-import * as $$$7 from "./loaders/popular-posts.ts";
-import * as $$$8 from "./loaders/post-archive.ts";
-import * as $$$9 from "./loaders/single-page.ts";
-import * as $$$10 from "./loaders/single-post.ts";
-import * as $$$11 from "./loaders/top5week.ts";
+import * as $$$5 from "./loaders/menu-selector.ts";
+import * as $$$6 from "./loaders/menus.ts";
+import * as $$$7 from "./loaders/most-read.ts";
+import * as $$$8 from "./loaders/news-carousel.ts";
+import * as $$$9 from "./loaders/page-archive.ts";
+import * as $$$10 from "./loaders/popular-posts.ts";
+import * as $$$11 from "./loaders/post-archive.ts";
+import * as $$$12 from "./loaders/single-page.ts";
+import * as $$$13 from "./loaders/single-post.ts";
+import * as $$$14 from "./loaders/top5week.ts";
 import * as $$$$$$0 from "./sections/Content/ArchiveTitle.tsx";
 import * as $$$$$$1 from "./sections/Content/Categories.tsx";
 import * as $$$$$$2 from "./sections/Content/Guias.tsx";
@@ -34,11 +37,12 @@ import * as $$$$$$13 from "./sections/Layout/Header.tsx";
 import * as $$$$$$14 from "./sections/Layout/Hero.tsx";
 import * as $$$$$$15 from "./sections/Layout/PageTitle.tsx";
 import * as $$$$$$16 from "./sections/Other/Adsense.tsx";
-import * as $$$$$$17 from "./sections/Other/SearchPage.tsx";
-import * as $$$$$$18 from "./sections/Other/WhatsappCTA.tsx";
-import * as $$$$$$19 from "./sections/SinglePost/PostContent.tsx";
-import * as $$$$$$20 from "./sections/SinglePost/PostCover.tsx";
-import * as $$$$$$21 from "./sections/Theme.tsx";
+import * as $$$$$$17 from "./sections/Other/AlgoliaSearch.tsx";
+import * as $$$$$$18 from "./sections/Other/SearchPage.tsx";
+import * as $$$$$$19 from "./sections/Other/WhatsappCTA.tsx";
+import * as $$$$$$20 from "./sections/SinglePost/PostContent.tsx";
+import * as $$$$$$21 from "./sections/SinglePost/PostCover.tsx";
+import * as $$$$$$22 from "./sections/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -47,13 +51,16 @@ const manifest = {
     "deco-sites/ultimato/loaders/guias.ts": $$$2,
     "deco-sites/ultimato/loaders/header.ts": $$$3,
     "deco-sites/ultimato/loaders/media.ts": $$$4,
-    "deco-sites/ultimato/loaders/news-carousel.ts": $$$5,
-    "deco-sites/ultimato/loaders/page-archive.ts": $$$6,
-    "deco-sites/ultimato/loaders/popular-posts.ts": $$$7,
-    "deco-sites/ultimato/loaders/post-archive.ts": $$$8,
-    "deco-sites/ultimato/loaders/single-page.ts": $$$9,
-    "deco-sites/ultimato/loaders/single-post.ts": $$$10,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$11,
+    "deco-sites/ultimato/loaders/menu-selector.ts": $$$5,
+    "deco-sites/ultimato/loaders/menus.ts": $$$6,
+    "deco-sites/ultimato/loaders/most-read.ts": $$$7,
+    "deco-sites/ultimato/loaders/news-carousel.ts": $$$8,
+    "deco-sites/ultimato/loaders/page-archive.ts": $$$9,
+    "deco-sites/ultimato/loaders/popular-posts.ts": $$$10,
+    "deco-sites/ultimato/loaders/post-archive.ts": $$$11,
+    "deco-sites/ultimato/loaders/single-page.ts": $$$12,
+    "deco-sites/ultimato/loaders/single-post.ts": $$$13,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$14,
   },
   "sections": {
     "deco-sites/ultimato/sections/Content/ArchiveTitle.tsx": $$$$$$0,
@@ -73,11 +80,12 @@ const manifest = {
     "deco-sites/ultimato/sections/Layout/Hero.tsx": $$$$$$14,
     "deco-sites/ultimato/sections/Layout/PageTitle.tsx": $$$$$$15,
     "deco-sites/ultimato/sections/Other/Adsense.tsx": $$$$$$16,
-    "deco-sites/ultimato/sections/Other/SearchPage.tsx": $$$$$$17,
-    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$18,
-    "deco-sites/ultimato/sections/SinglePost/PostContent.tsx": $$$$$$19,
-    "deco-sites/ultimato/sections/SinglePost/PostCover.tsx": $$$$$$20,
-    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$21,
+    "deco-sites/ultimato/sections/Other/AlgoliaSearch.tsx": $$$$$$17,
+    "deco-sites/ultimato/sections/Other/SearchPage.tsx": $$$$$$18,
+    "deco-sites/ultimato/sections/Other/WhatsappCTA.tsx": $$$$$$19,
+    "deco-sites/ultimato/sections/SinglePost/PostContent.tsx": $$$$$$20,
+    "deco-sites/ultimato/sections/SinglePost/PostCover.tsx": $$$$$$21,
+    "deco-sites/ultimato/sections/Theme.tsx": $$$$$$22,
   },
   "apps": {
     "deco-sites/ultimato/apps/algolia.ts": $$$$$$$$$$$0,
