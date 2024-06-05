@@ -147,8 +147,7 @@ export const toMenu = (menu: NavMenu): DecoMenu => {
   const items = menuItems.map((item) => {
     const { id, url, title, target, classes, attr_title, menus, parent } = item;
 
-    const formattedURL = (isExternalURL(url) ? url : `/${replaceAllSites(url)}`)
-      .replace("//", "/");
+    const formattedURL = isExternalURL(url) ? url : `${replaceAllSites(url)}`;
 
     return {
       id,

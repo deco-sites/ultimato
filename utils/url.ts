@@ -4,7 +4,8 @@ const replaceAllSites = (str: string) => {
     "",
   )
     // remove trailing slash
-    .replace(/\/$/, "");
+    .replace(/\/$/, "")
+    .replace(/hqs-/, "hqs/");
 };
 
 const isExternalURL = (url: string) => {
