@@ -22,7 +22,6 @@ function Menu({ data, wrapperProps }: Props) {
   const navRef = useRef<HTMLMenuElement>(null);
 
   useEffect(() => {
-    console.log("wp pass", data.pass);
     if (navRef.current) {
       // Fetch all the details element.
 
