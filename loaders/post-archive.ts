@@ -1,4 +1,7 @@
 import { fetchUB as fetch } from "deco-sites/ultimato/cms/wordpress/client.ts";
+
+// import { STALE } from "apps/utils/fetch.ts";
+
 import {
   type BlogPost,
   formatQuery,
@@ -174,7 +177,7 @@ const loader = async (
   }
 
   const postsPath = `/posts?${new URLSearchParams(variables)}`;
-  const postList = await fetch.wp<WP_REST_API_Posts>(postsPath, {});
+  const postList = await fetch.wp<WP_REST_API_Posts>(postsPath, {} /* STALE */);
 
   console.log("\n\n");
   console.log("%cLoader: Post Archive", "color: blue;");
@@ -233,8 +236,6 @@ const loader = async (
     },
   };
 };
-
-export const cache = "stale-while-revalidate";
 
 export const cacheKey = (props: Props, req: Request, _ctx: AppContext) => {
   const url = new URL(req.url);
