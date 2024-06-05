@@ -3,38 +3,56 @@ import {
   type Page,
 } from "deco-sites/ultimato/utils/transform.ts";
 
+import type { Status } from "std/http/mod.ts";
+
 import { AppContext } from "../apps/site.ts";
 export interface DecoSinglePost {
   contentTypeName?: string;
   singlePost?: BlogPost;
   relatedPosts?: BlogPost[];
   page?: Page;
+  status: Status;
+}
+
+import type { Props as PostProps } from "deco-sites/ultimato/loaders/post-archive.ts";
+
+export interface Props {
+  /** @description Slug do post. */
+  slug?: string;
+
+  /** @description ID do post. */
+  id?: number;
 }
 
 const loader = async (
-  _props: unknown,
+  props: Props,
   req: Request,
   ctx: AppContext,
 ): Promise<DecoSinglePost> => {
-  const variables = {
-    slug: new URL(req.url).pathname.slice(1).split("/")[0],
+  const variables: PostProps = {
+    slug: props.slug
+      ? [props.slug]
+      : [new URL(req.url).pathname.slice(1).split("/")[0] as string],
+    include: props.id ? [props.id] : undefined,
+    perPage: 1,
   };
 
   const getPosts = await ctx.invoke(
     "deco-sites/ultimato/loaders/post-archive.ts",
-    {
-      slug: [variables.slug],
-    },
+    variables,
   );
 
-  console.log(getPosts);
-
-  if (getPosts.posts.length === 0) {
+  if (!getPosts.posts.length || getPosts.posts.length === 0) {
     const page = await ctx.invoke("deco-sites/ultimato/loaders/single-page.ts");
+
+    if (page.status === 404) {
+      ctx.response.status = 404;
+    }
 
     return {
       contentTypeName: "page",
       page: page.page,
+      status: ctx.response.status as Status,
     };
   }
 
@@ -54,6 +72,7 @@ const loader = async (
     contentTypeName: "post",
     singlePost: getPosts.posts[0],
     relatedPosts: relatedPosts.posts,
+    status: ctx.response.status as Status,
   };
 };
 

@@ -5,9 +5,11 @@ import type { BlogPost } from "deco-sites/ultimato/utils/transform.ts";
 
 type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
-export interface Props
-  extends
-    MakeOptional<Omit<BlogPost, "id" | "content">, "categories" | "excerpt"> {
+export interface Props extends
+  MakeOptional<
+    Omit<BlogPost, "id" | "content">,
+    "categories" | "excerpt" | "views"
+  > {
   layout: layout;
   colorScheme?: "dark" | "light";
 }

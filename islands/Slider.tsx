@@ -50,7 +50,7 @@ export interface Props {
 }
 
 type SlideType = {
-  id: string;
+  id: number;
   title: string;
   image: string;
   link: string;
@@ -140,7 +140,7 @@ function Slider({ content }: Props) {
           />
         </div>
         {content.map((post, index) => (
-          <swiper-slide key={post.id}>
+          <swiper-slide key={post.id.toString()}>
             <a href={`/${post.link}`}>
               <div
                 className={`w-full h-96 lg:h-[700px] bg-black justify-center items-center relative ${

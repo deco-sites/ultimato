@@ -58,7 +58,16 @@ const formatContent = (content: string) => {
       `${p1}${p2 || ""}${p3 ? "" : ""}ultimatodobacon.com${p4}`,
   );
 
-  return links;
+  // remove undesired formatting
+  const format = links.replace(
+    /<span\s+style="([^"]*?)font-family:[^;"]*;?\s*([^"]*?)">/g,
+    '<span style="$1$2">',
+  ).replace(
+    /<span\s+style="([^"]*?)font-size:[^;"]*;?\s*([^"]*?)">/g,
+    '<span style="$1$2">',
+  );
+
+  return format;
 };
 
 const getReadingTime = (content: string) => {

@@ -5,6 +5,8 @@ import {
   toBlogPost,
 } from "deco-sites/ultimato/utils/transform.ts";
 
+import type { Status } from "std/http/mod.ts";
+
 //import { STALE } from "apps/utils/fetch.ts";
 
 import type {
@@ -87,6 +89,7 @@ export interface DecoPostArchive {
     perPage: number;
     totalPosts: number;
     totalPages: number;
+    status: Status;
   };
 }
 
@@ -165,11 +168,20 @@ const loader = async (
 
     if (categories.categories.length) {
       variables.categories = categories.categories[0].id.toString();
+    } else {
+      ctx.response.status = 404;
     }
   }
 
   const postsPath = `/posts?${new URLSearchParams(variables)}`;
   const postList = await fetch.wp<WP_REST_API_Posts>(postsPath, {});
+
+  console.log("\n\n");
+  console.log("%cLoader: Post Archive", "color: blue;");
+  console.log("Path: ", postsPath);
+  console.table(variables);
+  console.log("Post IDs: ", postList.content.map(({ id }) => id));
+  console.log("\n\n");
 
   const categoryIds = postList.content.map(({ categories }) => categories).flat(
     1,
@@ -217,15 +229,16 @@ const loader = async (
       perPage,
       totalPosts: parseInt(totalPosts),
       totalPages: parseInt(totalPages),
+      status: ctx.response.status as Status,
     },
   };
 };
 
 export const cache = "stale-while-revalidate";
 
-export const cacheKey = (_props: Props, req: Request, _ctx: AppContext) => {
+export const cacheKey = (props: Props, req: Request, _ctx: AppContext) => {
   const url = new URL(req.url);
-  return url.href;
+  return url.href + btoa(JSON.stringify(props));
 };
 
 export default loader;

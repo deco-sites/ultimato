@@ -2,39 +2,30 @@ import type { SectionProps } from "deco/mod.ts";
 import DecoImage from "apps/website/components/Image.tsx";
 import { replaceAllSites } from "deco-sites/ultimato/utils/url.ts";
 
-import { FnContext } from "deco/types.ts";
-
-import {
-  createClient,
-  endpoint,
-  gql,
-} from "deco-sites/ultimato/cms/wordpress/client.ts";
-
-import type { Page } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
-
-import {
-  FeaturedImageFields,
-} from "deco-sites/ultimato/cms/wordpress/fragments.ts";
+import { AppContext } from "deco-sites/ultimato/apps/site.ts";
 
 export interface Props {
+  /** @title Esconder */
   hideComponent?: boolean;
+
+  /** @title Posição */
   position?: "top" | "bottom" | "middle";
+}
+
+interface LoaderResponse extends Props {
+  image: string;
+  alt: string;
+  link: {
+    url: string;
+    target: string;
+  };
 }
 
 export const loader = async (
   props: Props,
   _req: Request,
-  _ctx: FnContext,
-): Promise<
-  Props & {
-    image: string;
-    alt: string;
-    link: {
-      url: string;
-      target: string;
-    };
-  }
-> => {
+  ctx: AppContext,
+): Promise<LoaderResponse> => {
   const response = {
     ...props,
     ...{
@@ -47,55 +38,44 @@ export const loader = async (
     },
   };
 
-  const client = createClient({ endpoint });
-
-  const banner = await client.query<{ page: Page }>(
-    Query,
-    {},
-    "getBannerHighlight",
+  const postHome = await ctx.invoke(
+    "deco-sites/ultimato/loaders/single-page.ts",
+    {
+      id: 5692,
+    },
   );
 
-  if (banner) {
-    response.image = banner.page.pageHighlight?.image?.sourceUrl
-      ? banner.page.pageHighlight?.image?.sourceUrl
-      : response.image;
-    response.alt = banner.page.pageHighlight?.image?.altText
-      ? banner.page.pageHighlight?.image?.altText
-      : response.alt;
-    response.link = {
-      url: banner.page.pageHighlight?.link?.url
-        ? banner.page.pageHighlight?.link?.url
-        : response.link?.url,
-      target: banner.page.pageHighlight?.link?.target
-        ? banner.page.pageHighlight?.link?.target
-        : response.link?.target,
-    };
-    response.hideComponent =
-      (banner.page.pageHighlight?.hide === "nao" && !props.hideComponent)
-        ? false
-        : true;
-  }
+  const banner = {
+    link: {
+      // @ts-ignore: acf can have any value
+      url: postHome.page?.acf?.link?.url as string | undefined,
+      // @ts-ignore: acf can have any value
+      target: postHome.page?.acf?.link?.target as string | undefined,
+    },
+    image: {
+      // @ts-ignore: acf can have any value
+      url: postHome.page?.acf?.image?.url as string | undefined,
+      // @ts-ignore: acf can have any value
+      alt: postHome.page?.acf?.image?.alt as string | undefined,
+    },
+    hide: postHome.page?.acf?.hide as string | undefined,
+  };
+
+  response.image = banner.image?.url
+    ? banner.image.url
+    : response.image as string;
+
+  response.alt = banner.image?.alt ? banner.image.alt : response.alt;
+
+  response.link = {
+    url: banner.link.url ? banner.link.url : response.link.url as string,
+    target: banner.link.target
+      ? banner.link.target
+      : response.link.target as string,
+  };
 
   return response;
 };
-
-const Query = gql`
-${FeaturedImageFields}
-query getBannerHighlight {
-  page(id: 5692, idType: DATABASE_ID){
-    pageHighlight {
-      hide
-      image {
-       ...FeaturedImageFields
-      }
-      link {
-        target
-        url
-      }
-    }
-  }
-}
-`;
 
 function FullBanner(
   { image, alt, link, hideComponent, position }: SectionProps<typeof loader>,

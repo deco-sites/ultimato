@@ -146,6 +146,13 @@ const loader = async (
   const postsPath = `/pages?${new URLSearchParams(variables)}`;
   const postList = await fetch.wp<WP_REST_API_Pages>(postsPath, {});
 
+  console.log("\n\n");
+  console.log("%cLoader: Page Archive", "color: blue;");
+  console.log("Path: ", postsPath);
+  console.table(variables);
+  console.log("Post IDs: ", postList.content.map(({ id }) => id));
+  console.log("\n\n");
+
   const featuredImageIds = postList.content.map(({ featured_media }) =>
     featured_media
   ).join(",");
@@ -183,9 +190,9 @@ const loader = async (
 
 export const cache = "stale-while-revalidate";
 
-export const cacheKey = (_props: Props, req: Request, _ctx: AppContext) => {
+export const cacheKey = (props: Props, req: Request, _ctx: AppContext) => {
   const url = new URL(req.url);
-  return url.href;
+  return url.href + btoa(JSON.stringify(props));
 };
 
 export default loader;

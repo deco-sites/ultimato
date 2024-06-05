@@ -49,8 +49,6 @@ const loader = async (
 
   const menuID = menu?.split(" | ")[1];
 
-  console.log(menuID, typeof menuID);
-
   const menus = await fetch.wp<NavMenuItem[]>(
     `/menu-items?menus=${menuID}&per_page=100`,
     {

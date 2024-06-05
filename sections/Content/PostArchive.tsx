@@ -33,10 +33,11 @@ function PostArchive(
     paginationPrefix = "/",
   }: Props,
 ) {
-  if (!postsContent || !postsContent.posts || postsContent.posts.length < 1) {
+  const pageInfo = postsContent.pageContext;
+
+  if (pageInfo.status === 404) {
     return <Page404 />;
   }
-  const pageInfo = postsContent.pageContext;
 
   return (
     <div className="container-wrapper bg-white group/container-light">

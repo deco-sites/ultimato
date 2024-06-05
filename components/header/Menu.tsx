@@ -50,8 +50,6 @@ function Menu({ data, wrapperProps }: Props) {
     }
   }, [navRef]);
 
-  console.log(data);
-
   return (
     <div {...wrapperProps}>
       <div className="lg:hidden">

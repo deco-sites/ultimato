@@ -29,13 +29,16 @@ import {
   stripTags,
 } from "deco-sites/ultimato/utils/content.tsx";
 
+type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
+
 export interface BlogPost
   extends Omit<_BlogPost, "image" | "authors" | "categories"> {
   id: number;
   image?: Media;
   readingTime?: number;
   categories?: Category[];
-  views?: number;
+  views: number;
+  acf?: Record<string, unknown>;
 }
 
 export interface Category extends _Category {
@@ -53,6 +56,7 @@ export interface Page {
   title: string;
   content: string;
   image?: Media;
+  acf?: Record<string, unknown>;
 }
 
 export interface DecoMenuItem extends Omit<NavMenuItem, "title"> {
@@ -65,7 +69,7 @@ export interface DecoMenu extends Omit<NavMenu, "items"> {
 }
 
 export const toBlogPost = (
-  post: WP_REST_API_Post,
+  post: AtLeast<WP_REST_API_Post, "id" | "title" | "excerpt" | "slug">,
   categories: Category[],
   featuredImages: Media[],
 ): BlogPost => {
@@ -76,8 +80,10 @@ export const toBlogPost = (
   const postCategories = post?.categories?.map((categoryId) =>
     categories.find((category) => category.id === categoryId)
   );
-  const postCategoriesObj = (postCategories?.filter(Boolean) as Category[])
-    .filter(({ slug }) => filterCategories(slug));
+  const postCategoriesObj = postCategories
+    ? (postCategories?.filter(Boolean) as Category[])
+      .filter(({ slug }) => filterCategories(slug))
+    : [];
 
   const blogPost: BlogPost = {
     id: post.id,
@@ -85,11 +91,16 @@ export const toBlogPost = (
     excerpt: formatExcerpt(post.excerpt.rendered, 200),
     image: featuredImage,
     categories: postCategoriesObj ?? [],
-    date: formatDate(post.date),
+    date: post.date ? formatDate(post.date) : "",
     slug: post.slug,
-    readingTime: getReadingTime(post.content.rendered),
-    content: formatContent(post.content.rendered),
+    readingTime: post?.content?.rendered
+      ? getReadingTime(post.content.rendered)
+      : 0,
+    content: post?.content?.rendered
+      ? formatContent(post?.content.rendered)
+      : "",
     views: parseInt(post.acf?.postViews as string),
+    acf: post.acf,
   };
 
   return blogPost;
@@ -124,6 +135,7 @@ export const toPage = (
     image: featuredImage,
     title: stripTags(page.title.rendered),
     content: formatContent(page.content.rendered),
+    acf: page.acf,
   };
 };
 
@@ -135,7 +147,8 @@ export const toMenu = (menu: NavMenu): DecoMenu => {
   const items = menuItems.map((item) => {
     const { id, url, title, target, classes, attr_title, menus, parent } = item;
 
-    const formattedURL = isExternalURL(url) ? url : `/${replaceAllSites(url)}`;
+    const formattedURL = (isExternalURL(url) ? url : `/${replaceAllSites(url)}`)
+      .replace("//", "/");
 
     return {
       id,
