@@ -10,7 +10,7 @@ export const loader = (
   return ctx.algolia as AlgoliaOpts;
 };
 
-export function AlgoliaSearch(
+export default function AlgoliaSearch(
   { applicationId, searchApiKey, indexName }: SectionProps<typeof loader>,
 ) {
   if (!applicationId || !searchApiKey || !indexName) {
