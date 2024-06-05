@@ -1,5 +1,9 @@
 import { fetchAPI } from "deco/utils/fetchAPI.ts";
 
+import { fetchAPI as _fetchAPI } from "deco-sites/ultimato/utils/fetch.ts";
+
+import type { DecoRequestInit } from "apps/utils/fetch.ts";
+
 // Use wordpress GraphQL API
 export const endpoint = "https://admin.ultimatodobacon.com/graphql";
 
@@ -60,7 +64,7 @@ export const createClient = ({
 
 interface Endpoint {
   base: string;
-  options: RequestInit;
+  options: DecoRequestInit;
 }
 
 type FetchEndpoints = {
@@ -71,37 +75,36 @@ export const adminUrl = "https://admin.ultimatodobacon.com";
 const restEndpoint = `${adminUrl}/wp-json`;
 
 const endpoints: FetchEndpoints = {
-  wp: { base: `${restEndpoint}/wp/v2`, options: {} as RequestInit },
-  yoast: { base: `${restEndpoint}/yoast/v1`, options: {} as RequestInit },
+  wp: { base: `${restEndpoint}/wp/v2`, options: {} as DecoRequestInit },
+  yoast: { base: `${restEndpoint}/yoast/v1`, options: {} as DecoRequestInit },
   cf7: {
     base: `${restEndpoint}/contact-form-7/v1`,
-    options: {} as RequestInit,
+    options: {} as DecoRequestInit,
   },
-  jwt: { base: `${restEndpoint}/jwt-auth/v1`, options: {} as RequestInit },
-  ub: { base: `${restEndpoint}/ub/v1`, options: {} as RequestInit },
+  jwt: { base: `${restEndpoint}/jwt-auth/v1`, options: {} as DecoRequestInit },
+  ub: { base: `${restEndpoint}/ub/v1`, options: {} as DecoRequestInit },
 };
 
 function createFetch<T extends Record<string, Endpoint>>(endpoints: T) {
   const fetchFunctions = {} as {
     [K in keyof T]: <R>(
       path: string,
-      options: RequestInit,
+      options: DecoRequestInit,
     ) => Promise<{ content: R; headers: Headers }>;
   };
 
   for (const key in endpoints) {
     fetchFunctions[key] = async function <R>(
       path: string,
-      options: RequestInit = {},
+      options: DecoRequestInit = {},
     ) {
-      const callAPI = await fetch(`${endpoints[key].base}${path}`, options);
+      const callAPI = await _fetchAPI<R>(
+        `${endpoints[key].base}${path}`,
+        options,
+      );
 
       const headers = callAPI.headers;
-      const response = await callAPI.json();
-
-      if (response?.code && response?.message) {
-        throw new Error(`Failed to parse response from ${path}`, response);
-      }
+      const response = callAPI.content;
 
       return {
         content: response as R,
