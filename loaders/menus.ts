@@ -36,6 +36,7 @@ export interface Props {
 
 export interface DecoMenu {
   menu: _DecoMenu;
+  pass?: string;
 }
 
 const loader = async (
@@ -66,6 +67,7 @@ const loader = async (
 
   return {
     menu: formattedMenu,
+    pass: wpPassword,
   };
 };
 
