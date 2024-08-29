@@ -3,7 +3,7 @@ import { useEffect, useId, useRef } from "preact/hooks";
 import {
   register,
   SwiperContainer,
-} from "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022";
+} from "swiper";
 
 interface Props {
   posts: {

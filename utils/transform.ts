@@ -25,8 +25,8 @@ import {
   formatContent,
   formatDate,
   formatExcerpt,
+  formatTitle,
   getReadingTime,
-  stripTags,
 } from "deco-sites/ultimato/utils/content.tsx";
 
 type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
@@ -69,7 +69,10 @@ export interface DecoMenu extends Omit<NavMenu, "items"> {
 }
 
 export const toBlogPost = (
-  post: AtLeast<WP_REST_API_Post, "id" | "title" | "excerpt" | "slug">,
+  post: AtLeast<
+    WP_REST_API_Post,
+    "id" | "title" | "excerpt" | "slug"
+  >,
   categories: Category[],
   featuredImages: Media[],
 ): BlogPost => {
@@ -87,7 +90,7 @@ export const toBlogPost = (
 
   const blogPost: BlogPost = {
     id: post.id,
-    title: stripTags(post.title.rendered),
+    title: formatTitle(post.title.rendered),
     excerpt: formatExcerpt(post.excerpt.rendered, 200),
     image: featuredImage,
     categories: postCategoriesObj ?? [],
@@ -133,7 +136,7 @@ export const toPage = (
   return {
     id: page.id,
     image: featuredImage,
-    title: stripTags(page.title.rendered),
+    title: formatTitle(page.title.rendered),
     content: formatContent(page.content.rendered),
     acf: page.acf,
   };
@@ -188,11 +191,17 @@ export const toMenu = (menu: NavMenu): DecoMenu => {
 export const formatQuery = (
   input: Record<string, string | undefined | null>,
 ) => {
-  return Object.fromEntries(
+  const cleanup = Object.fromEntries(
     Object.entries(input)
       .filter(([_, value]) =>
         value !== undefined && value !== "" && value !== null
       )
       .map(([key, value]) => [key, value as string]),
   ) as { [k: string]: string };
+
+  if (cleanup.include && cleanup.slug) {
+    delete cleanup.slug;
+  }
+
+  return cleanup;
 };

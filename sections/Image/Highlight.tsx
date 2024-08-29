@@ -10,6 +10,8 @@ export interface Props {
 
   /** @title Posição */
   position?: "top" | "bottom" | "middle";
+
+  colorScheme?: "dark" | "light";
 }
 
 interface LoaderResponse extends Props {
@@ -78,41 +80,43 @@ export const loader = async (
 };
 
 function FullBanner(
-  { image, alt, link, hideComponent, position }: SectionProps<typeof loader>,
+  { image, alt, link, hideComponent, position, colorScheme = 'light' }: SectionProps<typeof loader>,
 ) {
   if (hideComponent || !image) {
     return <div className="mb-10"></div>;
   }
 
   return (
-    <div className="container px-4">
-      <div
-        className={`mx-auto rounded-lg shadow-lg h-20 lg:h-36 relative z-10 overflow-hidden cursor-pointer ${
-          position === "top"
-            ? "transform-gpu -translate-y-1/2"
-            : (position === "bottom"
-              ? "transform-gpu translate-y-1/2"
-              : "my-10")
-        }`}
-      >
-        <a
-          className="w-full h-full flex"
-          href={link?.url ? replaceAllSites(link.url) : "#"}
-          target={link?.target ? link.target : "_self"}
-          aria-label={alt}
+    <div className={colorScheme === "light" ? "bg-white" : "bg-dark"}>
+      <div className="container px-4">
+        <div
+          className={`mx-auto rounded-lg shadow-lg h-20 lg:h-36 relative z-10 overflow-hidden cursor-pointer ${
+            position === "top"
+              ? "transform-gpu -translate-y-1/2"
+              : (position === "bottom"
+                ? "transform-gpu translate-y-1/2"
+                : "my-10")
+          }`}
         >
-          <DecoImage
-            className="w-full h-full object-left object-cover mx-auto"
-            src={image}
-            width={1200}
-            height={144}
-            alt={alt ? alt : "Destaque"}
-            loading="eager"
-          />
-          <div className="sr-only">
-            {alt ? alt : "Destaque"}
-          </div>
-        </a>
+          <a
+            className="w-full h-full flex"
+            href={link?.url ? replaceAllSites(link.url) : "#"}
+            target={link?.target ? link.target : "_self"}
+            aria-label={alt}
+          >
+            <DecoImage
+              className="w-full h-full object-left object-cover mx-auto"
+              src={image}
+              width={1200}
+              height={144}
+              alt={alt ? alt : "Destaque"}
+              loading="eager"
+            />
+            <div className="sr-only">
+              {alt ? alt : "Destaque"}
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   );

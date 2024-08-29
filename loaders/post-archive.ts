@@ -64,7 +64,8 @@ export interface Props {
     | "parent"
     | "relevance"
     | "slug"
-    | "title";
+    | "title"
+    | "postViews";
 
   /** @description Limitar resultados de posts definidos por um ou mais slugs específicos. */
   slug?: string[];
@@ -83,6 +84,20 @@ export interface Props {
 
   /** @description Limitar resultados para todos os itens que tenham o termo específico atribuído para a taxonomia tags. */
   tagsExclude?: string;
+
+  /**
+   *  @description Utilizar path da URL na query
+   *  @default true
+   */
+  usePath?: boolean;
+}
+
+export interface Query {
+  categoryName?: string;
+  categorySlug?: string;
+  isCategory?: boolean;
+  isHome?: boolean;
+  isHQ?: boolean;
 }
 
 export interface DecoPostArchive {
@@ -93,7 +108,9 @@ export interface DecoPostArchive {
     totalPosts: number;
     totalPages: number;
     status: Status;
+    paginationPrefix: string;
   };
+  query: Query;
 }
 
 /**
@@ -119,6 +136,7 @@ const loader = async (
     tags,
     categoriesExclude,
     tagsExclude,
+    usePath = true,
   }: Props,
   req: Request,
   ctx: AppContext,
@@ -150,17 +168,26 @@ const loader = async (
   // page url arguments
   const isPaginated = req.url.includes("page/");
   const isCategory = req.url.includes("categoria/");
-  const isHQ = req.url.includes("hq/");
+  const isHQ = req.url.includes("hqs/");
+
+  const query: Query = {};
+  query.isHQ = isHQ;
+  query.isCategory = isCategory;
+
+  let paginationPrefix = "/";
 
   if (isPaginated) {
     const page = req.url.split("page/")[1].split("/")[0];
     variables.page = page;
   }
 
-  if (isCategory || isHQ) {
+  if ((isCategory || isHQ) && !variables.include && usePath === true) {
+    //path only without query params
+    const urlPath = new URL(req.url).pathname;
+
     const cat = isCategory
-      ? req.url.split("categoria/")[1].split("/")[0]
-      : req.url.split("hq/")[1].split("/")[0];
+      ? urlPath.split("categoria/")[1].split("/")[0]
+      : urlPath.split("hqs/")[1].split("/")[0];
 
     const categories = await ctx.invoke(
       "deco-sites/ultimato/loaders/categories.ts",
@@ -169,20 +196,28 @@ const loader = async (
       },
     );
 
+    query.categorySlug = cat;
+
     if (categories.categories.length) {
       variables.categories = categories.categories[0].id.toString();
+
+      query.categoryName = categories.categories[0].name;
+
+      paginationPrefix = isCategory ? `/categoria/${cat}` : `/hqs/${cat}`;
     } else {
       ctx.response.status = 404;
     }
   }
 
   const postsPath = `/posts?${new URLSearchParams(variables)}`;
-  const postList = await fetch.wp<WP_REST_API_Posts>(postsPath, {} /* STALE */);
 
   console.log("\n\n");
   console.log("%cLoader: Post Archive", "color: blue;");
   console.log("Path: ", postsPath);
   console.table(variables);
+
+  const postList = await fetch.wp<WP_REST_API_Posts>(postsPath, {} /* STALE */);
+
   console.log("Post IDs: ", postList.content.map(({ id }) => id));
   console.log("\n\n");
 
@@ -225,6 +260,10 @@ const loader = async (
     "X-WP-TotalPages",
   ) as string;
 
+  if (new URL(req.url).pathname === "/") {
+    query.isHome = true;
+  }
+
   return {
     posts: normalizedPosts,
     pageContext: {
@@ -233,7 +272,9 @@ const loader = async (
       totalPosts: parseInt(totalPosts),
       totalPages: parseInt(totalPages),
       status: ctx.response.status as Status,
+      paginationPrefix,
     },
+    query,
   };
 };
 

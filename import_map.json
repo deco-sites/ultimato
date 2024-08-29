@@ -2,8 +2,8 @@
   "imports": {
     "deco-sites/ultimato/": "./",
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.70.6/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.45.1/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.81.0/",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.53.4/",
     "$fresh/": "https://deno.land/x/fresh@1.6.5/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",
@@ -17,6 +17,9 @@
     "instantsearch.js": "https://esm.sh/instantsearch.js@4.66.0",
     "instantsearch.js/": "https://esm.sh/instantsearch.js@4.66.0/",
     "algoliasearch": "https://esm.sh/algoliasearch@4.22.1",
-    "algoliasearch/": "https://esm.sh/algoliasearch@4.22.1/"
+    "algoliasearch/": "https://esm.sh/algoliasearch@4.22.1/",
+    "swiper": "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022",
+    "swiper/": "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022/",
+    "html-react-parser": "https://esm.sh/html-react-parser@5.1.10"
   }
 }
