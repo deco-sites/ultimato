@@ -82,7 +82,7 @@ export {
   formatContent,
   formatDate,
   formatExcerpt,
+  formatTitle,
   getReadingTime,
   stripTags,
-  formatTitle,
 };

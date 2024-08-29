@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import tw, { styled } from 'twin.macro'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Thumbs, Lazy } from 'swiper'
-import 'swiper/swiper.scss'
-import 'swiper/components/thumbs/thumbs.scss'
-SwiperCore.use([Thumbs, Lazy])
+import { useState } from "react";
+import tw, { styled } from "twin.macro";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Lazy, Thumbs } from "swiper";
+import "swiper/swiper.scss";
+import "swiper/components/thumbs/thumbs.scss";
+SwiperCore.use([Thumbs, Lazy]);
 
 export default function ImageSlider({ images, blockID }) {
-  const [swiperThumbs, updateSwiperThumbs] = useState<SwiperCore>()
+  const [swiperThumbs, updateSwiperThumbs] = useState<SwiperCore>();
 
   return (
     <SwiperWrapper id={`ub_slider-block-${blockID}`}>
@@ -17,15 +17,15 @@ export default function ImageSlider({ images, blockID }) {
         wrapperTag="ul"
         lazy={true}
         thumbs={{ swiper: swiperThumbs }}
-        onInit={swiper => {
-          swiper && swiper.navigation && swiper.navigation.update()
+        onInit={(swiper) => {
+          swiper && swiper.navigation && swiper.navigation.update();
         }}
       >
         {images &&
           images.map(({ alt, url }, index) => (
             <SwiperSlide
               style={{
-                height: 'unset !important'
+                height: "unset !important",
               }}
               key={url + index}
             >
@@ -47,8 +47,8 @@ export default function ImageSlider({ images, blockID }) {
         wrapperTag="ul"
         breakpoints={{
           768: {
-            slidesPerView: 12
-          }
+            slidesPerView: 12,
+          },
         }}
       >
         {images &&
@@ -59,16 +59,16 @@ export default function ImageSlider({ images, blockID }) {
           ))}
       </Swiper>
     </SwiperWrapper>
-  )
+  );
 }
 
 const Img = styled.img`
   ${tw`mx-auto cursor-move object-cover h-full`}
-`
+`;
 
 const Thumbnail = styled.img`
   ${tw`w-20 mx-auto cursor-pointer border-4 border-transparent`}
-`
+`;
 
 const SwiperWrapper = styled.div`
   .swiper-slide-thumb-active {
@@ -84,4 +84,4 @@ const SwiperWrapper = styled.div`
   .swiper-slide {
     ${tw`h-auto`}
   }
-`
+`;

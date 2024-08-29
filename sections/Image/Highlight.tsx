@@ -80,7 +80,8 @@ export const loader = async (
 };
 
 function FullBanner(
-  { image, alt, link, hideComponent, position, colorScheme = 'light' }: SectionProps<typeof loader>,
+  { image, alt, link, hideComponent, position, colorScheme = "light" }:
+    SectionProps<typeof loader>,
 ) {
   if (hideComponent || !image) {
     return <div className="mb-10"></div>;

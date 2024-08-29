@@ -24,7 +24,6 @@ const loader = async (
   req: Request,
   ctx: AppContext,
 ): Promise<DecoSinglePage> => {
-
   const variables: PageProps = {
     slug: props.slug
       ? [props.slug]
@@ -39,7 +38,7 @@ const loader = async (
 
   const getPage = await ctx.invoke(
     "deco-sites/ultimato/loaders/page-archive.ts",
-    variables
+    variables,
   );
 
   if (!getPage) {

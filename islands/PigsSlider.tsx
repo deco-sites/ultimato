@@ -1,9 +1,6 @@
 import { useEffect, useId, useRef } from "preact/hooks";
 
-import {
-  register,
-  SwiperContainer,
-} from "swiper";
+import { register, SwiperContainer } from "swiper";
 
 interface Props {
   posts: {
