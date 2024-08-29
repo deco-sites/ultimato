@@ -15,7 +15,7 @@ export const fetchAPI = async <T>(
 
   const response = await fetchSafe(input, { ...init, headers });
 
-  const content = await response.json();
+  const content: T = await response.json();
 
   return {
     content,

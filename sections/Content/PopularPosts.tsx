@@ -9,8 +9,12 @@ import type {
 } from "deco-sites/ultimato/loaders/post-archive.ts";
 
 export interface Props {
-  content?: DecoPostArchive;
+  /** @description Query */
+  content: DecoPostArchive;
+
+  /** @description Mostrar Anúncios? */
   adPosition?: "alternating" | "end";
+
   colorScheme?: "dark" | "light";
 }
 
@@ -21,7 +25,7 @@ function PopularPosts({
 }: Props) {
   return (
     <div>
-      <SectionTitle tag="div">
+      <SectionTitle tag="h2">
         As Populares
       </SectionTitle>
       {content &&

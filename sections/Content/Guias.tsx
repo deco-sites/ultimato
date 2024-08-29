@@ -14,15 +14,18 @@ export interface Props {
 
   /** @description Mostrar Anúncios? */
   adPosition?: "alternating" | "end";
+
+  colorScheme?: "dark" | "light";
 }
 
 function Guias({
   content,
   adPosition,
+  colorScheme = "light",
 }: Props) {
   return (
     <div>
-      <SectionTitle tag="div">
+      <SectionTitle tag="h2">
         Guias
       </SectionTitle>
       {content.posts &&
@@ -39,6 +42,7 @@ function Guias({
               readingTime={readingTime}
               categories={categories}
               layout="horizontal-reduced"
+              colorScheme={colorScheme}
             />
             {(!adPosition || adPosition === "alternating") &&
               index !== 0 &&

@@ -32,6 +32,10 @@ const loader = async (
     perPage: 1,
   };
 
+  if (variables.include && variables.slug) {
+    delete variables.slug;
+  }
+
   const getPage = await ctx.invoke(
     "deco-sites/ultimato/loaders/page-archive.ts",
     variables,

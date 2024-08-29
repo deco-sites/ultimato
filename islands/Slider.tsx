@@ -2,11 +2,7 @@ import { Ref, useEffect, useRef, useState } from "preact/hooks";
 import DecoImage from "apps/website/components/Image.tsx";
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 
-import {
-  register,
-  SwiperContainer,
-  SwiperSlide,
-} from "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022";
+import { register, SwiperContainer, SwiperSlide } from "swiper";
 import { ComponentChildren } from "preact";
 
 type CustomElement<T> = Partial<
@@ -112,7 +108,7 @@ function Slider({ content }: Props) {
         updatePrevAndNextTitles(swiperElRef);
       }, 100);
 
-      swiperElRef.current.addEventListener("slidechange", () => {
+      swiperElRef.current.swiper.on("slideChange", () => {
         setTimeout(() => {
           updatePrevAndNextTitles(swiperElRef);
         }, 100);

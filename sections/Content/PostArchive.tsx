@@ -29,8 +29,6 @@ function PostArchive(
     colorScheme = "light",
     showFeatured,
     callToAction,
-    categoryName,
-    paginationPrefix = "/",
   }: Props,
 ) {
   const pageInfo = postsContent.pageContext;
@@ -40,14 +38,26 @@ function PostArchive(
   }
 
   return (
-    <div className="container-wrapper bg-white group/container-light">
-      <FlyingBacons bg="light" />
+    <div
+      className={`container-wrapper ${
+        colorScheme === "light"
+          ? "bg-white group/container-light"
+          : "bg-dark group/container-dark"
+      }`}
+    >
+      <FlyingBacons bg={colorScheme} />
       <div className="container px-4 bacon-background">
         <div className="flex flex-wrap-reverse lg:flex-nowrap justify-between pb-24">
           <div className="w-full pr-0 lg:w-2/3 lg:pr-20 xl:pr-32">
-            <SectionTitle tag="div">
-              {categoryName
-                ? `Últimas postagens sobre "${categoryName}"`
+            <SectionTitle
+              tag={(postsContent.query?.isHQ ||
+                  postsContent.query?.isCategory ||
+                  postsContent.pageContext.page > 1)
+                ? "h1"
+                : "h2"}
+            >
+              {postsContent.query.categoryName
+                ? `Últimas postagens sobre "${postsContent.query.categoryName}"`
                 : `Notícias, Matérias e Reviews`}
               {(pageInfo.page > 1) ? ` - Página ${pageInfo.page}` : ``}
             </SectionTitle>
@@ -96,7 +106,7 @@ function PostArchive(
 
             <Pagination
               context={postsContent.pageContext}
-              pathPrefix={paginationPrefix}
+              pathPrefix={postsContent.pageContext.paginationPrefix}
             />
           </div>
           {sidebar &&

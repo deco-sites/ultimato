@@ -135,6 +135,13 @@ const loader = async (
     toCategory(category)
   );
 
+  console.log("\n\n");
+  console.log("%cLoader: Categories", "color: blue;");
+  console.log("Path: ", path);
+  console.table(variables);
+  console.log("Cat IDs: ", normalizedCategories.map(({ id }) => id));
+  console.log("\n\n");
+
   return { categories: normalizedCategories };
 };
 
