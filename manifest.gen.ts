@@ -17,9 +17,10 @@ import * as $$$8 from "./loaders/news-carousel.ts";
 import * as $$$9 from "./loaders/page-archive.ts";
 import * as $$$10 from "./loaders/popular-posts.ts";
 import * as $$$11 from "./loaders/post-archive.ts";
-import * as $$$12 from "./loaders/single-page.ts";
-import * as $$$13 from "./loaders/single-post.ts";
-import * as $$$14 from "./loaders/top5week.ts";
+import * as $$$12 from "./loaders/seo.ts";
+import * as $$$13 from "./loaders/single-page.ts";
+import * as $$$14 from "./loaders/single-post.ts";
+import * as $$$15 from "./loaders/top5week.ts";
 import * as $$$$$$0 from "./sections/Content/ArchiveTitle.tsx";
 import * as $$$$$$1 from "./sections/Content/Categories.tsx";
 import * as $$$$$$2 from "./sections/Content/Guias.tsx";
@@ -58,9 +59,10 @@ const manifest = {
     "deco-sites/ultimato/loaders/page-archive.ts": $$$9,
     "deco-sites/ultimato/loaders/popular-posts.ts": $$$10,
     "deco-sites/ultimato/loaders/post-archive.ts": $$$11,
-    "deco-sites/ultimato/loaders/single-page.ts": $$$12,
-    "deco-sites/ultimato/loaders/single-post.ts": $$$13,
-    "deco-sites/ultimato/loaders/top5week.ts": $$$14,
+    "deco-sites/ultimato/loaders/seo.ts": $$$12,
+    "deco-sites/ultimato/loaders/single-page.ts": $$$13,
+    "deco-sites/ultimato/loaders/single-post.ts": $$$14,
+    "deco-sites/ultimato/loaders/top5week.ts": $$$15,
   },
   "sections": {
     "deco-sites/ultimato/sections/Content/ArchiveTitle.tsx": $$$$$$0,

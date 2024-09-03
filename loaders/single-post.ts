@@ -68,6 +68,12 @@ const loader = async (
     },
   );
 
+  const seo = await ctx.invoke("deco-sites/ultimato/loaders/seo.ts", {
+    path: `/${getPosts.posts[0].slug}`,
+  });
+
+  getPosts.posts[0].seo = seo;
+
   return {
     contentTypeName: "post",
     singlePost: getPosts.posts[0],

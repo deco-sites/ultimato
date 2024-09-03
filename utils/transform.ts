@@ -10,6 +10,8 @@ import type {
   NavMenuItem,
 } from "deco-sites/ultimato/loaders/menus.ts";
 
+import type { SEO } from "deco-sites/ultimato/loaders/seo.ts";
+
 import type {
   BlogPost as _BlogPost,
   Category as _Category,
@@ -30,7 +32,6 @@ import {
 } from "deco-sites/ultimato/utils/content.tsx";
 
 type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
-
 export interface BlogPost
   extends Omit<_BlogPost, "image" | "authors" | "categories"> {
   id: number;
@@ -39,6 +40,7 @@ export interface BlogPost
   categories?: Category[];
   views: number;
   acf?: Record<string, unknown>;
+  seo?: SEO;
 }
 
 export interface Category extends _Category {

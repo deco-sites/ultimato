@@ -9,16 +9,22 @@ export const fetchAPI = async <T>(
   input: string | Request | URL,
   init?: DecoRequestInit,
 ): Promise<FetchReturn<T>> => {
-  const headers = new Headers(init?.headers);
+  try {
+    const headers = new Headers(init?.headers);
 
-  headers.set("accept", "application/json");
+    headers.set("accept", "application/json");
 
-  const response = await fetchSafe(input, { ...init, headers });
+    const response = await fetchSafe(input, { ...init, headers });
 
-  const content: T = await response.json();
+    const content: T = await response.json();
 
-  return {
-    content,
-    headers: response.headers,
-  };
+    return {
+      content,
+      headers: response.headers,
+    };
+  } catch (error) {
+    console.error(error);
+
+    throw new Error(`Error fetching API at ${input}`);
+  }
 };

@@ -1,10 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
-import { replaceAllSites } from "deco-sites/ultimato/utils/url.ts";
 
-import type { PostTypeSeo } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
+import type { SEO } from "deco-sites/ultimato/loaders/seo.ts";
 
 interface Props {
-  seo: PostTypeSeo;
+  seo: SEO;
   type?: "post" | "page" | "archive" | "home";
   archiveTitle?: string;
 }
@@ -15,8 +14,7 @@ function Seo({ seo, type, archiveTitle }: Props) {
     canonical,
     metaDesc,
     metaKeywords,
-    metaRobotsNofollow,
-    metaRobotsNoindex,
+    metaRobots,
     opengraphAuthor,
     opengraphDescription,
     opengraphModifiedTime,
@@ -27,15 +25,15 @@ function Seo({ seo, type, archiveTitle }: Props) {
     opengraphType,
     opengraphUrl,
     opengraphImage,
-    twitterTitle,
+    /*     twitterTitle,
     twitterDescription,
     twitterImage,
-    schema,
+    schema, */
   } = seo;
 
-  const robots = `${metaRobotsNofollow},${metaRobotsNoindex}`;
+  const robots = metaRobots ? `${metaRobots.follow},${metaRobots.index}` : "";
 
-  function formatSchema(schema: string) {
+  /*   function formatSchema(schema: string) {
     const schemaReplace = schema.replace(
       "admin.ultimatodobacon.com",
       "ultimatodobacon.com",
@@ -43,7 +41,7 @@ function Seo({ seo, type, archiveTitle }: Props) {
 
     return JSON.parse(schemaReplace);
   }
-
+ */
   const siteName = "Ultimato do Bacon";
 
   const definitiveTitle = type === "archive"
@@ -55,9 +53,7 @@ function Seo({ seo, type, archiveTitle }: Props) {
       <title>{definitiveTitle}</title>
       <link
         rel="canonical"
-        href={`https://ultimatodobacon.com${
-          replaceAllSites(canonical as string)
-        }`}
+        href={`https://ultimatodobacon.com${canonical}`}
       />
       <meta name="description" content={metaDesc as string} />
       {metaKeywords && (
@@ -82,7 +78,7 @@ function Seo({ seo, type, archiveTitle }: Props) {
       {opengraphUrl && (
         <meta
           property="og:url"
-          content={replaceAllSites(opengraphUrl as string)}
+          content={opengraphUrl as string}
         />
       )}
 
@@ -119,11 +115,12 @@ function Seo({ seo, type, archiveTitle }: Props) {
       {opengraphImage && (
         <meta
           property="og:image"
-          content={opengraphImage.sourceUrl as string}
+          content={opengraphImage[0].url as string}
         />
       )}
 
-      {twitterTitle && (
+      {
+        /*    {twitterTitle && (
         <meta name="twitter:title" content={twitterTitle as string} />
       )}
 
@@ -142,7 +139,8 @@ function Seo({ seo, type, archiveTitle }: Props) {
         <script type="application/ld+json">
           {JSON.stringify(formatSchema(schema.raw as string))}
         </script>
-      )}
+      )} */
+      }
     </Head>
   );
 }
