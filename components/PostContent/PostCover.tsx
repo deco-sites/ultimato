@@ -110,7 +110,7 @@ function PostCover(
         {image && image?.url && (
           <DecoImage
             src={image?.url.replaceAll(
-              /https:\/\/ultimatodobacon|https:\/\/www.ultimatodobacon/,
+              /https:\/\/ultimatodobacon|https:\/\/www.ultimatodobacon/g,
               "https://admin.ultimatodobacon",
             )}
             width={1800}
