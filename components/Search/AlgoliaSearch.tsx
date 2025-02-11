@@ -65,6 +65,7 @@ function AlgoliaSearch(
 
     const widgets = [
       configure({
+        // @ts-expect-error this is allowed
         hitsPerPage: resultsPage ? 20 : 10,
       }),
       searchBox({
