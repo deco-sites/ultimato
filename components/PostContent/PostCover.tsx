@@ -109,10 +109,7 @@ function PostCover(
         </div>
         {image && image?.url && (
           <DecoImage
-            src={image?.url.replace(
-              "www.ultimatodobacon",
-              "admin.ultimatodobacon",
-            )}
+            src={image?.url}
             width={1800}
             alt={image?.alt}
             className="w-full h-full absolute z-0 object-center object-cover opacity-30 top-0 left-0"
