@@ -22,64 +22,23 @@ function PigsSlider({ posts }: Props) {
   useEffect(() => {
     register();
 
-    console.log(register);
+    setTimeout(() => {
+      const SwiperControllerEl = SwiperControllerRef.current;
+      const SwiperThumbsEl = SwiperThumbsRef.current;
 
-    if (SwiperControllerRef.current && SwiperThumbsRef.current) {
-      SwiperControllerRef.current?.setAttribute(
-        "thumbs-swiper",
-        `#${idThumbs}`,
-      );
-    }
+      if (SwiperControllerEl && SwiperThumbsEl) {
+        const controller = SwiperControllerEl.swiper;
+        const thumbs = SwiperThumbsEl.swiper;
 
-    /*   const swiperThumbs: Element & { initialize: () => void } | null = document
-      .querySelector(`#${idThumbs}`);
+        thumbs.on("slideChange", () => {
+          controller.slideTo(thumbs.activeIndex);
+        });
 
-      const swiperController: Element & { initialize: () => void } | null =
-      document.querySelector(`#${idController}`);
-
-    const thumbsProps = {
-      spaceBetween: 24,
-      slidesPerView: 2.6,
-      centerInsufficientSlides: true,
-      centeredSlides: true,
-      centeredSlidesBounds: true,
-      watchSlidesProgress: true,
-      freeMode: true,
-      breakpoints: {
-        320: { slidesPerView: 3.8 },
-        400: { slidesPerView: 4.6 },
-        600: { slidesPerView: 5.6 },
-        800: { slidesPerView: 8 },
-      },
-    };
-
-
-
-    const controllerProps = {
-      thumbs: {
-        swiper: `#${idThumbs}`,
-      },
-      spaceBetween: 0,
-      slidesPerView: 1,
-      autoplay: { delay: 4000 },
-      injectStyles: [
-        `
-          :host {
-            transform: translate3d(0, 10%, 0);
-          }
-        `,
-      ],
-    };
-
-    if (swiperController && swiperThumbs) {
-      Object.assign(swiperController, controllerProps);
-      Object.assign(swiperThumbs, thumbsProps);
-
-      swiperController.initialize();
-      swiperThumbs.initialize();
-      console.log(Object.getOwnPropertyNames(swiperThumbs))
-      console.log(swiperThumbs.swiper)
-    } */
+        controller.on("slideChange", () => {
+          thumbs.slideTo(controller.activeIndex);
+        });
+      }
+    }, 100);
   }, []);
 
   return (

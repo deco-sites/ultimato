@@ -2,6 +2,8 @@ import Page404 from "deco-sites/ultimato/components/ui/404.tsx";
 /* import Seo from "deco-sites/ultimato/components/Seo.tsx";
  */
 import type { DecoSinglePost } from "deco-sites/ultimato/loaders/single-post.ts";
+import { parseHtml } from "deco-sites/ultimato/components/Blocks/parseBlocks.tsx";
+
 export interface Props {
   postContent: DecoSinglePost;
 }
@@ -16,6 +18,8 @@ export default function PostContent({
   const content = contentTypeName === "page"
     ? page?.content as string
     : singlePost?.content as string;
+
+  const html = parseHtml(content);
 
   /*   const seo = contentTypeName === "page"
     ? page?.seo as PostTypeSeo
@@ -34,7 +38,9 @@ export default function PostContent({
           contentTypeName === "page" ? "lg:prose-lg max-w-5xl" : "lg:prose"
         }`}
       >
-        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        <div>
+          {html}
+        </div>
       </article>
     </>
   );

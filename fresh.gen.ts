@@ -6,6 +6,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $AlgoliaSearch from "./islands/AlgoliaSearch.tsx";
 import * as $AlgoliaSearchPage from "./islands/AlgoliaSearchPage.tsx";
 import * as $Backdrop from "./islands/Backdrop.tsx";
+import * as $BlockImageSlider from "./islands/BlockImageSlider.tsx";
 import * as $CookiePrompt from "./islands/CookiePrompt.tsx";
 import * as $FlyingBacons from "./islands/FlyingBacons.tsx";
 import * as $Menu from "./islands/Menu.tsx";
@@ -21,6 +22,7 @@ const manifest = {
     "./islands/AlgoliaSearch.tsx": $AlgoliaSearch,
     "./islands/AlgoliaSearchPage.tsx": $AlgoliaSearchPage,
     "./islands/Backdrop.tsx": $Backdrop,
+    "./islands/BlockImageSlider.tsx": $BlockImageSlider,
     "./islands/CookiePrompt.tsx": $CookiePrompt,
     "./islands/FlyingBacons.tsx": $FlyingBacons,
     "./islands/Menu.tsx": $Menu,

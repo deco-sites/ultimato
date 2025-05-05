@@ -18,8 +18,8 @@
     "instantsearch.js/": "https://esm.sh/instantsearch.js@4.66.0/",
     "algoliasearch": "https://esm.sh/algoliasearch@4.22.1",
     "algoliasearch/": "https://esm.sh/algoliasearch@4.22.1/",
-    "swiper": "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022",
-    "swiper/": "https://esm.sh/swiper@11.0.6/element/bundle?target=es2022/",
-    "html-react-parser": "https://esm.sh/html-react-parser@5.1.10"
+    "swiper": "https://esm.sh/swiper@11.2.6/element/bundle?target=es2022",
+    "swiper/": "https://esm.sh/swiper@11.2.6/element/bundle?target=es2022/",
+    "html-react-parser": "https://esm.sh/html-react-parser@5.1.11"
   }
 }
