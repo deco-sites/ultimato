@@ -38,5 +38,19 @@ export default {
     },
   },
   plugins: [daisyui, typography],
-  daisyui: { themes: [], logs: false },
+  daisyui: {
+    themes: [
+      {
+        ub: {
+          "--color-primary": "#C83225",
+          "--color-secondary": "#ED6C6E",
+          "--color-accent": "#852C2A",
+          "--color-neutral": "#FFF4F2",
+          "--color-dark": "#18181B",
+          "--color-whatsapp": "#25D366",
+        },
+      },
+    ],
+    logs: false,
+  },
 };
