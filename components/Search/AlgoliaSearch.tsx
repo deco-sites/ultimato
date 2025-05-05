@@ -1,6 +1,6 @@
 import { useEffect } from "preact/hooks";
 
-import algoliasearch, { SearchClient } from "algoliasearch/lite";
+import { liteClient as algoliasearch } from "algoliasearch/lite";
 import instantsearch from "instantsearch.js";
 import {
   configure,
@@ -28,10 +28,12 @@ function AlgoliaSearch(
       searchApiKey,
     );
 
-    const searchClient: SearchClient = {
+    const searchClient = {
       ...algoliaClient,
-      search: (requests) => {
-        if (requests.every(({ params }) => !params?.query)) {
+      // deno-lint-ignore no-explicit-any
+      search: (requests: any) => {
+        // deno-lint-ignore no-explicit-any
+        if (requests.every(({ params }: { params: any }) => !params?.query)) {
           return Promise.resolve({
             results: requests.map(() => ({
               hits: [],
@@ -65,7 +67,6 @@ function AlgoliaSearch(
 
     const widgets = [
       configure({
-        // @ts-expect-error this is allowed
         hitsPerPage: resultsPage ? 20 : 10,
       }),
       searchBox({
@@ -82,7 +83,8 @@ function AlgoliaSearch(
       hits({
         container: `#${id}-algolia-hits`,
         templates: {
-          item: (hit, { html, components }) => {
+          // deno-lint-ignore no-explicit-any
+          item: ((hit: any, { html, components }: any) => {
             const title = components.Highlight({
               attribute: "title",
               hit,
@@ -96,7 +98,10 @@ function AlgoliaSearch(
             });
 
             return html`
-              <a class="hit text-primary font-medium text-sm lg:text-base mb-3 flex" href="/${hit.objectID}">
+              <a
+                class="hit text-primary font-medium text-sm lg:text-base mb-3 flex"
+                href="/${hit.objectID}"
+              >
                 <div class="w-24 h-20 lg:w-32 mr-2 lg:mr-4 lg:h-24 min-w-[6rem] min-h-[5rem] lg:min-w-[8rem] lg:min-h-[6rem]">
                   <img
                     src="https://ultimato.netlify.app${hit.image}"
@@ -109,14 +114,17 @@ function AlgoliaSearch(
                   <h3>
                     ${title}
                   </h3>
-                  <p class="hidden sm:block text-xs text-gray-400 mb-1">${hit.date}</p>
+                  <p class="hidden sm:block text-xs text-gray-400 mb-1">${hit
+                .date}</p>
                   <p class="text-xs lg:text-sm text-gray-700 line-clamp-3">
                     ${excerpt}
                   </p>
                 </div>
               </a>
             `;
-          },
+
+            // deno-lint-ignore no-explicit-any
+          }) as any,
           empty: "Nenhum resultado encontrado",
         },
       }),
@@ -154,7 +162,7 @@ function AlgoliaSearch(
           e.preventDefault();
         }
 
-        window.location.href = `/search?q=${searchValue}`;
+        globalThis.location.href = `/search?q=${searchValue}`;
       },
     );
   }, [applicationId, searchApiKey, indexName]);

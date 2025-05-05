@@ -19,6 +19,7 @@ function Search({ applicationId, searchApiKey, indexName }: Props) {
   return (
     <>
       <button
+        type="button"
         name="Pesquisar"
         class="cursor-pointer rounded-full p-2 bg-slate-500 z-20"
         id={buttonId}

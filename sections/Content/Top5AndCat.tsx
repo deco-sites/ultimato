@@ -3,12 +3,9 @@ import HQSelectorList, {
   type Selectors,
 } from "deco-sites/ultimato/components/HQSelectorList.tsx";
 import FeaturedPosts from "deco-sites/ultimato/components/BlogArchive/FeaturedPosts.tsx";
-
 import { type BlogPost } from "deco-sites/ultimato/utils/transform.ts";
-
 import type { AppContext } from "deco-sites/ultimato/apps/site.ts";
-
-import type { SectionProps } from "deco/mod.ts";
+import { type SectionProps } from "@deco/deco";
 export interface Props {
   /**
    * @title Selectores de HQ
@@ -16,7 +13,6 @@ export interface Props {
    */
   selectors: Selectors[];
 }
-
 function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
   return (
     <div className="flex flex-wrap-reverse justify-between mb-32">
@@ -24,11 +20,7 @@ function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
         <SectionTitle tag="h2">
           TOP 5 DA SEMANA
         </SectionTitle>
-        {posts && (
-          <FeaturedPosts
-            posts={posts.slice(0, 5)}
-          />
-        )}
+        {posts && <FeaturedPosts posts={posts.slice(0, 5)} />}
       </div>
       <div className="grid mb-8 lg:flex-1 lg:block lg:pl-8 lg:mb-0 xl:pl-10 2xl:pl-12">
         <HQSelectorList selectors={selectors} />
@@ -36,7 +28,6 @@ function Top5AndCat({ selectors, posts }: SectionProps<typeof loader>) {
     </div>
   );
 }
-
 export const loader = async (
   { selectors }: Props,
   _req: Request,
@@ -53,11 +44,9 @@ export const loader = async (
       order: "desc",
     },
   );
-
   return {
     selectors,
     posts: content.posts,
   };
 };
-
 export default Top5AndCat;

@@ -26,7 +26,9 @@ function Menu({ data, wrapperProps }: Props) {
       // Fetch all the details element.
 
       const nav = navRef.current;
-      const details = [...nav.querySelectorAll("ul > li > details.parent")];
+      const details = Array.from(
+        nav.querySelectorAll("ul > li > details.parent"),
+      );
 
       document.addEventListener("click", function (e) {
         if (!details.some((item) => item.contains(e.target as Node))) {
@@ -72,6 +74,7 @@ function Menu({ data, wrapperProps }: Props) {
                   key={id}
                   name={title}
                   href={url}
+                  // deno-lint-ignore jsx-no-children-prop
                   children={children as DecoMenuItem[]}
                   cssClasses={classes}
                   target={target}

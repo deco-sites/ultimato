@@ -103,7 +103,7 @@ function PostCover(
                 ))}
             </div>
             <div>
-              Em {date} {" • "} {`${readingTime} minutos de leitura`}
+              Em {date} • {`${readingTime} minutos de leitura`}
             </div>
           </div>
         </div>

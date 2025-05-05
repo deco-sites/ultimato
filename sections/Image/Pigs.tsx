@@ -1,19 +1,12 @@
 import PigsSlider from "deco-sites/ultimato/islands/PigsSlider.tsx";
-
-import type { SectionProps } from "deco/mod.ts";
-
 import {
   createClient,
   endpoint,
   gql,
 } from "deco-sites/ultimato/cms/wordpress/client.ts";
-
 import type { RootQueryToPostConnection } from "deco-sites/ultimato/cms/wordpress/graphql-types.ts";
-
-import {
-  FeaturedImageFields,
-} from "deco-sites/ultimato/cms/wordpress/fragments.ts";
-
+import { FeaturedImageFields } from "deco-sites/ultimato/cms/wordpress/fragments.ts";
+import { type SectionProps } from "@deco/deco";
 interface LoaderReturn {
   posts: {
     id: string;
@@ -23,22 +16,16 @@ interface LoaderReturn {
     alt?: string;
   }[];
 }
-
 export const loader = async (
   _props: unknown,
   _req: Request,
 ): Promise<LoaderReturn> => {
   const client = createClient({ endpoint });
-
-  const posts = await client.query<{ pigs: RootQueryToPostConnection }>(
-    Query,
-    {},
-    "getPigs",
-  );
-
+  const posts = await client.query<{
+    pigs: RootQueryToPostConnection;
+  }>(Query, {}, "getPigs");
   const response = posts?.pigs?.edges?.map((edge) => {
     const post = edge?.node;
-
     return {
       id: post?.id,
       slug: post?.slug,
@@ -47,10 +34,8 @@ export const loader = async (
       alt: post?.featuredImage?.node?.altText,
     };
   }) as LoaderReturn["posts"];
-
   return { posts: response };
 };
-
 const Query = gql`
 ${FeaturedImageFields}
 query getPigs {
@@ -70,10 +55,10 @@ query getPigs {
   }
 }
 `;
-
 function Porquinhos({ posts }: SectionProps<typeof loader>) {
-  if (!posts) return null;
-
+  if (!posts) {
+    return null;
+  }
   return (
     <div className="relative">
       <div className="container px-4 pt-6">
@@ -82,5 +67,4 @@ function Porquinhos({ posts }: SectionProps<typeof loader>) {
     </div>
   );
 }
-
 export default Porquinhos;

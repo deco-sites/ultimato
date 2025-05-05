@@ -486,21 +486,32 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-base-100 text-base-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
               {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -523,20 +534,30 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-base-content text-base-100">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
-              {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -559,19 +580,27 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-primary text-primary-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
               {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -592,18 +621,24 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-secondary text-secondary-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-accent">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button type="button" class="btn btn-sm btn-accent btn-outline">
+                A
+              </button>
               {" "}
             </div>
             {" "}
@@ -624,18 +659,27 @@ export function Preview(props: Props) {
         <div class="flex flex-col gap-4 p-4 bg-accent text-accent-content">
           <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
           {" "}
-          <button class="btn">Default button</button>{" "}
+          <button type="button" class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>
+              <button type="button" class="btn btn-sm">A</button>{" "}
+              <button type="button" class="btn btn-sm btn-primary">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-secondary">A</button>
               {" "}
             </div>
             <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
+              <button type="button" class="btn btn-sm btn-outline">A</button>
+              {" "}
+              <button type="button" class="btn btn-sm btn-primary btn-outline">
+                A
+              </button>{" "}
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary btn-outline"
+              >
+                A
+              </button>
               {" "}
             </div>
             {" "}

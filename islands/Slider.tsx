@@ -1,4 +1,4 @@
-import { Ref, useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import DecoImage from "apps/website/components/Image.tsx";
 import Icon from "deco-sites/ultimato/components/ui/Icon.tsx";
 
@@ -11,7 +11,7 @@ type CustomElement<T> = Partial<
 
 type CustomProps = {
   children?: ComponentChildren;
-  ref: Ref<SwiperContainer>;
+  ref: unknown;
   key?: string;
   class?: string;
 };
@@ -147,7 +147,7 @@ function Slider({ content }: Props) {
                   src={post.image}
                   width={980}
                   height={700}
-                  sizes={"100vw"}
+                  sizes="100vw"
                   className="absolute left-0 top-0 w-full h-full object-center object-cover z-0 opacity-30"
                   loading="eager"
                   alt={post.title}
@@ -172,6 +172,7 @@ function NavigationButton({ element, direction }: {
 }) {
   return (
     <button
+      type="button"
       className={`transition-all absolute top-1/2 bg-secondary bg-opacity-60 cursor-pointer h-16 w-8 lg:h-24 lg:w-12 z-20
       transform-gpu -translate-y-1/2 group
       ${

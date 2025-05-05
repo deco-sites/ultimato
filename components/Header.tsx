@@ -1,26 +1,17 @@
-import type { Section } from "deco/blocks/section.ts";
-
 import type { DecoMenu } from "deco-sites/ultimato/loaders/menus.ts";
-
 import Logo from "deco-sites/ultimato/components/ui/Logo.tsx";
 import MenuIsland from "deco-sites/ultimato/islands/Menu.tsx";
-
 import GenericCover from "deco-sites/ultimato/components/ui/GenericCover.tsx";
-
+import { type Section } from "@deco/deco/blocks";
 export interface Props {
   /** @description Cover section. */
   cover?: Section;
-
   /** @description Menu data. */
   menu?: DecoMenu;
-
   /** @description Algolia section */
   algolia?: Section;
 }
-
-function Header(
-  { cover, menu, algolia }: Props,
-) {
+function Header({ cover, menu, algolia }: Props) {
   return (
     <>
       <header class="absolute top-0 z-30 w-full">
@@ -52,5 +43,4 @@ function Header(
     </>
   );
 }
-
 export default Header;

@@ -33,7 +33,7 @@ import {
 
 type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
 export interface BlogPost
-  extends Omit<_BlogPost, "image" | "authors" | "categories"> {
+  extends Omit<_BlogPost, "id" | "image" | "authors" | "categories"> {
   id: number;
   image?: Media;
   readingTime?: number;
