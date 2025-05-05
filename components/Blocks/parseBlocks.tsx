@@ -13,7 +13,7 @@ interface ParseOptions {
   [key: string]: unknown;
 }
 
-function debugNode(node: Element, label: string): void {
+function _debugNode(node: Element, label: string): void {
   console.log(`[DEBUG] ${label}:`, {
     name: node.name,
     attribs: node.attribs,
