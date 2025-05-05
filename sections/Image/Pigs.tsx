@@ -60,7 +60,7 @@ function Porquinhos({ posts }: SectionProps<typeof loader>) {
     return null;
   }
   return (
-    <div className="relative">
+    <div className="relative hidden">
       <div className="container px-4 pt-6">
         <PigsSlider posts={posts} />
       </div>

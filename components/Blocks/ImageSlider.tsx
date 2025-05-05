@@ -91,7 +91,7 @@ export default function ImageSlider({ images, blockID }: Props) {
   }, [swiperMainRef, swiperThumbsRef]);
 
   return (
-    <div id={`ub_slider-block-${blockID}`} className="relative mb-8">
+    <div id={`ub_slider-block-${blockID}`} className="relative mb-8 hidden">
       {/* Estilo customizado para os thumbs ativos */}
       <style
         dangerouslySetInnerHTML={{
