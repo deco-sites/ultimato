@@ -48,7 +48,7 @@ export default function RelatedPosts(
                     <a href={`/${slug}`}>{title}</a>
                   </h4>
                   <p class="text-xs text-gray-400">
-                    {date} {" • "} {readingTime} minutos de leitura
+                    {date} • {readingTime} minutos de leitura
                   </p>
                 </div>
               </div>

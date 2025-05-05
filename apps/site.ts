@@ -6,50 +6,41 @@ import { color as vtex } from "apps/vtex/mod.ts";
 import { color as wake } from "apps/wake/mod.ts";
 import { color as linx } from "apps/linx/mod.ts";
 import { color as nuvemshop } from "apps/nuvemshop/mod.ts";
-import { Section } from "deco/blocks/section.ts";
-import { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
-
 import type { Secret } from "apps/website/loaders/secret.ts";
+import { type Section } from "@deco/deco/blocks";
+import { type App as A, type AppContext as AC } from "@deco/deco";
 export type AlgoliaOpts = AlgoliaProps & {
   indexName: string;
 };
-
-export type Props =
-  & {
+export type Props = {
+  /**
+   * @title Active Commerce Platform
+   * @description Choose the active ecommerce platform
+   * @default custom
+   */
+  platform: Platform;
+  theme?: Section;
+  algolia?: AlgoliaOpts;
+  wordpress?: {
     /**
-     * @title Active Commerce Platform
-     * @description Choose the active ecommerce platform
-     * @default custom
+     * @title Wordpress Site URL
+     * @description The URL of the Wordpress Site
      */
-    platform: Platform;
-    theme?: Section;
-
-    algolia?: AlgoliaOpts;
-
-    wordpress?: {
-      /**
-       * @title Wordpress Site URL
-       * @description The URL of the Wordpress Site
-       */
-      url: string;
-
-      /**
-       * @title Wordpress username
-       * @description The username of the Wordpress Site
-       */
-      username: string;
-
-      /**
-       * @title Wordpress password
-       * @description The password of the Wordpress Site
-       */
-      password: Secret;
-    };
-  }
-  & CommerceProps;
-
+    url: string;
+    /**
+     * @title Wordpress username
+     * @description The username of the Wordpress Site
+     */
+    username: string;
+    /**
+     * @title Wordpress password
+     * @description The password of the Wordpress Site
+     */
+    password: Secret;
+  };
+} & CommerceProps;
 export type Platform =
   | "vtex"
   | "vnda"
@@ -58,9 +49,7 @@ export type Platform =
   | "linx"
   | "nuvemshop"
   | "custom";
-
 export let _platform: Platform = "custom";
-
 const color = (platform: string) => {
   switch (platform) {
     case "vtex":
@@ -81,14 +70,11 @@ const color = (platform: string) => {
       return 0x212121;
   }
 };
-
 let firstRun = true;
-
-export default function Site(
-  { theme, ...state }: Props,
-): A<Manifest, Props, [ReturnType<typeof commerce>]> {
+export default function Site({ theme, ...state }: Props): A<Manifest, Props, [
+  ReturnType<typeof commerce>,
+]> {
   _platform = state.platform || state.commerce?.platform || "custom";
-
   // Prevent console.logging twice
   if (firstRun) {
     firstRun = false;
@@ -98,7 +84,6 @@ export default function Site(
       } \n`,
     );
   }
-
   return {
     state,
     manifest,
@@ -110,7 +95,6 @@ export default function Site(
     ],
   };
 }
-
 export { onBeforeResolveProps } from "apps/website/mod.ts";
 export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App & Pick<ReturnType<typeof algolia>, "manifest">>;

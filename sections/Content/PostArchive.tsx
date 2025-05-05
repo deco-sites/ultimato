@@ -2,16 +2,10 @@ import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
 import LatestPosts from "deco-sites/ultimato/components/BlogArchive/LatestPosts.tsx";
 import Post from "deco-sites/ultimato/components/BlogArchive/Post.tsx";
 import Pagination from "deco-sites/ultimato/components/BlogArchive/Pagination.tsx";
-
 import Page404 from "deco-sites/ultimato/components/ui/404.tsx";
-
-import type {
-  DecoPostArchive,
-} from "deco-sites/ultimato/loaders/post-archive.ts";
-
-import { Section } from "deco/blocks/section.ts";
-
+import type { DecoPostArchive } from "deco-sites/ultimato/loaders/post-archive.ts";
 import FlyingBacons from "deco-sites/ultimato/islands/FlyingBacons.tsx";
+import { type Section } from "@deco/deco/blocks";
 export interface Props {
   postsContent: DecoPostArchive;
   sidebar?: Section;
@@ -21,22 +15,14 @@ export interface Props {
   categoryName?: string;
   paginationPrefix?: string;
 }
-
 function PostArchive(
-  {
-    postsContent,
-    sidebar,
-    colorScheme = "light",
-    showFeatured,
-    callToAction,
-  }: Props,
+  { postsContent, sidebar, colorScheme = "light", showFeatured, callToAction }:
+    Props,
 ) {
   const pageInfo = postsContent.pageContext;
-
   if (pageInfo.status === 404) {
     return <Page404 />;
   }
-
   return (
     <div
       className={`container-wrapper ${
@@ -124,5 +110,4 @@ function PostArchive(
     </div>
   );
 }
-
 export default PostArchive;

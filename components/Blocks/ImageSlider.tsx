@@ -171,6 +171,7 @@ function NavigationButton({ element, direction }: {
 }) {
   return (
     <button
+      type="button"
       className={`absolute top-1/2 cursor-pointer h-16 w-8 lg:h-24 lg:w-12 z-20 transform-gpu -translate-y-1/2 ${
         direction === "next" ? "right-0" : "left-0"
       }`}

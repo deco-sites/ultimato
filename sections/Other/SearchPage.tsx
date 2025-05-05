@@ -1,23 +1,18 @@
 import { useId } from "preact/hooks";
 import type { AppContext } from "deco-sites/ultimato/apps/site.ts";
-import type { SectionProps } from "deco/mod.ts";
 import type { State as AlgoliaProps } from "apps/algolia/mod.ts";
-
 import AlgoliaSearch from "deco-sites/ultimato/islands/AlgoliaSearch.tsx";
 import Seo from "deco-sites/ultimato/components/Seo.tsx";
-
 import SectionTitle from "deco-sites/ultimato/components/ui/SectionTitle.tsx";
-
+import { type SectionProps } from "@deco/deco";
 interface LoaderReturn {
   searchQuery: string | null;
   algolia?: AlgoliaProps & {
     indexName: string;
   };
 }
-
 function SearchPage({ searchQuery, algolia }: SectionProps<typeof loader>) {
   const algoliaId = useId();
-
   return (
     <div class="container mx-auto pt-24">
       <Seo
@@ -44,7 +39,6 @@ function SearchPage({ searchQuery, algolia }: SectionProps<typeof loader>) {
     </div>
   );
 }
-
 export const loader = (
   _props: unknown,
   req: Request,
@@ -52,11 +46,9 @@ export const loader = (
 ): LoaderReturn => {
   const { searchParams } = new URL(req.url);
   const searchQuery = searchParams.get("q");
-
   return {
     searchQuery,
     algolia: ctx.algolia,
   };
 };
-
 export default SearchPage;

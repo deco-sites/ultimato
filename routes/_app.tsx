@@ -1,20 +1,16 @@
 import { defineApp } from "$fresh/server.ts";
-import { Context } from "deco/deco.ts";
 import { asset, Head } from "$fresh/runtime.ts";
 import GoogleTagManager from "partytown/integrations/GTM.tsx";
 import GlobalTags from "deco-sites/ultimato/components/GlobalTags.tsx";
 import Theme from "deco-sites/ultimato/sections/Theme.tsx";
-
+import { Context } from "@deco/deco";
 const trackingId = "";
-
 const sw = () =>
   addEventListener("load", () =>
     navigator && navigator.serviceWorker &&
     navigator.serviceWorker.register("/sw.js"));
-
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();
-
   return (
     <>
       {/* Include default fonts and css vars */}

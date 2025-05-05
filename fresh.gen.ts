@@ -12,7 +12,7 @@ import * as $FlyingBacons from "./islands/FlyingBacons.tsx";
 import * as $Menu from "./islands/Menu.tsx";
 import * as $PigsSlider from "./islands/PigsSlider.tsx";
 import * as $Slider from "./islands/Slider.tsx";
-import { type Manifest } from "$fresh/server.ts";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {

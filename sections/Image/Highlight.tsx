@@ -1,19 +1,14 @@
-import type { SectionProps } from "deco/mod.ts";
 import DecoImage from "apps/website/components/Image.tsx";
 import { replaceAllSites } from "deco-sites/ultimato/utils/url.ts";
-
 import { AppContext } from "deco-sites/ultimato/apps/site.ts";
-
+import { type SectionProps } from "@deco/deco";
 export interface Props {
   /** @title Esconder */
   hideComponent?: boolean;
-
   /** @title Posição */
   position?: "top" | "bottom" | "middle";
-
   colorScheme?: "dark" | "light";
 }
-
 interface LoaderResponse extends Props {
   image: string;
   alt: string;
@@ -22,7 +17,6 @@ interface LoaderResponse extends Props {
     target: string;
   };
 }
-
 export const loader = async (
   props: Props,
   _req: Request,
@@ -39,14 +33,12 @@ export const loader = async (
       },
     },
   };
-
   const postHome = await ctx.invoke(
     "deco-sites/ultimato/loaders/single-page.ts",
     {
       id: 5692,
     },
   );
-
   const banner = {
     link: {
       // @ts-ignore: acf can have any value
@@ -62,23 +54,18 @@ export const loader = async (
     },
     hide: postHome.page?.acf?.hide as string | undefined,
   };
-
   response.image = banner.image?.url
     ? banner.image.url
     : response.image as string;
-
   response.alt = banner.image?.alt ? banner.image.alt : response.alt;
-
   response.link = {
     url: banner.link.url ? banner.link.url : response.link.url as string,
     target: banner.link.target
       ? banner.link.target
       : response.link.target as string,
   };
-
   return response;
 };
-
 function FullBanner(
   { image, alt, link, hideComponent, position, colorScheme = "light" }:
     SectionProps<typeof loader>,
@@ -86,7 +73,6 @@ function FullBanner(
   if (hideComponent || !image) {
     return <div className="mb-10"></div>;
   }
-
   return (
     <div className={colorScheme === "light" ? "bg-white" : "bg-dark"}>
       <div className="container px-4">
@@ -122,5 +108,4 @@ function FullBanner(
     </div>
   );
 }
-
 export default FullBanner;

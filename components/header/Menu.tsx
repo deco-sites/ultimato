@@ -26,7 +26,9 @@ function Menu({ data, wrapperProps }: Props) {
       // Fetch all the details element.
 
       const nav = navRef.current;
-      const details = [...nav.querySelectorAll("ul > li > details.parent")];
+      const details = Array.from(
+        nav.querySelectorAll("ul > li > details.parent"),
+      );
 
       document.addEventListener("click", function (e) {
         if (!details.some((item) => item.contains(e.target as Node))) {
