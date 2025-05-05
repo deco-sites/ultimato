@@ -74,7 +74,6 @@ function Menu({ data, wrapperProps }: Props) {
                   key={id}
                   name={title}
                   href={url}
-                  // deno-lint-ignore jsx-no-children-prop
                   children={children as DecoMenuItem[]}
                   cssClasses={classes}
                   target={target}

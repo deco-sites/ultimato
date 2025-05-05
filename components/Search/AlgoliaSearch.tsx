@@ -114,8 +114,7 @@ function AlgoliaSearch(
                   <h3>
                     ${title}
                   </h3>
-                  <p class="hidden sm:block text-xs text-gray-400 mb-1">${hit
-                .date}</p>
+                  <p class="hidden sm:block text-xs text-gray-400 mb-1">${hit.date}</p>
                   <p class="text-xs lg:text-sm text-gray-700 line-clamp-3">
                     ${excerpt}
                   </p>

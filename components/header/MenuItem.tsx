@@ -61,7 +61,6 @@ function MenuItem(
                     cssClasses={child.classes as string[]}
                     href={child?.url as string}
                     name={child.title}
-                    // deno-lint-ignore jsx-no-children-prop
                     children={child.children as DecoMenuItem[]}
                     submenu
                   />
