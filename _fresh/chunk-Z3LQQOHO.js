@@ -1,0 +1,1 @@
+import{e}from"./chunk-GL6KGPTE.js";import{h as r}from"./chunk-AC742DEO.js";var i=r([]);function l(t){let n;try{n=e(i)}catch(o){throw new Error("<Head> component is not supported in the browser, or during suspense renders.",{cause:o})}return n.push(t.children),null}var S=r(void 0);function c(t){return t.children}c.displayName="Partial";export{l as a};

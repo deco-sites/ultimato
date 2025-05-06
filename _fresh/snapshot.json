@@ -1,0 +1,112 @@
+{
+  "build_id": "18ac284cd855c74e69634d7e682a38b9ca466530",
+  "files": {
+    "island-flyingbacons.js": [
+      "chunk-Z3LQQOHO.js",
+      "chunk-2G6O7NP3.js",
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "island-menu.js": [
+      "chunk-OCBXERK4.js",
+      "chunk-HIIHGU3Y.js",
+      "chunk-Z3LQQOHO.js",
+      "chunk-2G6O7NP3.js",
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "island-pigsslider.js": [
+      "chunk-GMZCQI4P.js",
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "island-slider.js": [
+      "chunk-HIIHGU3Y.js",
+      "chunk-Z3LQQOHO.js",
+      "chunk-GMZCQI4P.js",
+      "chunk-2G6O7NP3.js",
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "main.js": [
+      "chunk-2G6O7NP3.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "deserializer.js": [
+      "chunk-DOXK4YLI.js"
+    ],
+    "signals.js": [
+      "chunk-OCBXERK4.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "chunk-OCBXERK4.js": [
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js"
+    ],
+    "island-dispatchasyncrender.js": [
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "island-algoliasearch.js": [
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js",
+      "node:util"
+    ],
+    "island-backdrop.js": [
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "island-blockimageslider.js": [
+      "chunk-HIIHGU3Y.js",
+      "chunk-Z3LQQOHO.js",
+      "chunk-GMZCQI4P.js",
+      "chunk-2G6O7NP3.js",
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "chunk-HIIHGU3Y.js": [
+      "chunk-2G6O7NP3.js",
+      "chunk-ZVNG2CPR.js"
+    ],
+    "chunk-Z3LQQOHO.js": [
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js"
+    ],
+    "chunk-GMZCQI4P.js": [],
+    "chunk-2G6O7NP3.js": [],
+    "island-cookieprompt.js": [
+      "chunk-ZVNG2CPR.js",
+      "chunk-GL6KGPTE.js",
+      "chunk-AC742DEO.js",
+      "chunk-DOXK4YLI.js"
+    ],
+    "chunk-ZVNG2CPR.js": [
+      "chunk-AC742DEO.js"
+    ],
+    "chunk-GL6KGPTE.js": [
+      "chunk-AC742DEO.js"
+    ],
+    "chunk-AC742DEO.js": [],
+    "chunk-DOXK4YLI.js": [],
+    "metafile.json": []
+  }
+}
