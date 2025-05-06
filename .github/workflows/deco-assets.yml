@@ -1,0 +1,28 @@
+name: Generate fresh assets to deno build
+
+on: push
+
+jobs:
+  generate-loaders:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Exec scripts
+        run: deno task build && deno task bundle
+
+      - name: Commit and push the changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Auto update in fresh assets" -n
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
