@@ -1,9 +1,9 @@
 {
-  "build_id": "bdf803a44d0ca9564faec107c7d0bdc259a95e65",
+  "build_id": "8f7acdf28783945e71170404432b8cfa7dec2d74",
   "files": {
     "island-flyingbacons.js": [
       "chunk-Z3LQQOHO.js",
-      "chunk-B7QGCOOU.js",
+      "chunk-W6ZEDWNU.js",
       "chunk-ZVNG2CPR.js",
       "chunk-GL6KGPTE.js",
       "chunk-AC742DEO.js",
@@ -11,9 +11,9 @@
     ],
     "island-menu.js": [
       "chunk-RRS42XQP.js",
-      "chunk-5ABQNCFH.js",
+      "chunk-HMQOHKLJ.js",
       "chunk-Z3LQQOHO.js",
-      "chunk-B7QGCOOU.js",
+      "chunk-W6ZEDWNU.js",
       "chunk-ZVNG2CPR.js",
       "chunk-GL6KGPTE.js",
       "chunk-AC742DEO.js",
@@ -27,17 +27,17 @@
       "chunk-DOXK4YLI.js"
     ],
     "island-slider.js": [
-      "chunk-5ABQNCFH.js",
+      "chunk-HMQOHKLJ.js",
       "chunk-Z3LQQOHO.js",
       "chunk-GMZCQI4P.js",
-      "chunk-B7QGCOOU.js",
+      "chunk-W6ZEDWNU.js",
       "chunk-ZVNG2CPR.js",
       "chunk-GL6KGPTE.js",
       "chunk-AC742DEO.js",
       "chunk-DOXK4YLI.js"
     ],
     "main.js": [
-      "chunk-B7QGCOOU.js",
+      "chunk-W6ZEDWNU.js",
       "chunk-AC742DEO.js",
       "chunk-DOXK4YLI.js"
     ],
@@ -74,17 +74,17 @@
       "chunk-DOXK4YLI.js"
     ],
     "island-blockimageslider.js": [
-      "chunk-5ABQNCFH.js",
+      "chunk-HMQOHKLJ.js",
       "chunk-Z3LQQOHO.js",
       "chunk-GMZCQI4P.js",
-      "chunk-B7QGCOOU.js",
+      "chunk-W6ZEDWNU.js",
       "chunk-ZVNG2CPR.js",
       "chunk-GL6KGPTE.js",
       "chunk-AC742DEO.js",
       "chunk-DOXK4YLI.js"
     ],
-    "chunk-5ABQNCFH.js": [
-      "chunk-B7QGCOOU.js",
+    "chunk-HMQOHKLJ.js": [
+      "chunk-W6ZEDWNU.js",
       "chunk-ZVNG2CPR.js"
     ],
     "chunk-Z3LQQOHO.js": [
@@ -92,7 +92,7 @@
       "chunk-AC742DEO.js"
     ],
     "chunk-GMZCQI4P.js": [],
-    "chunk-B7QGCOOU.js": [],
+    "chunk-W6ZEDWNU.js": [],
     "island-cookieprompt.js": [
       "chunk-ZVNG2CPR.js",
       "chunk-GL6KGPTE.js",
